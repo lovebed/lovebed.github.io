@@ -1,0 +1,399 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>解析漏洞小总结 | 天空下行走</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="专注安全、专注生活、专注人生">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="解析漏洞小总结"/>
+  <meta property="og:site_name" content="天空下行走"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+  <link rel="alternate" href="/atom.xml" title="天空下行走" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">天空下行走</a></h1>
+  <h2><a href="/">Walk Around</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+    <li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+	})()    '>High一下</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-16T08:14:31.000Z"><a href="/2014/11/16/解析漏洞小总结/">2014-11-16</a></time>
+      
+      
+  
+    <h1 class="title">解析漏洞小总结</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+      
+        <p>本文转自乌云，原文链接：<a href="http://drops.wooyun.org/papers/539。" target="_blank" rel="external">http://drops.wooyun.org/papers/539。</a><br><a id="more"></a></p>
+<h2 id="IIS_5-x/6-0解析漏洞">IIS 5.x/6.0解析漏洞</h2><p>IIS 6.0解析利用方法有两种</p>
+<ol>
+<li>目录解析 <code>/xx.asp/xx.jpg</code></li>
+<li>文件解析 <code>/wooyun.asp;.jpg</code></li>
+</ol>
+<p>第一种，在网站下建立文件夹的名字为 .asp、.asa 的文件夹，其目录内的任何扩展名的文件都被IIS当作asp文件来解析并执行。<br>例如创建目录 wooyun.asp，那么/wooyun.asp/1.jpg 将被当作asp文件来执行。假设黑阔可以控制上传文件夹路径,就可以不管你上传后你的图片改不改名都能拿shell了。</p>
+<p>第二种，在IIS6.0下，分号后面的不被解析，也就是说wooyun.asp;.jpg 会被服务器看成是wooyun.asp。还有IIS6.0 默认的可执行文件除了asp还包含这三种 <code>/wooyun.asa /wooyun.cer /wooyun.cdx</code></p>
+<h2 id="IIS_7-0/IIS_7-5/_Nginx_&lt;8-03畸形解析漏洞">IIS 7.0/IIS 7.5/ Nginx &lt;8.03畸形解析漏洞</h2><p>Nginx解析漏洞:</p>
+<p>在默认Fast-CGI开启状况下,黑阔上传一个名字为wooyun.jpg，内容为<code>&lt;?PHP fputs(fopen(&#39;shell.php&#39;,&#39;w&#39;),&#39;&lt;?php eval($_POST[cmd])?&gt;&#39;);?&gt;</code>的文件，然后访问wooyun.jpg/.php,在这个目录下就会生成一句话木马<code>shell.php</code></p>
+<h2 id="Nginx_&lt;8-03_空字节代码执行漏洞">Nginx &lt;8.03 空字节代码执行漏洞</h2><p>影响版:0.5.,0.6., 0.7 &lt;= 0.7.65, 0.8 &lt;= 0.8.37<br>Nginx在图片中嵌入PHP代码然后通过访问xxx.jpg%00.php来执行其中的代码</p>
+<h2 id="Apache解析漏洞">Apache解析漏洞</h2><p>Apache是从右到左开始判断解析,如果为不可识别解析,就再往左判断。比如<code>wooyun.php.owf.rar</code>,<code>.owf</code>和<code>.rar</code>这两种后缀是apache不可识别解析,apache就会把wooyun.php.owf.rar解析成php。<br>如何判断是不是合法的后缀就是这个漏洞的利用关键,测试时可以尝试上传一个wooyun.php.rara.jpg.png…（把你知道的常见后缀都写上…）去测试是否是合法后缀</p>
+<h2 id="fast-CGI解析漏洞">fast-CGI解析漏洞</h2><p>在web服务器开启fast-CGI的时候，上传图片xx.jpg。内容为：<code>&lt;?php fputs(fopen(&#39;shell.php&#39;,&#39;w&#39;),&#39;&lt;?php eval($_POST[shell])?&gt;&#39;);?&gt;</code><br>这里使用的fput创建一个shell.php文件，并写入一句话。访问路径<code>xx.jpg/.php</code>，就会在该路径下生成一个一句话木马shell.php。这个漏洞在IIS 7.0/7.5，Nginx 8.03以下版本存在。语言环境：PHP，prel，Bourne Shell，C等语言。</p>
+<p>*注：fast-CGI是CGI的升级版，CGI指的是在服务器上提供人机交互的接口，fast-CGI是一种常驻型的CGI。因为CGI每次执行时候，都需要用fork启用一个进程，但是fast-CGI属于激活后就一直执行，不需要每次请求都fork一个进程。比普通的CGI占的内存少。</p>
+<h2 id="其他">其他</h2><p>在windows环境下，<code>xx.jpg[空格]</code>或<code>xx.jpg.</code>这两类文件都是不允许存在的，若这样命名，windows会默认除去空格或点，黑客可以通过抓包，在文件名后加一个空格或者点绕过黑名单。若上传成功，空格和点都会被windows自动消除,这样也可以getshell。</p>
+<p>如果在Apache中.htaccess可被执行.且可被上传.那可以尝试在.htaccess中写入:<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;FilesMatch "wooyun.jpg"&gt;</span> </span><br><span class="line">	<span class="keyword"><span class="common">SetHandler</span></span> application/x-httpd-php </span><br><span class="line"><span class="tag">&lt;/FilesMatch&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后再上传shell.jpg的木马, 这样shell.jpg就可解析为php文件。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Web安全/">Web安全</a>
+  </div>
+ 
+        
+  
+  <div class="tags">
+    <a href="/tags/渗透测试/">渗透测试</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+  
+  <a href="/2014/11/17/文件包含小总结/" class="alignleft prev" >上一頁</a>
+  
+  
+  <a href="/2014/11/16/文件上传小总结/" class="alignright next" >下一頁</a>
+  
+  <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="_posts/解析漏洞小总结.md" data-title="解析漏洞小总结" data-url="http://ohroot.com/2014/11/16/解析漏洞小总结/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:ohroot.com">
+  </form>
+</div>
+
+  
+<script type="text/javascript" src="/js/tag.js"></script>
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry" id = "cloud3d">
+    <a href="/tags/Android/" style="font-size: 15px;">Android</a><a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a><a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mongodb/" style="font-size: 15px;">Mongodb</a><a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a><a href="/tags/Web运维/" style="font-size: 10px;">Web运维</a><a href="/tags/XSS/" style="font-size: 12.5px;">XSS</a><a href="/tags/hexo/" style="font-size: 17.5px;">hexo</a><a href="/tags/javascript/" style="font-size: 12.5px;">javascript</a><a href="/tags/mysql/" style="font-size: 15px;">mysql</a><a href="/tags/phantomjs/" style="font-size: 10px;">phantomjs</a><a href="/tags/python/" style="font-size: 15px;">python</a><a href="/tags/sublime/" style="font-size: 10px;">sublime</a><a href="/tags/渗透测试/" style="font-size: 17.5px;">渗透测试</a>
+  </div>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>3</small></li>
+  
+    <li><a href="/categories/Web安全/">Web安全</a><small>5</small></li>
+  
+    <li><a href="/categories/Web运维/">Web运维</a><small>1</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/categories/工具使用/">工具使用</a><small>1</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>9</small></li>
+  
+    <li><a href="/categories/数据库/">数据库</a><small>5</small></li>
+  
+    <li><a href="/categories/渗透测试/">渗透测试</a><small>1</small></li>
+  
+    <li><a href="/categories/编程/">编程</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/15/ubuntu14-04下修复flash版本问题/">ubuntu14.04下修复flash版本问题</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/12/从BSON文件到MySQL/">从BSON文件到MySQL</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/11/MySQL-Cluster搭建/">MySQL Cluster搭建</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/11/Mongodb取消开机自启动/">Mongodb取消开机自启动</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/11/Mongodb安装笔记/">Mongodb安装笔记</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://www.sec-wiki.com/" title="SecWiki">SecWiki</a></li>
+<li><a href="http://www.jinglingshu.org/" title="jinglingshu">精灵鼠</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F8f194a78c11f76027a96c6ec87298c62' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

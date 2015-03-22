@@ -1,0 +1,420 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CentOS搭建VPN | 天空下行走</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="专注安全、专注生活、专注人生">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="CentOS搭建VPN"/>
+  <meta property="og:site_name" content="天空下行走"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+  <link rel="alternate" href="/atom.xml" title="天空下行走" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">天空下行走</a></h1>
+  <h2><a href="/">Walk Around</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+    <li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+	})()    '>High一下</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-12-17T13:12:43.000Z"><a href="/2014/12/17/CentOS搭建VPN/">2014-12-17</a></time>
+      
+      
+  
+    <h1 class="title">CentOS搭建VPN</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+      
+        <p>搭建了一个L2TP+IPSec的VPN,对于小菜来说着实花了一番功夫…记录过程与此<br><a id="more"></a></p>
+<h2 id="搭建L2TP+IPSec_VPN">搭建L2TP+IPSec VPN</h2><p>搭建VPN的时候，仔细了解了下现在的三种VPN。分别是PPTP、IPSec/L2TP、OpenVPN，经过比较，我决定先尝试搭建一个IPSec/L2TP的VPN。<br>唉，网上资料好多，可是也好乱，自己搭建一边，做个整理吧</p>
+<h3 id="安装相应的软件">安装相应的软件</h3><p>首先<code>yum update</code>更新下源.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install wget <span class="built_in">bind</span>-utils</span><br><span class="line">wget http://mirror.nl.leaseweb.net/epel/<span class="number">6</span>/i386/epel-release-<span class="number">6</span>-<span class="number">8</span>.noarch.rpm</span><br><span class="line">rpm -ivh ./epel-release-<span class="number">6</span>-<span class="number">8</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line">yum install openswan</span><br><span class="line">yum install ppp xl2tpd</span><br><span class="line">yum install lsof man</span><br></pre></td></tr></table></figure></p>
+<p>ppp是用于管理VPN用户的,我这里出现了问题,xl2tpd找不到源,解决办法是:到<a href="http://pkgs.org/" target="_blank" rel="external">pkgs.org</a>这个网站去搜,我就找到了相应的最新版<a href="http://pkgs.org/centos-6/epel-i386/xl2tpd-1.3.6-1.el6.i686.rpm.html" target="_blank" rel="external">地址</a><br>接下来就是找到相应的文件下载,然后安装<code>yum install xl2tpd-1.3.6-1.el6.i686.rpm</code></p>
+<h3 id="配置内核与防火墙">配置内核与防火墙</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//设置 iptables 的数据包转发</span><br><span class="line">iptables --table nat --append POSTROUTING --jump MASQUERADE</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"net.ipv4.ip_forward = 1"</span> |  tee <span class="operator">-a</span> /etc/sysctl.conf</span><br><span class="line"></span><br><span class="line">//是否接受ICMP转发,如果不是路由器，该值需要设置为 <span class="number">0</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"net.ipv4.conf.all.accept_redirects = 0"</span> |  tee <span class="operator">-a</span> /etc/sysctl.conf</span><br><span class="line">//是否发送ICMP转发(redirect)如果服务器不作为网关/路由器,该值建议设置为<span class="number">0</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"net.ipv4.conf.all.send_redirects = 0"</span> |  tee <span class="operator">-a</span> /etc/sysctl.conf</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> vpn <span class="keyword">in</span> /proc/sys/net/ipv4/conf/*; <span class="keyword">do</span> <span class="built_in">echo</span> <span class="number">0</span> &gt; <span class="variable">$vpn</span>/accept_redirects; <span class="built_in">echo</span> <span class="number">0</span> &gt; <span class="variable">$vpn</span>/send_redirects; <span class="keyword">done</span></span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<h3 id="其他配置">其他配置</h3><ul>
+<li>编辑<code>/etc/rc.local</code>在结尾添加</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Correct ICMP Redirect issues with OpenSWAN</span></span><br><span class="line"><span class="keyword">for</span> each <span class="keyword">in</span> /proc/sys/net/ipv4/conf/*; <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="number">0</span> &gt; <span class="variable">$each</span>/accept_redirects</span><br><span class="line">        <span class="built_in">echo</span> <span class="number">0</span> &gt; <span class="variable">$each</span>/send_redirects</span><br><span class="line">        <span class="built_in">echo</span> <span class="number">0</span> &gt; <span class="variable">$each</span>/rp_filter</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>编辑 /etc/ipsec.conf ,我的配置如下:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/ipsec.conf - Openswan IPsec configuration file</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Manual:     ipsec.conf.5</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Please place your own config files in /etc/ipsec.d/ ending in .conf</span></span><br><span class="line"></span><br><span class="line">version <span class="number">2.0</span>     <span class="comment"># conforms to second version of ipsec.conf specification</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># basic configuration</span></span><br><span class="line">config setup</span><br><span class="line">        interfaces=<span class="string">"%defaultroute"</span></span><br><span class="line">        <span class="comment"># Debug-logging controls:  "none" for (almost) none, "all" for lots.</span></span><br><span class="line">        klipsdebug=none</span><br><span class="line">        plutodebug=<span class="string">"none"</span></span><br><span class="line">        plutostderrlog=/var/<span class="built_in">log</span>/pluto.log</span><br><span class="line">        <span class="comment"># For Red Hat Enterprise Linux and Fedora, leave protostack=netkey</span></span><br><span class="line">        protostack=netkey</span><br><span class="line">        nat_traversal=yes</span><br><span class="line">        oe=off</span><br><span class="line">        <span class="comment"># Enable this if you see "failed to find any available worker"</span></span><br><span class="line">        nhelpers=<span class="number">0</span></span><br><span class="line">        virtual_private=%v4:<span class="number">10.0</span>.<span class="number">0.0</span>/<span class="number">8</span>,%v4:<span class="number">192.168</span>.<span class="number">0.0</span>/<span class="number">16</span>,%v4:<span class="number">172.16</span>.<span class="number">0.0</span>/<span class="number">12</span></span><br><span class="line"></span><br><span class="line">conn L2TP-PSK</span><br><span class="line">       authby=secret</span><br><span class="line">       pfs=no</span><br><span class="line">       auto=add</span><br><span class="line">       keyingtries=<span class="number">3</span></span><br><span class="line">       rekey=no</span><br><span class="line">       <span class="built_in">type</span>=transport</span><br><span class="line">       forceencaps=yes</span><br><span class="line">       right=%any</span><br><span class="line">       rightsubnet=vhost:%any,%priv</span><br><span class="line">       rightprotoport=<span class="number">17</span>/%any</span><br><span class="line">       left=%defaultroute</span><br><span class="line"></span><br><span class="line">       leftprotoport=<span class="number">17</span>/<span class="number">1701</span></span><br><span class="line">       <span class="comment"># Apple iOS doesn't send delete notify so we need dead peer detection</span></span><br><span class="line">       <span class="comment"># to detect vanishing clients</span></span><br><span class="line">       dpddelay=<span class="number">10</span></span><br><span class="line">       dpdtimeout=<span class="number">90</span></span><br><span class="line">       dpdaction=clear</span><br><span class="line"></span><br><span class="line"><span class="comment">#You may put your configuration (.conf) file in the "/etc/ipsec.d/" and uncomment this.</span></span><br><span class="line"><span class="comment">#include /etc/ipsec.d/*.conf</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>编辑/etc/ipsec.secrets</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ipsec.secrets</span><br><span class="line"><span class="comment">#include /etc/ipsec.d/*.secrets</span></span><br><span class="line">你的公网IP     %any:PSK     <span class="string">"任意的密钥"</span></span><br></pre></td></tr></table></figure>
+<p>此时<code>ipsec verify</code>运行检查配置效果,我的如下:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Checking your <span class="keyword">system</span> <span class="built_in">to</span> see <span class="keyword">if</span> IPsec got installed <span class="operator">and</span> started correctly:</span><br><span class="line">Version check <span class="operator">and</span> ipsec <span class="command"><span class="keyword">on</span>-path                                 [<span class="title">OK</span>]</span></span><br><span class="line">Linux Openswan U2<span class="number">.6</span><span class="number">.32</span>/K2<span class="number">.6</span><span class="number">.32</span>-<span class="number">504.3</span><span class="number">.3</span>.el6.i686 (netkey)</span><br><span class="line">Checking <span class="keyword">for</span> IPsec support <span class="operator">in</span> kernel                            [OK]</span><br><span class="line"> SAref kernel support                                           [N/A]</span><br><span class="line"> NETKEY:  Testing <span class="keyword">for</span> disabled ICMP send_redirects              [OK]</span><br><span class="line">NETKEY detected, testing <span class="keyword">for</span> disabled ICMP accept_redirects     [OK]</span><br><span class="line">Checking that pluto is running                                  [OK]</span><br><span class="line"> Pluto listening <span class="keyword">for</span> IKE <span class="command"><span class="keyword">on</span> <span class="title">udp</span> <span class="title">500</span>                             [<span class="title">OK</span>]</span></span><br><span class="line"> Pluto listening <span class="keyword">for</span> NAT-T <span class="command"><span class="keyword">on</span> <span class="title">udp</span> <span class="title">4500</span>                          [<span class="title">OK</span>]</span></span><br><span class="line">Two <span class="operator">or</span> more interfaces found, checking IP forwarding            [OK]</span><br><span class="line">Checking NAT <span class="operator">and</span> MASQUERADEing                                  [OK]</span><br><span class="line">Checking <span class="keyword">for</span> <span class="string">'ip'</span> <span class="command"><span class="keyword">command</span>                                       [<span class="title">OK</span>]</span></span><br><span class="line">Checking /bin/sh is <span class="operator">not</span> /bin/dash                               [OK]</span><br><span class="line">Checking <span class="keyword">for</span> <span class="string">'iptables'</span> <span class="command"><span class="keyword">command</span>                                 [<span class="title">OK</span>]</span></span><br><span class="line">Opportunistic Encryption Support                                [DISABLED]</span><br></pre></td></tr></table></figure>
+<p>这里遇到问题则一定要先解决了.哪一项不过就google解决哪一项.</p>
+<ul>
+<li>编辑 /etc/xl2tpd/xl2tpd.conf</li>
+</ul>
+<p><code>vi /etc/xl2tpd/xl2tpd.conf</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">;</span><br><span class="line">; This is a minimal sample xl2tpd configuration file <span class="keyword">for</span> use</span><br><span class="line">; with L2TP over IPsec.</span><br><span class="line">;</span><br><span class="line">; The idea is to provide an L2TP daemon to <span class="built_in">which</span> remote Windows L2TP/IPsec</span><br><span class="line">; clients connect. In this example, the internal (protected) network</span><br><span class="line">; is <span class="number">192.168</span>.<span class="number">1.0</span>/<span class="number">24</span>.  A special IP range within this network is reserved</span><br><span class="line">; <span class="keyword">for</span> the remote clients: <span class="number">192.168</span>.<span class="number">1.128</span>/<span class="number">25</span></span><br><span class="line">; (i.e. <span class="number">192.168</span>.<span class="number">1.128</span> ... <span class="number">192.168</span>.<span class="number">1.254</span>)</span><br><span class="line">;</span><br><span class="line">; The listen-addr parameter can be used <span class="keyword">if</span> you want to <span class="built_in">bind</span> the L2TP daemon</span><br><span class="line">; to a specific IP address instead of to all interfaces. For instance,</span><br><span class="line">; you could <span class="built_in">bind</span> it to the interface of the internal LAN (e.g. <span class="number">192.168</span>.<span class="number">1.98</span></span><br><span class="line">; <span class="keyword">in</span> the example below). Yet another IP address (<span class="built_in">local</span> ip, e.g. <span class="number">192.168</span>.<span class="number">1.99</span>)</span><br><span class="line">; will be used by xl2tpd as its address on pppX interfaces.</span><br><span class="line"></span><br><span class="line">[global]</span><br><span class="line">; listen-addr = <span class="number">192.168</span>.<span class="number">1.98</span></span><br><span class="line">;</span><br><span class="line">; requires openswan-<span class="number">2.5</span>.<span class="number">18</span> or higher - Also does not yet work <span class="keyword">in</span> combination</span><br><span class="line">; with kernel mode l2tp as present <span class="keyword">in</span> linux <span class="number">2.6</span>.<span class="number">23</span>+</span><br><span class="line">ipsec saref = no</span><br><span class="line">; Use refinfo of <span class="number">22</span> <span class="keyword">if</span> using an SAref kernel patch based on openswan <span class="number">2.6</span>.<span class="number">35</span> or</span><br><span class="line">;  when using any of the SAref kernel patches <span class="keyword">for</span> kernels up to <span class="number">2.6</span>.<span class="number">35</span>.</span><br><span class="line">; saref refinfo = <span class="number">30</span></span><br><span class="line">;</span><br><span class="line">; force userspace = yes</span><br><span class="line">;</span><br><span class="line">; debug tunnel = yes</span><br><span class="line"></span><br><span class="line">[lns default]</span><br><span class="line">ip range = <span class="number">192.168</span>.<span class="number">32.1</span>-<span class="number">192.168</span>.<span class="number">32.250</span></span><br><span class="line"><span class="built_in">local</span> ip = <span class="number">192.168</span>.<span class="number">32.252</span></span><br><span class="line">require chap = yes</span><br><span class="line">refuse pap = yes</span><br><span class="line">require authentication = yes</span><br><span class="line">name = LinuxVPNserver</span><br><span class="line">ppp debug = yes</span><br><span class="line">pppoptfile = /etc/ppp/options.xl2tpd</span><br><span class="line">length bit = yes</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>修改 /etc/ppp/options.xl2tpd</li>
+</ul>
+<p><code>vi /etc/ppp/options.xl2tpd</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">ipcp-accept-local</span><br><span class="line">ipcp-accept-remote</span><br><span class="line">ms-dns  <span class="number">8.8</span>.<span class="number">8.8</span></span><br><span class="line">ms-dns  <span class="number">8.8</span>.<span class="number">4.4</span></span><br><span class="line"><span class="comment"># ms-dns  192.168.1.1</span></span><br><span class="line"><span class="comment"># ms-dns  192.168.1.3</span></span><br><span class="line"><span class="comment"># ms-wins 192.168.1.2</span></span><br><span class="line"><span class="comment"># ms-wins 192.168.1.4</span></span><br><span class="line">noccp</span><br><span class="line">auth</span><br><span class="line">crtscts</span><br><span class="line">idle <span class="number">1800</span></span><br><span class="line">mtu <span class="number">1410</span></span><br><span class="line">mru <span class="number">1410</span></span><br><span class="line">nodefaultroute</span><br><span class="line">debug</span><br><span class="line">lock</span><br><span class="line">proxyarp</span><br><span class="line">connect-delay <span class="number">5000</span></span><br><span class="line"><span class="comment"># To allow authentication against a Windows domain EXAMPLE, and require the</span></span><br><span class="line"><span class="comment"># user to be in a group "VPN Users". Requires the samba-winbind package</span></span><br><span class="line">require-mschap-v2</span><br><span class="line"><span class="comment"># plugin winbind.so</span></span><br><span class="line"><span class="comment"># ntlm_auth-helper '/usr/bin/ntlm_auth --helper-protocol=ntlm-server-1 --require-membership-of="EXAMPLE\\VPN Users"'</span></span><br><span class="line"><span class="comment"># You need to join the domain on the server, for example using samba:</span></span><br><span class="line"><span class="comment"># http://rootmanager.com/ubuntu-ipsec-l2tp-windows-domain-auth/setting-up-openswan-xl2tpd-with-native-windows-clients-lucid.html</span></span><br><span class="line">logfile /var/<span class="built_in">log</span>/ppp.log</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>添加用户</li>
+</ul>
+<p><code>vi /etc/ppp/chap-secrets</code> 在文件中按格式添加用户.</p>
+<ul>
+<li>使用的防火墙规则:</li>
+</ul>
+<p>这里直接放出我配置好的防火墙规则,这里真的是卡了好久,对iptables不是非常熟悉.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Mon Dec 22 21:49:43 2014</span></span><br><span class="line">*nat</span><br><span class="line">:PREROUTING ACCEPT [<span class="number">834</span>:<span class="number">63397</span>]</span><br><span class="line">:POSTROUTING ACCEPT [<span class="number">0</span>:<span class="number">0</span>]</span><br><span class="line">:OUTPUT ACCEPT [<span class="number">5</span>:<span class="number">365</span>]</span><br><span class="line">-A POSTROUTING <span class="operator">-s</span> <span class="number">192.168</span>.<span class="number">32.0</span>/<span class="number">24</span> -o eth0 -j MASQUERADE</span><br><span class="line">COMMIT</span><br><span class="line"><span class="comment"># Completed on Mon Dec 22 21:49:43 2014</span></span><br><span class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Mon Dec 22 21:49:43 2014</span></span><br><span class="line">*filter</span><br><span class="line">:INPUT ACCEPT [<span class="number">0</span>:<span class="number">0</span>]</span><br><span class="line">:FORWARD ACCEPT [<span class="number">0</span>:<span class="number">0</span>]</span><br><span class="line">:OUTPUT ACCEPT [<span class="number">300</span>:<span class="number">44294</span>]</span><br><span class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">-A INPUT -p icmp -j ACCEPT</span><br><span class="line">-A INPUT -i lo -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport <span class="number">22</span> -j ACCEPT</span><br><span class="line">-A INPUT -p udp -m state --state NEW -m udp --dport <span class="number">1701</span> -j ACCEPT</span><br><span class="line">-A INPUT -p udp -m state --state NEW -m udp --dport <span class="number">500</span> -j ACCEPT</span><br><span class="line">-A INPUT -p udp -m state --state NEW -m udp --dport <span class="number">4500</span> -j ACCEPT</span><br><span class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">-A FORWARD <span class="operator">-d</span> <span class="number">192.168</span>.<span class="number">32.0</span>/<span class="number">24</span> -j ACCEPT</span><br><span class="line">-A FORWARD <span class="operator">-s</span> <span class="number">192.168</span>.<span class="number">32.0</span>/<span class="number">24</span> -j ACCEPT</span><br><span class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">COMMIT</span><br><span class="line"><span class="comment"># Completed on Mon Dec 22 21:49:43 2014</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="最后">最后</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">service xl2tpd restart</span><br><span class="line">service iptables restart</span><br><span class="line">chkconfig xl2tpd on</span><br><span class="line">chkconfig iptables on</span><br><span class="line">chkconfig ipsec on</span><br></pre></td></tr></table></figure>
+<p>参考链接:<a href="http://linux.die.net/man/5/xl2tpd.conf" target="_blank" rel="external">http://linux.die.net/man/5/xl2tpd.conf</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/操作系统/">操作系统</a>
+  </div>
+ 
+        
+  
+  <div class="tags">
+    <a href="/tags/CentOS/">CentOS</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+  
+  <a href="/2014/12/19/ubuntu安装nodejs/" class="alignleft prev" >上一頁</a>
+  
+  
+  <a href="/2014/12/08/js匿名函数与感叹号/" class="alignright next" >下一頁</a>
+  
+  <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="_posts/CentOS搭建VPN.md" data-title="CentOS搭建VPN" data-url="http://ohroot.com/2014/12/17/CentOS搭建VPN/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:ohroot.com">
+  </form>
+</div>
+
+  
+<script type="text/javascript" src="/js/tag.js"></script>
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry" id = "cloud3d">
+    <a href="/tags/Android/" style="font-size: 15px;">Android</a><a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a><a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mongodb/" style="font-size: 15px;">Mongodb</a><a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a><a href="/tags/Web运维/" style="font-size: 10px;">Web运维</a><a href="/tags/XSS/" style="font-size: 12.5px;">XSS</a><a href="/tags/hexo/" style="font-size: 17.5px;">hexo</a><a href="/tags/javascript/" style="font-size: 12.5px;">javascript</a><a href="/tags/mysql/" style="font-size: 15px;">mysql</a><a href="/tags/phantomjs/" style="font-size: 10px;">phantomjs</a><a href="/tags/python/" style="font-size: 15px;">python</a><a href="/tags/sublime/" style="font-size: 10px;">sublime</a><a href="/tags/渗透测试/" style="font-size: 17.5px;">渗透测试</a>
+  </div>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>3</small></li>
+  
+    <li><a href="/categories/Web安全/">Web安全</a><small>5</small></li>
+  
+    <li><a href="/categories/Web运维/">Web运维</a><small>1</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/categories/工具使用/">工具使用</a><small>1</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>9</small></li>
+  
+    <li><a href="/categories/数据库/">数据库</a><small>5</small></li>
+  
+    <li><a href="/categories/渗透测试/">渗透测试</a><small>1</small></li>
+  
+    <li><a href="/categories/编程/">编程</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/15/ubuntu14-04下修复flash版本问题/">ubuntu14.04下修复flash版本问题</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/12/从BSON文件到MySQL/">从BSON文件到MySQL</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/11/MySQL-Cluster搭建/">MySQL Cluster搭建</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/11/Mongodb取消开机自启动/">Mongodb取消开机自启动</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/11/Mongodb安装笔记/">Mongodb安装笔记</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://www.sec-wiki.com/" title="SecWiki">SecWiki</a></li>
+<li><a href="http://www.jinglingshu.org/" title="jinglingshu">精灵鼠</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F8f194a78c11f76027a96c6ec87298c62' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

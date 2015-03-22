@@ -1,0 +1,611 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>文件上传小总结 | 天空下行走</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="专注安全、专注生活、专注人生">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="文件上传小总结"/>
+  <meta property="og:site_name" content="天空下行走"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+  <link rel="alternate" href="/atom.xml" title="天空下行走" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">天空下行走</a></h1>
+  <h2><a href="/">Walk Around</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+    <li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+	})()    '>High一下</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-16T06:36:17.000Z"><a href="/2014/11/16/文件上传小总结/">2014-11-16</a></time>
+      
+      
+  
+    <h1 class="title">文件上传小总结</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+      
+        <p>本文主要总结下文件上传，主要是通过PHP的逻辑解释文件上传中的一些安全问题。在前人总结的基础上自己再琢磨琢磨。。。<br><a id="more"></a></p>
+<p>上传漏洞通常是一个文件上传点，其缺乏相应的安全验证，从而可以上传恶意代码，网站最终被getshell<br>下面我们分情况分析</p>
+<h2 id="无丝毫验证的文件上传">无丝毫验证的文件上传</h2><p>一个简单的文件上传表单通常包含一个HTML表单和PHP脚本。HTML表单呈现给用户，而文件上传功能的通常通过PHP脚本实现。下面是一个例子：</p>
+<p>HTML表单如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">form</span> <span class="attribute">enctype</span>=<span class="value">"multipart/form-data"</span> <span class="attribute">action</span>=<span class="value">"uploader.php"</span> <span class="attribute">method</span>=<span class="value">"POST"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"hidden"</span> <span class="attribute">name</span>=<span class="value">"MAX_FILE_SIZE"</span> <span class="attribute">value</span>=<span class="value">"100000"</span> /&gt;</span></span><br><span class="line">	Choose a file to upload: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">name</span>=<span class="value">"uploadedfile"</span> <span class="attribute">type</span>=<span class="value">"file"</span> /&gt;</span><span class="tag">&lt;<span class="title">br</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"submit"</span> <span class="attribute">value</span>=<span class="value">"Upload File"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>PHP代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line">	<span class="variable">$target_path</span> = <span class="string">"uploads/"</span>;</span><br><span class="line">	<span class="variable">$target_path</span> = <span class="variable">$target_path</span> . basename(<span class="variable">$_FILES</span>[<span class="string">'uploadedfile'</span>][<span class="string">'name'</span>]);</span><br><span class="line">	<span class="keyword">if</span> (move_uploaded_file(<span class="variable">$_FILES</span>[<span class="string">'uploadedfile'</span>][<span class="string">'tmp_name'</span>], <span class="variable">$target_path</span>)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"The file "</span> . basename(<span class="variable">$_FILES</span>[<span class="string">'uploadedfile'</span>][<span class="string">'name'</span>]) . <span class="string">" has been uploaded"</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"There was an error uploading the file, please try again!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="preprocessor">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>当PHP接收POST请求且编码类型是multipart/form-data，它会在一个临时的文件名随机的临时目录创建一个文件（例如/ var/tmp/php6yXOVs）。 PHP也将填充全局数组$_FILES上传的文件的信息:<br>$_FILES [‘UploadedFile的’] [‘name’]：在客户机上的文件的原始名称<br>$_FILES [‘UploadedFile的’] [‘type’]：文件的MIME类型<br>$_FILES [‘UploadedFile的’] [‘size’]：文件的大小（以字节为单位）<br>$_FILES [‘UploadedFile的’][‘tmp_name’]：上传的文件存储在服务器上的临时文件名。<br>PHP函数move_uploaded_file将用户提供的临时文件移动到一个位置。在这种情况下，目的地是服务器根目录以下。因此，文件可以使 用的URL来访问。<br>在这个简单的例子中，由于上传的文件类型没有限制，因此攻击者可以上传一个PHP或.NET等带有恶意代码的文件，可导致服务器被getshell。</p>
+<p>但是这种毫无验证的方式通常不会存在，下面从不同的验证方法上看上传绕过。</p>
+<h2 id="Mime类型验证">Mime类型验证</h2><p>MIME的作用：使客户端软件，区分不同种类的数据，例如web浏览器就是通过MIME类型来判断文件是GIF图片，还是可打印的PostScript文件。web服务器使用MIME来说明发送数据的种类， web客户端使用MIME来说明希望接收到的数据种类。<br>常见的错误是Web开发人员验证文件上传表单时，只检查从PHP返回mime类型。当一个文件被上传到服务器，PHP将设置变量$_FILES[‘UploadedFile’][‘type’]所提供的Web浏览器客户端使用的MIME类型。</p>
+<p>服务器端（tomcat5.5）接收不同浏览器上传的文件时，取得的MIME类型</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>用IE7上传</th>
+<th>用Firefox3.0上传</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GIF</td>
+<td>image/gif</td>
+<td>image/gif</td>
+</tr>
+<tr>
+<td>JPG</td>
+<td>image/jpeg</td>
+<td>image/jpeg</td>
+</tr>
+<tr>
+<td>ZIP</td>
+<td>application/x-compressed</td>
+<td>application/octet-stream</td>
+</tr>
+<tr>
+<td>JSP</td>
+<td>text/html</td>
+<td>text/html</td>
+</tr>
+<tr>
+<td>EXE</td>
+<td>application/octet-stream</td>
+<td>application/octet-stream</td>
+</tr>
+</tbody>
+</table>
+<p>常见MIME类型例表：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>内容类型</th>
+<th>文件扩展名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>application/msword</td>
+<td>doc</td>
+<td>Microsoft Word</td>
+</tr>
+<tr>
+<td>2</td>
+<td>application/octet-stream bin</td>
+<td>dms lha lzh exe class</td>
+<td>可执行程序</td>
+</tr>
+<tr>
+<td>3</td>
+<td>application/pdf</td>
+<td>pdf</td>
+<td>Adobe Acrobat</td>
+</tr>
+<tr>
+<td>4</td>
+<td>application/postscript</td>
+<td>ai eps ps</td>
+<td>PostScript</td>
+</tr>
+<tr>
+<td>5</td>
+<td>appication/powerpoint</td>
+<td>ppt</td>
+<td>Microsoft Powerpoint</td>
+</tr>
+<tr>
+<td>6</td>
+<td>appication/rtf</td>
+<td>rtf</td>
+<td>rtf格式</td>
+</tr>
+<tr>
+<td>7</td>
+<td>appication/x-compress</td>
+<td>z</td>
+<td>unix 压缩文件</td>
+</tr>
+<tr>
+<td>8</td>
+<td>application/x-gzip</td>
+<td>gz</td>
+<td>gzip</td>
+</tr>
+<tr>
+<td>9</td>
+<td>application/x-gtar</td>
+<td>gtar</td>
+<td>tar 文档 (gnu 格式 )</td>
+</tr>
+<tr>
+<td>10</td>
+<td>application/x-shockwave-flash</td>
+<td>swf</td>
+<td>MacroMedia Flash</td>
+</tr>
+<tr>
+<td>11</td>
+<td>application/x-tar</td>
+<td>tar</td>
+<td>tar(4.3BSD)</td>
+</tr>
+<tr>
+<td>12</td>
+<td>application/zip</td>
+<td>zip</td>
+<td>winzip</td>
+</tr>
+<tr>
+<td>13</td>
+<td>audio/basic</td>
+<td>au snd</td>
+<td>sun/next 声音文件</td>
+</tr>
+<tr>
+<td>14</td>
+<td>audio/mpeg</td>
+<td>mpeg mp2</td>
+<td>Mpeg 声音文件</td>
+</tr>
+<tr>
+<td>15</td>
+<td>audio/x-aiff</td>
+<td>mid midi rmf</td>
+<td>Midi 格式</td>
+</tr>
+<tr>
+<td>16</td>
+<td>audio/x-pn-realaudio</td>
+<td>ram ra</td>
+<td>Real Audio 声音</td>
+</tr>
+<tr>
+<td>17</td>
+<td>audio/x-pn-realaudio-plugin</td>
+<td>rpm</td>
+<td>Real Audio 插件</td>
+</tr>
+<tr>
+<td>18</td>
+<td>audio/x-wav</td>
+<td>wav</td>
+<td>Microsoft Windows 声音</td>
+</tr>
+<tr>
+<td>19</td>
+<td>image/cgm</td>
+<td>cgm</td>
+<td>计算机图形元文件</td>
+</tr>
+<tr>
+<td>20</td>
+<td>image/gif</td>
+<td>gif</td>
+<td>COMPUSERVE GIF 图像</td>
+</tr>
+<tr>
+<td>21</td>
+<td>image/jpeg</td>
+<td>jpeg jpg jpe</td>
+<td>JPEG 图像</td>
+</tr>
+<tr>
+<td>22</td>
+<td>image/png</td>
+<td>png</td>
+<td>PNG 图像</td>
+</tr>
+</tbody>
+</table>
+<p><strong> 绕过 </strong><br>判断方法：基于不同mime类型多上传几次来测试<br>MIME类型通常在http头中，我们很容易通过抓包，改包的方式去绕过此种验证方式。最常用burp去修改http包。</p>
+<h2 id="限制危险的拓展">限制危险的拓展</h2><p>在另一个例子里，我们遇到了文件上传使用黑名单的做法，作为一项安全措施。从开发者收集制定的危险列表，如果正在上传的文件扩展名包含在列表中，访问会被拒绝。<br>使用危险的文件扩展名，其主要缺点之一是，它几乎不可能编制一份完整的清单，包括攻击者可以使用的所有可能的扩展名。<br>恶意用户可以很容易地绕过该检查上传一个文件名为“.htaccess”，其中包含类似于下面的一行代码：<code>AddType application/x-httpd-php .jpg</code><br>上面的代码行指示ApacheWeb服务器执行jpg图片，好像他们是PHP脚本。攻击者现在可以上传一个jpg扩展名的文件，其中包含PHP代码。通过web浏览器请求一个jpg文件，其中包含PHP的命令phpinfo()函数，Web服务器依旧会执行php代码。</p>
+<h2 id="服务端扩展名验证">服务端扩展名验证</h2><p>一般都是黑名单验证的，这部分建议看一下关于解析漏洞的文章：<a href="http://direwolf.gitcafe.com/2014/11/16/解析漏洞小总结/" target="_blank" rel="external">解析漏洞小总结</a><br>如何绕过：</p>
+<ol>
+<li>找黑名单扩展名的漏网之鱼 – 通常对于asp就是 asa、cer之类，对于php就是php3、php4等</li>
+<li>可能存在大小写绕过漏洞 – 比如 aSp 和 pHp 之类</li>
+<li>特别文件名构造 – 比如发送的 http 包里把文件名改成 help.asp. 或 help.asp_(下划线为空格)，这种命名方式在 windows 系统里是不被允许的，所以需要在 burp 之类里进行修改， 然后绕过验证后，会被windows系统自动去掉后面的点和空格。</li>
+<li>IIS或nginx文件名解析漏洞 – 比如 help.asp;.jpg或<a href="http://www.xx.com/help.jpg/2.php。这里注意网上所谓的" target="_blank" rel="external">http://www.xx.com/help.jpg/2.php。这里注意网上所谓的</a> nginx 文件名解析漏洞实际上是 php-fpm 文件名解析漏洞，详见 <a href="http://www.cnbeta.com/articles/111752.htm" target="_blank" rel="external">http://www.cnbeta.com/articles/111752.htm</a></li>
+<li>0×00 截断绕过 – 这个是基于一个组合逻辑漏洞造成的</li>
+<li>双扩展名解析绕过攻击(1) – 基于 web 服务的解析逻辑。比如上传x.php.rar等文件</li>
+<li>双扩展名解析绕过攻击(2) – 基于 web 服务的解析方式（解析漏洞）</li>
+<li>如果在 Apache 的 conf 里有这样一行配置<code>AddHandler php5-script .php</code> 这时只要文件名里包含.php,即使文件名是 test2.php.jpg 也会以 php 来执行</li>
+</ol>
+<h2 id="检查图片头部">检查图片头部</h2><p>当仅允许上传图片的时候, 开发者通常使用PHP的getimagesize函数来检测图片的头部信息。该函数在被调用时将会返回图片的尺寸, 如果图片经验证为无效的, 也就是说图片头部信息不正确, 则会返回 false 值。因此一个开发者一般会检查该函数是否返回true或false,并且通过该信息来验证上传的文件。所以, 如果一个恶意用户试着上传一个内嵌有简单PHP shell的jpg文件的话,该函数会返回false，然后他将不允许上传此文件。然而, 即使这种方式也能被很容易的绕过。如果一个图片在一个图片编辑器内打开, 就如Gimp,用户就可以编辑图片的注释区, 那儿就能插入PHP代码,该图片仍然有一个有效的头部; 因此就绕过了getimagesize函数的检查。<br>这里就是php图片马的原理了。一般我们做图片马尽量不要去损坏图片头信息。</p>
+<h2 id="js验证">js验证</h2><p>判断方法：点击提交，用burp看是否有数据提交到服务器端，或者直接看是否直接弹出不允许的上传类型。<br>绕过方法：</p>
+<ol>
+<li>我们直接删除代码中onsubmit事件中关于文件上传时验证上传文件的相关代码即可。</li>
+<li>直接更改文件上传JS代码中允许上传的文件扩展名你想要上传的文件扩展名。</li>
+<li>使用本地构造提交表单即可，作相应的更改。</li>
+<li>使用burpsuite或者是fiddle等代理工具提交，本地文件先更改为jpg，上传时拦截，再把文件扩展名更改为asp即可。这也是最简单，最常用的了。</li>
+</ol>
+<h2 id="通过-htaccess保护上传文件夹">通过.htaccess保护上传文件夹</h2><p>另一种流行的创建安全的文件上传表单的方法是使用.htaccess保护好上传文件存放的文件夹。办法是限制这个文件夹里的脚本文件的执行。这种情形一下一个.htaccess文件一般包含下面的代码：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AddHandler cgi-script <span class="class">.php</span> <span class="class">.php3</span> <span class="class">.php4</span> <span class="class">.phtml</span> <span class="class">.pl</span> <span class="class">.py</span> <span class="class">.jsp</span> <span class="class">.asp</span> <span class="class">.htm</span> <span class="class">.shtml</span> <span class="class">.sh</span> <span class="class">.cgi</span></span><br><span class="line">Options –ExecCGI</span><br></pre></td></tr></table></figure></p>
+<p>上面的是另一种形式的黑名单，本身并不是很安全。在PHP手册中，move_uploaded_file一章中，有一个warning:若目标文件已经存在，则会覆盖原文件。因为上传的文件能够而且会覆盖已经存在的同名文件，一个恶意用户很轻易就能用他自己修改过的.htaccess替换掉原来的。进而可以 上传执行特定的恶意脚本。</p>
+<h2 id="客户端验证">客户端验证</h2><p>另一种在文件上传表单中常用的安全技术是在客户端验证上传的文件。一般而言，该技术在ASP.NET应用中更通用一些，因为ASP.NET提供了易用的验证控件。<br>这些验证控件允许开发者对要上传的文件做正则检查，以查出待上传的文件扩展名是否在允许列表中。下面是一段来自微软网站的示例代码:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;asp:FileUpload ID=&#34;FileUpload1&#34; runat=&#34;server&#34; /&#62;&#10;&#60;asp:Button ID=&#34;Button1&#34; runat=&#34;server&#34; OnClick=&#34;Button1_Click&#34; Text=&#34;Upload File&#34; /&#62;&#10;&#60;asp:Label ID=&#34;Label1&#34; runat=&#34;server&#34;&#62;&#60;/asp:Label&#62;&#10;&#60;asp:RegularExpressionValidator id=&#34;RegularExpressionValidator1&#34; runat=&#34;server&#34; ErrorMessage=&#34;Only mp3, m3u or mpeg files are allowed!&#34; ValidationExpression=&#34;^(([a-zA-Z]:)|(&#123;2&#125;w+)$?)((w[w].*))+(.mp3|.MP3|.mpeg|.MPEG|.m3u|.M3U)$&#34; ControlToValidate=&#34;FileUpload1&#34;&#62;&#60;/asp:RegularExpressionValidator&#62;&#10;&#60;asp:RequiredFieldValidator id=&#34;RequiredFieldValidator1&#34; runat=&#34;server&#34; ErrorMessage=&#34;This is a required field!&#34; ControlToValidate=&#34;FileUpload1&#34;&#62;&#60;/asp:RequiredFieldValidator&#62;</span><br></pre></td></tr></table></figure></p>
+<p>这段ASP.NET代码使用了验证控件，所以最终用户只被允许上传.mp3,.mpeg,或者.m3u文件到服务器。若文件类型和这三个指定的文件类型不一致，验证控件将抛出异常，文件也就不会被上传。<br>由于这种文件验证是在客户端完成的，恶意用户很容易就能绕过这一检查。写一段客户端脚本来替换web应用的验证脚本做验证。不用web浏览器，入侵者可以使用可以发送HTTP POST请求的程序来实现上传文件。</p>
+<p><strong> 推荐的解决方案 </strong></p>
+<ul>
+<li><p>定义一个.htaccess文件，只允许访问指定扩展名的文件。不要把.htaccess文件和上传文件放在同一个目录里，应该放在父目录里。一个典型的只允许 gif, jpg, jpeg 和 png文件的.htaccess文件应当包含下面的代码(根据你的需求做调整)。这样也能阻止双扩展名攻击.</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword"><span class="common">deny</span></span> from <span class="literal">all</span></span><br><span class="line"><span class="tag">&lt;Files ~ "^w+.(gif|jpe?g|png)$"&gt;</span></span><br><span class="line">	<span class="keyword"><span class="common">order</span></span> deny,allow</span><br><span class="line">	<span class="keyword"><span class="common">allow</span></span> from <span class="literal">all</span></span><br><span class="line"><span class="tag">&lt;/Files&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果可能，把文件上传到root目录以外的目录里。</p>
+</li>
+<li>禁止覆盖已存在的文件（以阻止.htaccess覆盖攻击）</li>
+<li>创建一个mime-type白名单列表。(只允许这个列表里的Mime-type)</li>
+<li>生成一个随机的文件名，并且加上此前生成的文件扩展名、</li>
+<li>不要只依赖客户端验证，这不够。理想的是既有客户端验证也有服务器端验证。</li>
+</ul>
+<p>参考文章:</p>
+<p><a href="http://www.91ri.org/9033.html" target="_blank" rel="external">上传漏洞科普[1]-文件上传表单是Web安全主要威胁</a><br><a href="http://www.91ri.org/9034.html" target="_blank" rel="external">上传漏洞科普[1]-js验证</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Web安全/">Web安全</a>
+  </div>
+ 
+        
+  
+  <div class="tags">
+    <a href="/tags/渗透测试/">渗透测试</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+  
+  <a href="/2014/11/16/解析漏洞小总结/" class="alignleft prev" >上一頁</a>
+  
+  
+  <a href="/2014/11/11/phantomjs小试牛刀/" class="alignright next" >下一頁</a>
+  
+  <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="_posts/文件上传小总结.md" data-title="文件上传小总结" data-url="http://ohroot.com/2014/11/16/文件上传小总结/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:ohroot.com">
+  </form>
+</div>
+
+  
+<script type="text/javascript" src="/js/tag.js"></script>
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry" id = "cloud3d">
+    <a href="/tags/Android/" style="font-size: 15px;">Android</a><a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a><a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mongodb/" style="font-size: 15px;">Mongodb</a><a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a><a href="/tags/Web运维/" style="font-size: 10px;">Web运维</a><a href="/tags/XSS/" style="font-size: 12.5px;">XSS</a><a href="/tags/hexo/" style="font-size: 17.5px;">hexo</a><a href="/tags/javascript/" style="font-size: 12.5px;">javascript</a><a href="/tags/mysql/" style="font-size: 15px;">mysql</a><a href="/tags/phantomjs/" style="font-size: 10px;">phantomjs</a><a href="/tags/python/" style="font-size: 15px;">python</a><a href="/tags/sublime/" style="font-size: 10px;">sublime</a><a href="/tags/渗透测试/" style="font-size: 17.5px;">渗透测试</a>
+  </div>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>3</small></li>
+  
+    <li><a href="/categories/Web安全/">Web安全</a><small>5</small></li>
+  
+    <li><a href="/categories/Web运维/">Web运维</a><small>1</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/categories/工具使用/">工具使用</a><small>1</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>9</small></li>
+  
+    <li><a href="/categories/数据库/">数据库</a><small>5</small></li>
+  
+    <li><a href="/categories/渗透测试/">渗透测试</a><small>1</small></li>
+  
+    <li><a href="/categories/编程/">编程</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/15/ubuntu14-04下修复flash版本问题/">ubuntu14.04下修复flash版本问题</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/12/从BSON文件到MySQL/">从BSON文件到MySQL</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/11/MySQL-Cluster搭建/">MySQL Cluster搭建</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/11/Mongodb取消开机自启动/">Mongodb取消开机自启动</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/11/Mongodb安装笔记/">Mongodb安装笔记</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://www.sec-wiki.com/" title="SecWiki">SecWiki</a></li>
+<li><a href="http://www.jinglingshu.org/" title="jinglingshu">精灵鼠</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F8f194a78c11f76027a96c6ec87298c62' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
