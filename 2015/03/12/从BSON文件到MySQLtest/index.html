@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 2 頁 | 彙整 | 天空下行走</title>
+  <title>从BSON文件到MySQLtest | 天空下行走</title>
   <meta name="author" content="John Doe">
   
   <meta name="description" content="专注安全、专注生活、专注人生">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="从BSON文件到MySQLtest"/>
   <meta property="og:site_name" content="天空下行走"/>
 
   
@@ -198,109 +198,83 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title">彙整</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-12T13:56:35.000Z"><a href="/2015/03/12/从BSON文件到MySQLtest/">2015-03-12</a></time>
+      
+      
+  
+    <h1 class="title">从BSON文件到MySQLtest</h1>
+  
 
+    </header>
+    <div class="entry">
+      
+      
+        <a id="more"></a>
+<p>​我们获取到了一个BSON的数据文件，怎么将其导入到MySQL中呢，下面开始探索</p>
+<p>Google下发现其为Mongodb的一种数据格式，然后便安装mongodb。解决思路。将数据恢复到mongodb，然后将数据导出成mysql可接受的格式，即CSV格式，然后导入到Mysql</p>
+<h2 id="mongodbexport工具使用">mongodbexport工具使用</h2><p>mongoexport参数说明：<br>-h:指明数据库宿主机的IP<br>-u:指明数据库的用户名<br>-p:指明数据库的密码<br>-d:指明数据库的名字<br>-c:指明collection的名字<br>-f:指明要导出那些列<br>-o:指明到要导出的文件名<br>-q:指明导出数据的过滤条件</p>
+<h3 id="数据导入mongodb">数据导入mongodb</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ mongorestore <span class="operator">-d</span> mydb ~/data/data.bson    <span class="comment">#tank这个数据库的备份路径</span></span><br><span class="line">$ mongo</span><br><span class="line">&gt;show dbs         <span class="comment">#查看数据库</span></span><br><span class="line">&gt;use dbname     <span class="comment">#选择一个数据库</span></span><br><span class="line">&gt;db.tablename.find()    <span class="comment">#查看一个表的十条数据</span></span><br><span class="line">&gt;db.tablename.findOne()    <span class="comment">#查看一个表的一条数据，此命令可用于查询表“结构”</span></span><br><span class="line">&gt;db.dropDatabase()      <span class="comment">#数据导出完成后，删除数据库</span></span><br></pre></td></tr></table></figure>
+<h2 id="mongodb导入到mysql">mongodb导入到mysql</h2><p><code>mongoexport -h 127.0.0.1 -d dbname -c tablename -f ziduan1,ziduan2 --type=csv -o webdata.csv</code><br>或<br><code>mongoexport -d dbname -c user -o user.dat</code><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -u root -p</span><br><span class="line"><span class="operator"><span class="keyword">use</span> db;</span></span><br><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> ....;</span></span><br><span class="line"><span class="operator"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">INFILE</span> <span class="string">'~/data/webdata.csv'</span> <span class="keyword">INTO</span> <span class="keyword">TABLE</span> webhost;</span></span><br></pre></td></tr></table></figure></p>
 
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-12-20T03:11:46.000Z"><a href="/2014/12/20/linux配置证书登陆/">2014-12-20</a></time>
-            
-              <h1 class="title"><a href="/2014/12/20/linux配置证书登陆/">linux配置证书登陆</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-12-20T02:42:38.000Z"><a href="/2014/12/20/linux安装为知笔记/">2014-12-20</a></time>
-            
-              <h1 class="title"><a href="/2014/12/20/linux安装为知笔记/">linux安装为知笔记</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-12-19T14:22:02.000Z"><a href="/2014/12/19/ubuntu安装nodejs/">2014-12-19</a></time>
-            
-              <h1 class="title"><a href="/2014/12/19/ubuntu安装nodejs/">ubuntu安装nodejs</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-12-17T13:12:43.000Z"><a href="/2014/12/17/CentOS搭建VPN/">2014-12-17</a></time>
-            
-              <h1 class="title"><a href="/2014/12/17/CentOS搭建VPN/">CentOS搭建VPN</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-12-08T13:46:22.000Z"><a href="/2014/12/08/js匿名函数与感叹号/">2014-12-08</a></time>
-            
-              <h1 class="title"><a href="/2014/12/08/js匿名函数与感叹号/">js匿名函数与感叹号</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-11-24T13:26:24.000Z"><a href="/2014/11/24/hydra使用手记/">2014-11-24</a></time>
-            
-              <h1 class="title"><a href="/2014/11/24/hydra使用手记/">hydra使用手记</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-11-18T05:37:16.000Z"><a href="/2014/11/18/nexus-7-刷机/">2014-11-18</a></time>
-            
-              <h1 class="title"><a href="/2014/11/18/nexus-7-刷机/">nexus 7 刷机</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-11-17T01:52:37.000Z"><a href="/2014/11/17/文件包含小总结/">2014-11-17</a></time>
-            
-              <h1 class="title"><a href="/2014/11/17/文件包含小总结/">文件包含小总结</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据库/">数据库</a>
   </div>
+ 
+        
+  
+  <div class="tags">
+    <a href="/tags/Mongodb/">Mongodb</a>, <a href="/tags/mysql/">mysql</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+  
+  <a href="/2015/03/15/ubuntu14-04下修复flash版本问题/" class="alignleft prev" >上一頁</a>
+  
+  
+  <a href="/2015/03/12/从BSON文件到MySQL/" class="alignright next" >下一頁</a>
+  
+  <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="_posts/从BSON文件到MySQLtest.md" data-title="从BSON文件到MySQLtest" data-url="http://ohroot.com/2015/03/12/从BSON文件到MySQLtest/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
