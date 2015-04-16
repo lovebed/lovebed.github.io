@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Walk Around]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2015-03-15T13:38:55.000Z</updated>
+  <updated>2015-04-16T06:17:27.000Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -13,6 +13,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[我与Shadowsocks]]></title>
+    <link href="http://ohroot.com/2015/04/16/%E6%88%91%E4%B8%8EShadowsocks/"/>
+    <id>http://ohroot.com/2015/04/16/我与Shadowsocks/</id>
+    <published>2015-04-16T06:09:00.000Z</published>
+    <updated>2015-04-16T06:17:27.000Z</updated>
+    <content type="html"><![CDATA[<p>之前一直采用Goagent应对GFW问题，这几日发现实在卡的不得了，有些链接都打不开了，于是就看下有没有啥好的替换方案，就去看了下Shadowsocks，发现使用起来还是非常简单方便的。<br><a id="more"></a></p>
+<h2 id="资源链接">资源链接</h2><ol>
+<li><a href="https://github.com/shadowsocks/shadowsocks" target="_blank" rel="external">Shadowsocks的Github地址</a>,这里有简单的使用说明</li>
+<li><a href="http://sourceforge.net/projects/shadowsocksgui/files/dist/" target="_blank" rel="external">Windows客户端下载地址</a>，可根据<a href="https://github.com/shadowsocks/shadowsocks-csharp" target="_blank" rel="external">Github上该软件的说明</a>来下载对应的版本</li>
+<li>免费的<a href="http://www.hidess.com/shadowsocks/" target="_blank" rel="external">服务端信息</a>，这个网站有提供免费的服务端</li>
+</ol>
+<h2 id="安装使用">安装使用</h2><h3 id="window平台">window平台</h3><p>直接下载对应版本的软件，双击执行就可以了，你的设备需要使用系统代理，我发现Shadowsocks还会有PAC，用过Goagent的人一定会觉得这两货功能还挺像</p>
+<h3 id="Linux平台">Linux平台</h3><p>我用的是Ubuntu，所以我只记录下Ubuntu下的安装使用，其他的或许以后用到再更新吧。<br>好像有好多种方法可以使用，我就选择了安装有图形界面的，不是很习惯每次启动都要敲命令，Qt5版的安装方法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install shadowsocks-qt5</span><br></pre></td></tr></table></figure>]]></content>
+    <summary type="html">
+    <![CDATA[<p>之前一直采用Goagent应对GFW问题，这几日发现实在卡的不得了，有些链接都打不开了，于是就看下有没有啥好的替换方案，就去看了下Shadowsocks，发现使用起来还是非常简单方便的。<br>]]>
+    
+    </summary>
+    
+      <category term="proxy" scheme="http://ohroot.com/tags/proxy/"/>
+    
+      <category term="工具使用" scheme="http://ohroot.com/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[ubuntu14.04下修复flash版本问题]]></title>
@@ -141,7 +167,7 @@
     <link href="http://ohroot.com/2015/03/11/Mongodb%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/"/>
     <id>http://ohroot.com/2015/03/11/Mongodb安装笔记/</id>
     <published>2015-03-11T11:05:48.000Z</published>
-    <updated>2015-03-11T11:08:26.000Z</updated>
+    <updated>2015-03-27T07:10:32.000Z</updated>
     <content type="html"><![CDATA[<p>Mongodb初探<br><a id="more"></a><br>本文主要讲述ubuntu下安装Mongodb的简明教程</p>
 <h2 id="安装Mongodb">安装Mongodb</h2><p>执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:<span class="number">80</span> --recv <span class="number">7</span>F0CEB10</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"deb http://repo.mongodb.org/apt/ubuntu "</span>$(lsb_release -sc)<span class="string">"/mongodb-org/3.0 multiverse"</span> | sudo tee /etc/apt/sources.list.d/mongodb-org-<span class="number">3.0</span>.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install -y mongodb-org</span><br></pre></td></tr></table></figure></p>
 <h2 id="简单使用">简单使用</h2><p>MongoDB默认数据存储位置：<code>/var/lib/mongodb</code>，日志文件存储位置：<code>/var/log/mongodb</code>，配置文件位置：<code>/etc/mongod.conf</code>，可在配置文件中修改数据存储位置和日志文件存储位置。MongoDB默认的端口号为：27017。</p>
@@ -165,7 +191,7 @@
 <ul>
 <li><p>先停止服务:<code>$ sudo service mongod stop</code>。</p>
 </li>
-<li><p>编辑<code>/etc/mongo.conf</code>文件, 找到 <code>#auth=true</code> , 去掉注释。</p>
+<li><p>编辑<code>/etc/mongod.conf</code>文件, 找到 <code>#auth=true</code> , 去掉注释。</p>
 </li>
 <li><p>重新运行服务:<code>$ sudo service mongod start</code>。</p>
 </li>
@@ -896,65 +922,6 @@ ZipArchive::<span class="keyword">open</span>()
     </summary>
     
       <category term="Linux" scheme="http://ohroot.com/tags/Linux/"/>
-    
-      <category term="操作系统" scheme="http://ohroot.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[CentOS 6.5安装配置LNMP服务器(Nginx+PHP+MySQL)]]></title>
-    <link href="http://ohroot.com/2014/11/03/CentOS-6-5-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AELNMP%E6%9C%8D%E5%8A%A1%E5%99%A8-Nginx-PHP-MySQL/"/>
-    <id>http://ohroot.com/2014/11/03/CentOS-6-5-安装配置LNMP服务器-Nginx-PHP-MySQL/</id>
-    <published>2014-11-03T03:07:27.000Z</published>
-    <updated>2014-11-03T12:38:05.000Z</updated>
-    <content type="html"><![CDATA[<p>CentOS下搭建LNMP服务器，实践后做个笔记。<br><a id="more"></a></p>
-<h2 id="准备篇">准备篇</h2><h3 id="配置防火墙，开启80端口、3306端口">配置防火墙，开启80端口、3306端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/iptables</span><br><span class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport <span class="number">80</span> -j ACCEPT <span class="comment">#允许80端口通过防火墙</span></span><br><span class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport <span class="number">3306</span> -j ACCEPT <span class="comment">#允许3306端口通过防火墙</span></span><br></pre></td></tr></table></figure>
-<p><code>/etc/init.d/iptables restart #最后重启防火墙使配置生效</code></p>
-<h3 id="关闭SELINUX">关闭SELINUX</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/selinux/config</span><br><span class="line"><span class="comment">#SELINUX=enforcing #注释掉</span></span><br><span class="line"><span class="comment">#SELINUXTYPE=targeted #注释掉</span></span><br><span class="line">SELINUX=disabled <span class="comment">#增加</span></span><br><span class="line">:wq <span class="comment">#保存退出</span></span><br></pre></td></tr></table></figure>
-<p><code>shutdown -r now #重启系统</code></p>
-<h3 id="安装第三方yum源">安装第三方yum源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.atomicorp.com/installers/atomic <span class="comment">#下载</span></span><br><span class="line">sh ./atomic <span class="comment">#安装</span></span><br><span class="line">yum check-update <span class="comment">#更新yum源</span></span><br></pre></td></tr></table></figure>
-<h2 id="安装篇">安装篇</h2><h3 id="安装nginx">安装nginx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum remove httpd* php* <span class="comment">#删除系统自带的软件包</span></span><br><span class="line">yum install nginx <span class="comment">#安装nginx 根据提示输入y进行安装</span></span><br><span class="line">chkconfig nginx on <span class="comment">#设置nginx开机启动</span></span><br><span class="line">service nginx start <span class="comment">#启动nginx</span></span><br></pre></td></tr></table></figure>
-<h3 id="安装MySQL">安装MySQL</h3><ul>
-<li><p>安装MySQL</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum install mysql mysql-server <span class="comment">#输入Y即可自动安装,直到安装完成</span></span><br><span class="line">/etc/init.d/mysqld start <span class="comment">#启动MySQL</span></span><br><span class="line">chkconfig mysqld on <span class="comment">#设为开机启动</span></span><br><span class="line">cp /usr/share/mysql/my-medium.cnf /etc/my.cnf <span class="comment">#拷贝配置文件（注意：如果/etc目录下面默认有一个my.cnf，直接覆盖即可）</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>为root账户设置密码</p>
-</li>
-</ul>
-<p><code>mysql_secure_installation</code>  回车，根据提示输入Y，输入2次密码，回车，根据提示一路输入Y，最后出现：Thanks for using MySQL!<br>MySql密码设置完成，重新启动 MySQL：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/mysqld restart <span class="comment">#重启</span></span><br><span class="line">/etc/init.d/mysqld stop <span class="comment">#停止</span></span><br><span class="line">/etc/init.d/mysqld start <span class="comment">#启动</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="安装PHP5">安装PHP5</h3><ul>
-<li><p>安装PHP5<br><code>yum install php php-fpm #根据提示输入Y直到安装完成</code></p>
-</li>
-<li><p>安装PHP组件，使PHP5支持MySQL<br><code>yum install php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt  #这里选择以上安装包进行安装，根据提示输入Y回车</code><br><code>chkconfig php-fpm on #设置php-fpm开机启动</code><br><code>/etc/init.d/php-fpm start #启动php-fpm</code></p>
-</li>
-</ul>
-<h2 id="配置篇">配置篇</h2><ul>
-<li>配置nginx支持php<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/nginx/nginx.conf /etc/nginx/nginx.confbak  <span class="comment">#备份原有配置文件</span></span><br><span class="line">vi /etc/nginx/nginx.conf  <span class="comment">#编辑</span></span><br><span class="line">user nginx nginx; <span class="comment">#修改nginx运行账号为：nginx组的nginx用户</span></span><br><span class="line">:wq <span class="comment">#保存退出</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.confbak <span class="comment">#备份原有配置文件</span></span><br><span class="line">vi /etc/nginx/conf.d/default.conf <span class="comment">#编辑</span></span><br><span class="line">index index.php index.html index.htm; <span class="comment">#增加index.php</span></span><br><span class="line"><span class="comment"># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">root html;</span><br><span class="line">fastcgi_pass <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">9000</span>;</span><br><span class="line">fastcgi_index index.php;</span><br><span class="line">fastcgi_param SCRIPT_FILENAME <span class="variable">$document_root</span><span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">include fastcgi_params;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#取消FastCGI server部分location的注释,并要注意fastcgi_param行的参数,改为$document_root$fastcgi_script_name,或者使用绝对路径</span></span><br></pre></td></tr></table></figure>
-<p><code>service nginx restart</code> #重启nginx</p>
-<ul>
-<li>php配置</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/php.ini <span class="comment">#编辑</span></span><br><span class="line"></span><br><span class="line">date.timezone = PRC <span class="comment">#把前面的分号去掉，改为date.timezone = PRC</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">disable</span>_<span class="built_in">functions</span> = passthru,<span class="built_in">exec</span>,system,chroot,scandir,chgrp,chown,shell_<span class="built_in">exec</span>,proc_open,proc_get_status,ini_alter,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server,escapeshellcmd,dll,popen,disk_free_space,checkdnsrr,checkdnsrr,getservbyname,getservbyport,disk_total_space,posix_ctermid,posix_get_last_error,posix_getcwd,posix_getegid,posix_geteuid,posix_getgid,posix_getgrgid,posix_getgrnam,posix_getgroups,posix_getlogin,posix_getpgid,posix_getpgrp,posix_getpid,posix_getppid,posix_getpwnam,posix_getpwuid, posix_getrlimit, posix_getsid,posix_getuid,posix_isatty,posix_<span class="built_in">kill</span>,posix_mkfifo,posix_setegid,posix_seteuid,posix_setgid,posix_setpgid,posix_setsid,posix_setuid,posix_strerror,posix_<span class="built_in">times</span>,posix_ttyname,posix_uname</span><br><span class="line"><span class="comment">#在386行 列出PHP可以禁用的函数，如果某些程序需要用到这个函数，可以删除，取消禁用。</span></span><br><span class="line"></span><br><span class="line">expose_php = Off <span class="comment">#禁止显示php版本的信息</span></span><br><span class="line"></span><br><span class="line">short_open_tag = ON <span class="comment">#支持php短标签</span></span><br><span class="line"></span><br><span class="line">open_basedir = 网站根目录:/tmp/</span><br><span class="line"><span class="comment">#设置表示允许访问当前目录(即PHP脚本文件所在之目录)和/tmp/目录;冒号为分隔符。</span></span><br><span class="line"></span><br><span class="line">:wq! <span class="comment">#保存退出</span></span><br></pre></td></tr></table></figure>
-<p>open_basedir配置选项中有些教程会配置为<code>open_basedir=.:/tmp/</code>，其中’.’代表当前目录。这种方式在nginx+phpfastcgi下好像行不通。</p>
-<ul>
-<li>配置php-fpm<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.confbak <span class="comment">#备份原有配置文件</span></span><br><span class="line">vi /etc/php-fpm.d/www.conf  <span class="comment">#编辑</span></span><br><span class="line">user = nginx <span class="comment">#修改用户为nginx</span></span><br><span class="line">group = nginx <span class="comment">#修改组为nginx</span></span><br><span class="line">:wq <span class="comment">#保存退出</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="测试篇">测试篇</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/share/nginx/html</span><br><span class="line">vi index.php <span class="comment">#添加以下代码</span></span><br><span class="line">&lt;?php</span><br><span class="line">phpinfo();</span><br><span class="line">?&gt;</span><br><span class="line">:wq! <span class="comment">#保存退出</span></span><br><span class="line"></span><br><span class="line">chown nginx.nginx /usr/share/nginx/html -R <span class="comment">#设置权限</span></span><br><span class="line">service nginx restart <span class="comment">#重启nginx</span></span><br><span class="line">service php-fpm restart <span class="comment">#重启php-fpm</span></span><br></pre></td></tr></table></figure>
-<p>在客户端浏览器输入服务器IP地址，可以看到相关的配置信息！说明lnmp配置成功！</p>
-<p>至此，CnetOS 6.5安装配置LNMP（Nginx+PHP+MySQL）教程完成。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>CentOS下搭建LNMP服务器，实践后做个笔记。<br>]]>
-    
-    </summary>
-    
-      <category term="CentOS" scheme="http://ohroot.com/tags/CentOS/"/>
-    
-      <category term="Nginx" scheme="http://ohroot.com/tags/Nginx/"/>
     
       <category term="操作系统" scheme="http://ohroot.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
