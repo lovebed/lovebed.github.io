@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>渗透测试 | 天空下行走</title>
+  <title>python进行Elasticsearch批量索引 | 天空下行走</title>
   <meta name="author" content="Direwolf">
   
   <meta name="description" content="专注安全、专注生活、专注人生">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="python进行Elasticsearch批量索引"/>
   <meta property="og:site_name" content="天空下行走"/>
 
   
@@ -198,25 +198,81 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title category">渗透测试</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-04-28T07:23:58.000Z"><a href="/2015/04/28/python进行Elasticsearch批量索引/">2015-04-28</a></time>
+      
+      
+  
+    <h1 class="title">python进行Elasticsearch批量索引</h1>
+  
 
+    </header>
+    <div class="entry">
+      
+      
+        <p>本文分享使用python脚本进行Elasticsearch的批量索引<br><a id="more"></a><br>之前主要还是采用jdbc-river的方式将数据从MySQL索引到Elasticsearch，但是由于有些数据表字符各种奇怪的，导入总是报各种错，于是自己折腾个python脚本导入数据，这里列出主要函数。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取表数据量</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getTablesCounts</span><span class="params">(_cursor, _tablename)</span>:</span></span><br><span class="line">    _querySQL = <span class="string">'select count(*) from `%s`'</span>%_tablename</span><br><span class="line">    retNum = _cursor.execute(_querySQL)</span><br><span class="line">    <span class="keyword">return</span> _cursor.fetchone();</span><br><span class="line"></span><br><span class="line"><span class="comment">#从数据库中获取一条数据</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getFromId</span><span class="params">(_cursor, _id,_tablename)</span>:</span></span><br><span class="line">    _querySQL = <span class="string">"select * from `%s` where id = %s "</span>%(_tablename, _id)</span><br><span class="line">    retNum = _cursor.execute(_querySQL)</span><br><span class="line">    <span class="keyword">return</span> _cursor.fetchone();</span><br><span class="line"></span><br><span class="line"><span class="comment">#将数据导入ES，bulk数据的大小为500000</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bulkData</span><span class="params">(_cur, _tableCounts)</span>:</span></span><br><span class="line">    es = Elasticsearch(<span class="string">"192.168.88.88"</span>)</span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    count = _tableCounts</span><br><span class="line">    actions = []</span><br><span class="line">    <span class="keyword">while</span> (j &lt; count):</span><br><span class="line">        oneRec = getFromId(_cur, j+<span class="number">1</span>, tablename)</span><br><span class="line">        action = &#123;</span><br><span class="line">            <span class="string">"_index"</span>: indexname,</span><br><span class="line">            <span class="string">"_type"</span>: typename,</span><br><span class="line">            <span class="string">"_id"</span>: j + <span class="number">1</span>,</span><br><span class="line">            <span class="string">"_source"</span>: &#123;</span><br><span class="line">                <span class="string">"column1"</span>:oneRec[<span class="number">1</span>],</span><br><span class="line">                <span class="string">"column2"</span>:oneRec[<span class="number">2</span>],</span><br><span class="line">                <span class="string">"column3"</span>:oneRec[<span class="number">3</span>],</span><br><span class="line">                <span class="string">"column4"</span>:oneRec[<span class="number">4</span>],</span><br><span class="line">                <span class="string">"column5"</span>:oneRec[<span class="number">5</span>],</span><br><span class="line">                <span class="string">"column6"</span>:oneRec[<span class="number">6</span>]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        actions.append(action)</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> (len(actions) == <span class="number">500000</span>):</span><br><span class="line">            <span class="keyword">print</span> j</span><br><span class="line">            helpers.bulk(es, actions)</span><br><span class="line">            <span class="keyword">del</span> actions[<span class="number">0</span>:len(actions)]</span><br><span class="line">    <span class="keyword">if</span> (len(actions) &gt; <span class="number">0</span>):</span><br><span class="line">        helpers.bulk(es, actions)</span><br><span class="line">        <span class="keyword">del</span> actions[<span class="number">0</span>:len(actions)]</span><br></pre></td></tr></table></figure></p>
+<p>【参考文章】</p>
+<ul>
+<li><a href="http://www.justinablog.com/archives/967" target="_blank" rel="external">使用Python进行Elasticsearch数据索引</a></li>
+<li><a href="http://chenlinux.com/2015/02/11/python-elasticsearch-bulk/" target="_blank" rel="external">Python 批量写入 Elasticsearch 脚本</a></li>
+</ul>
 
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-11-24T13:26:24.000Z"><a href="/2014/11/24/hydra使用手记/">2014-11-24</a></time>
-            
-              <h1 class="title"><a href="/2014/11/24/hydra使用手记/">hydra使用手记</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/编程/">编程</a>
   </div>
+ 
+        
+  
+  <div class="tags">
+    <a href="/tags/Elasticsearch/">Elasticsearch</a>, <a href="/tags/python/">python</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+  
+  
+  <a href="/2015/04/16/我与Shadowsocks/" class="alignright next" >下一页</a>
+  
+  <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="_posts/python进行Elasticsearch批量索引.md" data-title="python进行Elasticsearch批量索引" data-url="http://ohroot.com/2015/04/28/python进行Elasticsearch批量索引/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
