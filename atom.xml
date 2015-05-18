@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Walk Around]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2015-05-18T13:41:30.000Z</updated>
+  <updated>2015-05-18T13:48:36.000Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -19,9 +19,8 @@
     <link href="http://ohroot.com/2015/05/18/MySQL%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5ElasticSearch/"/>
     <id>http://ohroot.com/2015/05/18/MySQL数据导入ElasticSearch/</id>
     <published>2015-05-18T13:37:54.000Z</published>
-    <updated>2015-05-18T13:41:30.000Z</updated>
-    <content type="html"><![CDATA[<a id="more"></a>
-<p>Github上主要是有三个项目，分别是<a href="https://github.com/siddontang/go-mysql-elasticsearch" target="_blank" rel="external">go-mysql-elasticsearch</a>、<a href="https://github.com/jprante/elasticsearch-river-jdbc" target="_blank" rel="external">elasticsearch-river-jdbc</a>和<a href="https://github.com/scharron/elasticsearch-river-mysql" target="_blank" rel="external">elasticsearch-river-mysql</a></p>
+    <updated>2015-05-18T13:48:36.000Z</updated>
+    <content type="html"><![CDATA[<p>Github上主要是有三个项目，分别是<a href="https://github.com/siddontang/go-mysql-elasticsearch" target="_blank" rel="external">go-mysql-elasticsearch</a>、<a href="https://github.com/jprante/elasticsearch-river-jdbc" target="_blank" rel="external">elasticsearch-river-jdbc</a>和<a href="https://github.com/scharron/elasticsearch-river-mysql" target="_blank" rel="external">elasticsearch-river-mysql</a>,click to see more<br><a id="more"></a></p>
 <h2 id="go-mysql-elasticsearch">go-mysql-elasticsearch</h2><p>go-mysql-elasticsearch 是一个将MySQL数据导入到Elasticsearch的服务，他是用<code>mysqldump</code>来获取源数据，然后使用binlog同步数据，按照github上说明，他好像是使用go语言开发的一款工具，实现数据迁移。搭建需要go环境支持。<br>他主要可以实现：</p>
 <ul>
 <li>定制化同步，可修改index、type、field等</li>
@@ -41,8 +40,8 @@
 </ul>
 ]]></content>
     <summary type="html">
-    <![CDATA[<a id="more"></a>
-<p>Github上主要是有三个项目，分别是<a href="https://github.com/siddontang/go-mysql-elasticsearch" target="_blank" rel="external">go-mys]]>
+    <![CDATA[<p>Github上主要是有三个项目，分别是<a href="https://github.com/siddontang/go-mysql-elasticsearch">go-mysql-elasticsearch</a>、<a href="https://github.com/jprante/elasticsearch-river-jdbc">elasticsearch-river-jdbc</a>和<a href="https://github.com/scharron/elasticsearch-river-mysql">elasticsearch-river-mysql</a>,click to see more<br>]]>
+    
     </summary>
     
       <category term="ElasticSearch" scheme="http://ohroot.com/tags/ElasticSearch/"/>

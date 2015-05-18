@@ -215,31 +215,15 @@
     </header>
     <div class="entry">
       
-      
-        <a id="more"></a>
-<p>Github上主要是有三个项目，分别是<a href="https://github.com/siddontang/go-mysql-elasticsearch" target="_blank" rel="external">go-mysql-elasticsearch</a>、<a href="https://github.com/jprante/elasticsearch-river-jdbc" target="_blank" rel="external">elasticsearch-river-jdbc</a>和<a href="https://github.com/scharron/elasticsearch-river-mysql" target="_blank" rel="external">elasticsearch-river-mysql</a></p>
-<h2 id="go-mysql-elasticsearch">go-mysql-elasticsearch</h2><p>go-mysql-elasticsearch 是一个将MySQL数据导入到Elasticsearch的服务，他是用<code>mysqldump</code>来获取源数据，然后使用binlog同步数据，按照github上说明，他好像是使用go语言开发的一款工具，实现数据迁移。搭建需要go环境支持。<br>他主要可以实现：</p>
-<ul>
-<li>定制化同步，可修改index、type、field等</li>
-<li>可增量同步</li>
-<li>支持基于正则命名的index和type</li>
-</ul>
-<h2 id="elasticsearch-river-mysql">elasticsearch-river-mysql</h2><p>他需要安装一个Elasticsearch插件和一个小型的webserver<br>看了下，安装过程。。。步骤还是比较多，最后操作还是基于http的，example：<code>curl -XPUT &#39;localhost:9200/_river/mydb/_meta&#39; -d &#39;{ &quot;type&quot; : &quot;mysql&quot;, &quot;streamer&quot; : { &quot;host&quot; : &quot;localhost&quot;, &quot;port&quot; : 8080, }, &quot;mysql&quot; : { # Future usage to configure mysql access from the river. _ } }&#39;</code></p>
-<h2 id="elasticsearch-river-jdbc">elasticsearch-river-jdbc</h2><p>他是一个JDBC插件，不仅仅支持mysql，还支持其他数据库。项目现在还在更新，让我感觉靠谱点<br><a href="https://github.com/jprante/elasticsearch-river-jdbc/wiki/Quickstart" target="_blank" rel="external">Quick start</a><br>安装方法：</p>
-<ul>
-<li><code>./bin/plugin --install jdbc --url http://xbib.org/repository/org/xbib/elasticsearch/plugin/elasticsearch-river-jdbc/1.5.0.5/elasticsearch-river-jdbc-1.5.0.5-plugin.zip</code></li>
-<li><code>curl -o mysql-connector-java-5.1.35.zip -L &#39;http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.35.zip/from/http://cdn.mysql.com/&#39;</code></li>
-<li>解压后<code>cp mysql-connector-java-5.1.28-bin.jar $ES_HOME/plugins/jdbc/</code>，即将mysql connect的一个jar文件拷贝到jdbc的目录下即可。</li>
-</ul>
-<p>参考文章</p>
-<ul>
-<li><a href="http://blog.randywallace.com/blog/2013/08/27/pulling-a-large-mysql-table-into-elasticsearch/" target="_blank" rel="external">Pulling a Large MySQL Table Into Elasticsearch</a></li>
-</ul>
-
+        <p>Github上主要是有三个项目，分别是<a href="https://github.com/siddontang/go-mysql-elasticsearch">go-mysql-elasticsearch</a>、<a href="https://github.com/jprante/elasticsearch-river-jdbc">elasticsearch-river-jdbc</a>和<a href="https://github.com/scharron/elasticsearch-river-mysql">elasticsearch-river-mysql</a>,click to see more<br>
       
     </div>
     <footer>
       
+        
+          <div class="alignleft">
+            <a href="/2015/05/18/MySQL数据导入ElasticSearch/#more" class="more-link">Read More</a>
+          </div>
         
         
       
