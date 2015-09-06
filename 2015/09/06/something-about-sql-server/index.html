@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于sql server备份文件恢复的事儿 | 半饱和</title>
+  <meta name="author" content="Direwolf">
+  
+  <meta name="description" content="专注安全、专注生活、专注人生">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="关于sql server备份文件恢复的事儿"/>
+  <meta property="og:site_name" content="半饱和"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+  <link rel="alternate" href="/atom.xml" title="半饱和" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">半饱和</a></h1>
+  <h2><a href="/">Valar dohaeris</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+    <li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+	})()    '>High一下</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-09-06T03:56:57.000Z"><a href="/2015/09/06/something-about-sql-server/">2015-09-06</a></time>
+      
+      
+  
+    <h1 class="title">关于sql server备份文件恢复的事儿</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+      
+        <p>好久都没写文了，怎么的也得刷新下博客了，最近拿到一个.bak文件，经过分析是sql server的备份文件，想把它数据移植到mysql中，于是就有了下文<br><a id="more"></a><br>﻿<br>首先sql server中数据要移植到mysql中，在自带安装的SQL Server Management Studio中只发现了可以导出成sql文件的方法，但是这个sql格式好像是叫<code>T-SQL</code>，反正就是Mysql不能直接导入，如果这样的话，好像有些工具可以转换这种SQL文件，但是我并没有找到有详细说明文档的，stackoverflow上并没有找到合适的方法。</p>
+<p>对了这里顺便提一下.bak文件恢复到sql server的方法：可以使用SQL Server Management Studio，然后连接上之后，右击左侧数据库—&gt;选择还原数据库—&gt;选择设备-&gt;添加bak文件-&gt;等待恢复成功。恢复前还可以验证下bak文件，看看是否损坏什么的，避免浪费时间。</p>
+<p>其实，后面才是我最想写的。</p>
+<p>导入sql server之后，想舒舒服服的导入到mysql，简单的方法就是装个navicat，这个网上破解版很多，装了之后可以导出成dbf格式，然后再从dbf格式导入到mysql，全程无脑操作。</p>
+<p>后面问题来了，有一个bak文件导出不成功，报各种错，然后还提示啥<code>DBCC   CHECKDB</code>去查看原因。本人不太懂sql server。先开始是想到的是sql server版本问题，于是果断从2014降到2012，方法是重装，花了不少时间，发现有的表勉强能够导出了，但是还是有些要报错。</p>
+<p>最终我选择，试试这个<code>DBCC CHECKDB</code>命令，运行之后，等待了好久，才有反应。错误名字大概叫<code>CHECKDB 发现了 0 个分配错误和 多少 个一致性错误</code>，大概这么个意思。于是再一次google，我还是蛮幸运的，找到了解决办法，错误说明如下：</p>
+<p>一般情况下，引起分配错误的原因是磁盘损坏或突然停电；一致性错误可能是数据库中的表或索引坏，一般都可修复。<br>1、查看红色字体，并把有错误的数据库表名记录下来，或把索引损坏的表名记录下来。<br>2、把数据库设置为单用户模式，直接在查询分析器中执行以下语句即可：<br><code>EXEC sp_dboption &#39;dbname&#39;, &#39;single user&#39;, &#39;TRUE&#39;</code><br>上面语句我执行发现没开启啥存储过程，然后就搜砸开起存储过程。搜到了另一个高版本开启方法：<br><code>alter database dbname set SINGLE_USER with ROLLBACK IMMEDIATE</code><br>3、进入查询分析器执行如下语句：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">use</span>  dbname</span><br><span class="line">dbcc checkdb（<span class="string">'dbname'</span>,repair_allow_data_loss）<span class="comment">-------修复数据库</span></span><br><span class="line">dbcc checkdb (<span class="string">'dbname'</span>,REPAIR_REBUILD)<span class="comment">----------------修复数据库索引</span></span></span><br></pre></td></tr></table></figure></p>
+<p>4、再执行：<code>dbcc checkdb</code>，检测数据库，出现结果为：<br>CHECKDB 发现了0个分配错误和 0个一致性错误（在数据库 ‘dbname’ 中）。<br>数据库已经修复完毕。<br>5、取消单用户模式，即直接在查询分析器中执行以下语句即可：<br><code>EXEC sp_dboption &#39;dbname&#39;, &#39;single user&#39;,&#39;FALSE&#39;</code><br>对应的： <code>alter database dbname set MULTI_USER with ROLLBACK IMMEDIATE</code></p>
+<p>最终顺利搞定，真是伤脑筋。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据库/">数据库</a>
+  </div>
+ 
+        
+  
+  <div class="tags">
+    <a href="/tags/mssql/">mssql</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+  
+  <a href="/2015/09/06/Keylogger-with-javascript/" class="alignleft prev" >上一页</a>
+  
+  
+  <a href="/2015/06/24/JS可以实现的一些好玩的功能/" class="alignright next" >下一页</a>
+  
+  <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="_posts/something-about-sql-server.md" data-title="关于sql server备份文件恢复的事儿" data-url="http://ohroot.com/2015/09/06/something-about-sql-server/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:ohroot.com">
+  </form>
+</div>
+
+  
+<script type="text/javascript" src="/js/tag.js"></script>
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry" id = "cloud3d">
+    <a href="/tags/Android/" style="font-size: 15px;">Android</a><a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a><a href="/tags/ElasticSearch/" style="font-size: 10px;">ElasticSearch</a><a href="/tags/Elasticsearch/" style="font-size: 12.5px;">Elasticsearch</a><a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mongodb/" style="font-size: 15px;">Mongodb</a><a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a><a href="/tags/Web运维/" style="font-size: 10px;">Web运维</a><a href="/tags/XSS/" style="font-size: 12.5px;">XSS</a><a href="/tags/hexo/" style="font-size: 17.5px;">hexo</a><a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a><a href="/tags/mssql/" style="font-size: 10px;">mssql</a><a href="/tags/mysql/" style="font-size: 15px;">mysql</a><a href="/tags/phantomjs/" style="font-size: 10px;">phantomjs</a><a href="/tags/proxy/" style="font-size: 10px;">proxy</a><a href="/tags/python/" style="font-size: 17.5px;">python</a><a href="/tags/sublime/" style="font-size: 10px;">sublime</a><a href="/tags/渗透测试/" style="font-size: 17.5px;">渗透测试</a><a href="/tags/编程/" style="font-size: 10px;">编程</a>
+  </div>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>3</small></li>
+  
+    <li><a href="/categories/Web安全/">Web安全</a><small>6</small></li>
+  
+    <li><a href="/categories/Web运维/">Web运维</a><small>1</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/categories/yii/">yii</a><small>1</small></li>
+  
+    <li><a href="/categories/工具使用/">工具使用</a><small>2</small></li>
+  
+    <li><a href="/categories/操作系统/">操作系统</a><small>10</small></li>
+  
+    <li><a href="/categories/数据库/">数据库</a><small>6</small></li>
+  
+    <li><a href="/categories/渗透测试/">渗透测试</a><small>1</small></li>
+  
+    <li><a href="/categories/编程/">编程</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/09/06/YII-study/">Yii2学习资料整理</a>
+      </li>
+    
+      <li>
+        <a href="/2015/09/06/Keylogger-with-javascript/">javascript键盘记录</a>
+      </li>
+    
+      <li>
+        <a href="/2015/09/06/something-about-sql-server/">关于sql server备份文件恢复的事儿</a>
+      </li>
+    
+      <li>
+        <a href="/2015/06/24/JS可以实现的一些好玩的功能/">JS可以实现的一些好玩的功能</a>
+      </li>
+    
+      <li>
+        <a href="/2015/05/18/MySQL数据导入ElasticSearch/">MySQL数据导入ElasticSearch</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://www.sec-wiki.com/" title="SecWiki">SecWiki</a></li>
+<li><a href="http://www.anquanquan.info/" title="anquanquan">安全圈</a></li>
+<li><a href="http://www.jinglingshu.org/" title="jinglingshu">精灵鼠</a></li>
+<li><a href="http://www.pang0lin.com/" title="pang0lin">pang0lin</a></li>
+<li><a href="http://wps2015.jinglingshu.org/" title="wps2015">wps2015</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 Direwolf
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F8f194a78c11f76027a96c6ec87298c62' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

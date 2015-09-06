@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Valar dohaeris]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2015-06-24T08:28:14.000Z</updated>
+  <updated>2015-09-06T04:10:20.000Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -13,6 +13,91 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Yii2学习资料整理]]></title>
+    <link href="http://ohroot.com/2015/09/06/YII-study/"/>
+    <id>http://ohroot.com/2015/09/06/YII-study/</id>
+    <published>2015-09-06T04:09:08.000Z</published>
+    <updated>2015-09-06T04:10:20.000Z</updated>
+    <content type="html"><![CDATA[<p>自己学习YII框架还是走了不少坑，这里把学习资料整理下<br><a id="more"></a></p>
+<p>建议先看慕课网的视频，可以快速有一个了解。然后去看权威指南，去查参考手册，去看各种doc，看多了就会写了</p>
+<p>首先是一些链接：</p>
+<ul>
+<li>官网   <a href="http://www.yiiframework.com/" target="_blank" rel="external">地址请猛戳</a></li>
+<li>github   <a href="https://github.com/yiisoft/yii2" target="_blank" rel="external">地址请猛戳</a></li>
+<li><p>英文guide   <a href="http://www.yiiframework.com/doc-2.0/guide-index.html" target="_blank" rel="external">地址请猛戳</a></p>
+</li>
+<li><p>yiichina   <a href="http://www.yiichina.com/" target="_blank" rel="external">地址请猛戳</a></p>
+</li>
+<li>Yii Framework 2.0 类参考手册  <a href="http://www.yiichina.com/doc/api/2.0" target="_blank" rel="external">地址请猛戳</a></li>
+<li>Yii Framework 2.0 权威指南    <a href="http://www.yiichina.com/doc/guide/2.0" target="_blank" rel="external">地址请猛戳</a></li>
+<li>深入理解Yii2.0 — 深入理解Yii2.0   <a href="http://www.digpage.com/" target="_blank" rel="external">地址请猛戳</a></li>
+<li>踏得网  <a href="http://yii2.techbrood.com/" target="_blank" rel="external">地址请猛戳</a></li>
+</ul>
+<p>然后是视频资源，这里只列一些我看过的：</p>
+<ul>
+<li>优酷资源 <a href="http://i.youku.com/u/UMjg4NTg1MzY4MA==/videos" target="_blank" rel="external">地址请猛戳</a></li>
+<li>慕课网资源 <a href="http://www.imooc.com/index/search?words=yii" target="_blank" rel="external">地址请猛戳</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>自己学习YII框架还是走了不少坑，这里把学习资料整理下<br>]]>
+    
+    </summary>
+    
+      <category term="编程" scheme="http://ohroot.com/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="yii" scheme="http://ohroot.com/categories/yii/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[javascript键盘记录]]></title>
+    <link href="http://ohroot.com/2015/09/06/Keylogger-with-javascript/"/>
+    <id>http://ohroot.com/2015/09/06/Keylogger-with-javascript/</id>
+    <published>2015-09-06T03:57:45.000Z</published>
+    <updated>2015-09-06T04:00:46.000Z</updated>
+    <content type="html"><![CDATA[<p>记录一段键盘记录的js代码<br><a id="more"></a></p>
+<p>代码如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">keyUp</span><span class="params">(e)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">var</span> keyChar=<span class="number">0</span>,e=e||event;</span><br><span class="line">       keyChar=e.keyCode||e.which||e.charCode;</span><br><span class="line">       <span class="keyword">var</span> key = <span class="built_in">String</span>.fromCharCode(keyChar);</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">"字符: "</span> + key);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.onkeyup = keyUp;</span><br></pre></td></tr></table></figure></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>记录一段键盘记录的js代码<br>]]>
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://ohroot.com/tags/javascript/"/>
+    
+      <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[关于sql server备份文件恢复的事儿]]></title>
+    <link href="http://ohroot.com/2015/09/06/something-about-sql-server/"/>
+    <id>http://ohroot.com/2015/09/06/something-about-sql-server/</id>
+    <published>2015-09-06T03:56:57.000Z</published>
+    <updated>2015-09-06T04:01:01.000Z</updated>
+    <content type="html"><![CDATA[<p>好久都没写文了，怎么的也得刷新下博客了，最近拿到一个.bak文件，经过分析是sql server的备份文件，想把它数据移植到mysql中，于是就有了下文<br><a id="more"></a><br>﻿<br>首先sql server中数据要移植到mysql中，在自带安装的SQL Server Management Studio中只发现了可以导出成sql文件的方法，但是这个sql格式好像是叫<code>T-SQL</code>，反正就是Mysql不能直接导入，如果这样的话，好像有些工具可以转换这种SQL文件，但是我并没有找到有详细说明文档的，stackoverflow上并没有找到合适的方法。</p>
+<p>对了这里顺便提一下.bak文件恢复到sql server的方法：可以使用SQL Server Management Studio，然后连接上之后，右击左侧数据库—&gt;选择还原数据库—&gt;选择设备-&gt;添加bak文件-&gt;等待恢复成功。恢复前还可以验证下bak文件，看看是否损坏什么的，避免浪费时间。</p>
+<p>其实，后面才是我最想写的。</p>
+<p>导入sql server之后，想舒舒服服的导入到mysql，简单的方法就是装个navicat，这个网上破解版很多，装了之后可以导出成dbf格式，然后再从dbf格式导入到mysql，全程无脑操作。</p>
+<p>后面问题来了，有一个bak文件导出不成功，报各种错，然后还提示啥<code>DBCC   CHECKDB</code>去查看原因。本人不太懂sql server。先开始是想到的是sql server版本问题，于是果断从2014降到2012，方法是重装，花了不少时间，发现有的表勉强能够导出了，但是还是有些要报错。</p>
+<p>最终我选择，试试这个<code>DBCC CHECKDB</code>命令，运行之后，等待了好久，才有反应。错误名字大概叫<code>CHECKDB 发现了 0 个分配错误和 多少 个一致性错误</code>，大概这么个意思。于是再一次google，我还是蛮幸运的，找到了解决办法，错误说明如下：</p>
+<p>一般情况下，引起分配错误的原因是磁盘损坏或突然停电；一致性错误可能是数据库中的表或索引坏，一般都可修复。<br>1、查看红色字体，并把有错误的数据库表名记录下来，或把索引损坏的表名记录下来。<br>2、把数据库设置为单用户模式，直接在查询分析器中执行以下语句即可：<br><code>EXEC sp_dboption &#39;dbname&#39;, &#39;single user&#39;, &#39;TRUE&#39;</code><br>上面语句我执行发现没开启啥存储过程，然后就搜砸开起存储过程。搜到了另一个高版本开启方法：<br><code>alter database dbname set SINGLE_USER with ROLLBACK IMMEDIATE</code><br>3、进入查询分析器执行如下语句：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">use</span>  dbname</span><br><span class="line">dbcc checkdb（<span class="string">'dbname'</span>,repair_allow_data_loss）<span class="comment">-------修复数据库</span></span><br><span class="line">dbcc checkdb (<span class="string">'dbname'</span>,REPAIR_REBUILD)<span class="comment">----------------修复数据库索引</span></span></span><br></pre></td></tr></table></figure></p>
+<p>4、再执行：<code>dbcc checkdb</code>，检测数据库，出现结果为：<br>CHECKDB 发现了0个分配错误和 0个一致性错误（在数据库 ‘dbname’ 中）。<br>数据库已经修复完毕。<br>5、取消单用户模式，即直接在查询分析器中执行以下语句即可：<br><code>EXEC sp_dboption &#39;dbname&#39;, &#39;single user&#39;,&#39;FALSE&#39;</code><br>对应的： <code>alter database dbname set MULTI_USER with ROLLBACK IMMEDIATE</code></p>
+<p>最终顺利搞定，真是伤脑筋。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>好久都没写文了，怎么的也得刷新下博客了，最近拿到一个.bak文件，经过分析是sql server的备份文件，想把它数据移植到mysql中，于是就有了下文<br>]]>
+    
+    </summary>
+    
+      <category term="mssql" scheme="http://ohroot.com/tags/mssql/"/>
+    
+      <category term="数据库" scheme="http://ohroot.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[JS可以实现的一些好玩的功能]]></title>
@@ -545,171 +630,6 @@
       <category term="hexo" scheme="http://ohroot.com/tags/hexo/"/>
     
       <category term="操作系统" scheme="http://ohroot.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[CentOS搭建VPN]]></title>
-    <link href="http://ohroot.com/2014/12/17/CentOS%E6%90%AD%E5%BB%BAVPN/"/>
-    <id>http://ohroot.com/2014/12/17/CentOS搭建VPN/</id>
-    <published>2014-12-17T13:12:43.000Z</published>
-    <updated>2014-12-29T13:58:27.000Z</updated>
-    <content type="html"><![CDATA[<p>搭建了一个L2TP+IPSec的VPN,对于小菜来说着实花了一番功夫…记录过程与此<br><a id="more"></a></p>
-<h2 id="搭建L2TP+IPSec_VPN">搭建L2TP+IPSec VPN</h2><p>搭建VPN的时候，仔细了解了下现在的三种VPN。分别是PPTP、IPSec/L2TP、OpenVPN，经过比较，我决定先尝试搭建一个IPSec/L2TP的VPN。<br>唉，网上资料好多，可是也好乱，自己搭建一边，做个整理吧</p>
-<h3 id="安装相应的软件">安装相应的软件</h3><p>首先<code>yum update</code>更新下源.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install wget <span class="built_in">bind</span>-utils</span><br><span class="line">wget http://mirror.nl.leaseweb.net/epel/<span class="number">6</span>/i386/epel-release-<span class="number">6</span>-<span class="number">8</span>.noarch.rpm</span><br><span class="line">rpm -ivh ./epel-release-<span class="number">6</span>-<span class="number">8</span>.noarch.rpm</span><br><span class="line"></span><br><span class="line">yum install openswan</span><br><span class="line">yum install ppp xl2tpd</span><br><span class="line">yum install lsof man</span><br></pre></td></tr></table></figure></p>
-<p>ppp是用于管理VPN用户的,我这里出现了问题,xl2tpd找不到源,解决办法是:到<a href="http://pkgs.org/" target="_blank" rel="external">pkgs.org</a>这个网站去搜,我就找到了相应的最新版<a href="http://pkgs.org/centos-6/epel-i386/xl2tpd-1.3.6-1.el6.i686.rpm.html" target="_blank" rel="external">地址</a><br>接下来就是找到相应的文件下载,然后安装<code>yum install xl2tpd-1.3.6-1.el6.i686.rpm</code></p>
-<h3 id="配置内核与防火墙">配置内核与防火墙</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//设置 iptables 的数据包转发</span><br><span class="line">iptables --table nat --append POSTROUTING --jump MASQUERADE</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"net.ipv4.ip_forward = 1"</span> |  tee <span class="operator">-a</span> /etc/sysctl.conf</span><br><span class="line"></span><br><span class="line">//是否接受ICMP转发,如果不是路由器，该值需要设置为 <span class="number">0</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"net.ipv4.conf.all.accept_redirects = 0"</span> |  tee <span class="operator">-a</span> /etc/sysctl.conf</span><br><span class="line">//是否发送ICMP转发(redirect)如果服务器不作为网关/路由器,该值建议设置为<span class="number">0</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"net.ipv4.conf.all.send_redirects = 0"</span> |  tee <span class="operator">-a</span> /etc/sysctl.conf</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> vpn <span class="keyword">in</span> /proc/sys/net/ipv4/conf/*; <span class="keyword">do</span> <span class="built_in">echo</span> <span class="number">0</span> &gt; <span class="variable">$vpn</span>/accept_redirects; <span class="built_in">echo</span> <span class="number">0</span> &gt; <span class="variable">$vpn</span>/send_redirects; <span class="keyword">done</span></span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
-<h3 id="其他配置">其他配置</h3><ul>
-<li>编辑<code>/etc/rc.local</code>在结尾添加</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Correct ICMP Redirect issues with OpenSWAN</span></span><br><span class="line"><span class="keyword">for</span> each <span class="keyword">in</span> /proc/sys/net/ipv4/conf/*; <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="number">0</span> &gt; <span class="variable">$each</span>/accept_redirects</span><br><span class="line">        <span class="built_in">echo</span> <span class="number">0</span> &gt; <span class="variable">$each</span>/send_redirects</span><br><span class="line">        <span class="built_in">echo</span> <span class="number">0</span> &gt; <span class="variable">$each</span>/rp_filter</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>编辑 /etc/ipsec.conf ,我的配置如下:</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/ipsec.conf - Openswan IPsec configuration file</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Manual:     ipsec.conf.5</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Please place your own config files in /etc/ipsec.d/ ending in .conf</span></span><br><span class="line"></span><br><span class="line">version <span class="number">2.0</span>     <span class="comment"># conforms to second version of ipsec.conf specification</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># basic configuration</span></span><br><span class="line">config setup</span><br><span class="line">        interfaces=<span class="string">"%defaultroute"</span></span><br><span class="line">        <span class="comment"># Debug-logging controls:  "none" for (almost) none, "all" for lots.</span></span><br><span class="line">        klipsdebug=none</span><br><span class="line">        plutodebug=<span class="string">"none"</span></span><br><span class="line">        plutostderrlog=/var/<span class="built_in">log</span>/pluto.log</span><br><span class="line">        <span class="comment"># For Red Hat Enterprise Linux and Fedora, leave protostack=netkey</span></span><br><span class="line">        protostack=netkey</span><br><span class="line">        nat_traversal=yes</span><br><span class="line">        oe=off</span><br><span class="line">        <span class="comment"># Enable this if you see "failed to find any available worker"</span></span><br><span class="line">        nhelpers=<span class="number">0</span></span><br><span class="line">        virtual_private=%v4:<span class="number">10.0</span>.<span class="number">0.0</span>/<span class="number">8</span>,%v4:<span class="number">192.168</span>.<span class="number">0.0</span>/<span class="number">16</span>,%v4:<span class="number">172.16</span>.<span class="number">0.0</span>/<span class="number">12</span></span><br><span class="line"></span><br><span class="line">conn L2TP-PSK</span><br><span class="line">       authby=secret</span><br><span class="line">       pfs=no</span><br><span class="line">       auto=add</span><br><span class="line">       keyingtries=<span class="number">3</span></span><br><span class="line">       rekey=no</span><br><span class="line">       <span class="built_in">type</span>=transport</span><br><span class="line">       forceencaps=yes</span><br><span class="line">       right=%any</span><br><span class="line">       rightsubnet=vhost:%any,%priv</span><br><span class="line">       rightprotoport=<span class="number">17</span>/%any</span><br><span class="line">       left=%defaultroute</span><br><span class="line"></span><br><span class="line">       leftprotoport=<span class="number">17</span>/<span class="number">1701</span></span><br><span class="line">       <span class="comment"># Apple iOS doesn't send delete notify so we need dead peer detection</span></span><br><span class="line">       <span class="comment"># to detect vanishing clients</span></span><br><span class="line">       dpddelay=<span class="number">10</span></span><br><span class="line">       dpdtimeout=<span class="number">90</span></span><br><span class="line">       dpdaction=clear</span><br><span class="line"></span><br><span class="line"><span class="comment">#You may put your configuration (.conf) file in the "/etc/ipsec.d/" and uncomment this.</span></span><br><span class="line"><span class="comment">#include /etc/ipsec.d/*.conf</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>编辑/etc/ipsec.secrets</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ipsec.secrets</span><br><span class="line"><span class="comment">#include /etc/ipsec.d/*.secrets</span></span><br><span class="line">你的公网IP     %any:PSK     <span class="string">"任意的密钥"</span></span><br></pre></td></tr></table></figure>
-<p>此时<code>ipsec verify</code>运行检查配置效果,我的如下:</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Checking your <span class="keyword">system</span> <span class="built_in">to</span> see <span class="keyword">if</span> IPsec got installed <span class="operator">and</span> started correctly:</span><br><span class="line">Version check <span class="operator">and</span> ipsec <span class="command"><span class="keyword">on</span>-path                                 [<span class="title">OK</span>]</span></span><br><span class="line">Linux Openswan U2<span class="number">.6</span><span class="number">.32</span>/K2<span class="number">.6</span><span class="number">.32</span>-<span class="number">504.3</span><span class="number">.3</span>.el6.i686 (netkey)</span><br><span class="line">Checking <span class="keyword">for</span> IPsec support <span class="operator">in</span> kernel                            [OK]</span><br><span class="line"> SAref kernel support                                           [N/A]</span><br><span class="line"> NETKEY:  Testing <span class="keyword">for</span> disabled ICMP send_redirects              [OK]</span><br><span class="line">NETKEY detected, testing <span class="keyword">for</span> disabled ICMP accept_redirects     [OK]</span><br><span class="line">Checking that pluto is running                                  [OK]</span><br><span class="line"> Pluto listening <span class="keyword">for</span> IKE <span class="command"><span class="keyword">on</span> <span class="title">udp</span> <span class="title">500</span>                             [<span class="title">OK</span>]</span></span><br><span class="line"> Pluto listening <span class="keyword">for</span> NAT-T <span class="command"><span class="keyword">on</span> <span class="title">udp</span> <span class="title">4500</span>                          [<span class="title">OK</span>]</span></span><br><span class="line">Two <span class="operator">or</span> more interfaces found, checking IP forwarding            [OK]</span><br><span class="line">Checking NAT <span class="operator">and</span> MASQUERADEing                                  [OK]</span><br><span class="line">Checking <span class="keyword">for</span> <span class="string">'ip'</span> <span class="command"><span class="keyword">command</span>                                       [<span class="title">OK</span>]</span></span><br><span class="line">Checking /bin/sh is <span class="operator">not</span> /bin/dash                               [OK]</span><br><span class="line">Checking <span class="keyword">for</span> <span class="string">'iptables'</span> <span class="command"><span class="keyword">command</span>                                 [<span class="title">OK</span>]</span></span><br><span class="line">Opportunistic Encryption Support                                [DISABLED]</span><br></pre></td></tr></table></figure>
-<p>这里遇到问题则一定要先解决了.哪一项不过就google解决哪一项.</p>
-<ul>
-<li>编辑 /etc/xl2tpd/xl2tpd.conf</li>
-</ul>
-<p><code>vi /etc/xl2tpd/xl2tpd.conf</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">;</span><br><span class="line">; This is a minimal sample xl2tpd configuration file <span class="keyword">for</span> use</span><br><span class="line">; with L2TP over IPsec.</span><br><span class="line">;</span><br><span class="line">; The idea is to provide an L2TP daemon to <span class="built_in">which</span> remote Windows L2TP/IPsec</span><br><span class="line">; clients connect. In this example, the internal (protected) network</span><br><span class="line">; is <span class="number">192.168</span>.<span class="number">1.0</span>/<span class="number">24</span>.  A special IP range within this network is reserved</span><br><span class="line">; <span class="keyword">for</span> the remote clients: <span class="number">192.168</span>.<span class="number">1.128</span>/<span class="number">25</span></span><br><span class="line">; (i.e. <span class="number">192.168</span>.<span class="number">1.128</span> ... <span class="number">192.168</span>.<span class="number">1.254</span>)</span><br><span class="line">;</span><br><span class="line">; The listen-addr parameter can be used <span class="keyword">if</span> you want to <span class="built_in">bind</span> the L2TP daemon</span><br><span class="line">; to a specific IP address instead of to all interfaces. For instance,</span><br><span class="line">; you could <span class="built_in">bind</span> it to the interface of the internal LAN (e.g. <span class="number">192.168</span>.<span class="number">1.98</span></span><br><span class="line">; <span class="keyword">in</span> the example below). Yet another IP address (<span class="built_in">local</span> ip, e.g. <span class="number">192.168</span>.<span class="number">1.99</span>)</span><br><span class="line">; will be used by xl2tpd as its address on pppX interfaces.</span><br><span class="line"></span><br><span class="line">[global]</span><br><span class="line">; listen-addr = <span class="number">192.168</span>.<span class="number">1.98</span></span><br><span class="line">;</span><br><span class="line">; requires openswan-<span class="number">2.5</span>.<span class="number">18</span> or higher - Also does not yet work <span class="keyword">in</span> combination</span><br><span class="line">; with kernel mode l2tp as present <span class="keyword">in</span> linux <span class="number">2.6</span>.<span class="number">23</span>+</span><br><span class="line">ipsec saref = no</span><br><span class="line">; Use refinfo of <span class="number">22</span> <span class="keyword">if</span> using an SAref kernel patch based on openswan <span class="number">2.6</span>.<span class="number">35</span> or</span><br><span class="line">;  when using any of the SAref kernel patches <span class="keyword">for</span> kernels up to <span class="number">2.6</span>.<span class="number">35</span>.</span><br><span class="line">; saref refinfo = <span class="number">30</span></span><br><span class="line">;</span><br><span class="line">; force userspace = yes</span><br><span class="line">;</span><br><span class="line">; debug tunnel = yes</span><br><span class="line"></span><br><span class="line">[lns default]</span><br><span class="line">ip range = <span class="number">192.168</span>.<span class="number">32.1</span>-<span class="number">192.168</span>.<span class="number">32.250</span></span><br><span class="line"><span class="built_in">local</span> ip = <span class="number">192.168</span>.<span class="number">32.252</span></span><br><span class="line">require chap = yes</span><br><span class="line">refuse pap = yes</span><br><span class="line">require authentication = yes</span><br><span class="line">name = LinuxVPNserver</span><br><span class="line">ppp debug = yes</span><br><span class="line">pppoptfile = /etc/ppp/options.xl2tpd</span><br><span class="line">length bit = yes</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>修改 /etc/ppp/options.xl2tpd</li>
-</ul>
-<p><code>vi /etc/ppp/options.xl2tpd</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">ipcp-accept-local</span><br><span class="line">ipcp-accept-remote</span><br><span class="line">ms-dns  <span class="number">8.8</span>.<span class="number">8.8</span></span><br><span class="line">ms-dns  <span class="number">8.8</span>.<span class="number">4.4</span></span><br><span class="line"><span class="comment"># ms-dns  192.168.1.1</span></span><br><span class="line"><span class="comment"># ms-dns  192.168.1.3</span></span><br><span class="line"><span class="comment"># ms-wins 192.168.1.2</span></span><br><span class="line"><span class="comment"># ms-wins 192.168.1.4</span></span><br><span class="line">noccp</span><br><span class="line">auth</span><br><span class="line">crtscts</span><br><span class="line">idle <span class="number">1800</span></span><br><span class="line">mtu <span class="number">1410</span></span><br><span class="line">mru <span class="number">1410</span></span><br><span class="line">nodefaultroute</span><br><span class="line">debug</span><br><span class="line">lock</span><br><span class="line">proxyarp</span><br><span class="line">connect-delay <span class="number">5000</span></span><br><span class="line"><span class="comment"># To allow authentication against a Windows domain EXAMPLE, and require the</span></span><br><span class="line"><span class="comment"># user to be in a group "VPN Users". Requires the samba-winbind package</span></span><br><span class="line">require-mschap-v2</span><br><span class="line"><span class="comment"># plugin winbind.so</span></span><br><span class="line"><span class="comment"># ntlm_auth-helper '/usr/bin/ntlm_auth --helper-protocol=ntlm-server-1 --require-membership-of="EXAMPLE\\VPN Users"'</span></span><br><span class="line"><span class="comment"># You need to join the domain on the server, for example using samba:</span></span><br><span class="line"><span class="comment"># http://rootmanager.com/ubuntu-ipsec-l2tp-windows-domain-auth/setting-up-openswan-xl2tpd-with-native-windows-clients-lucid.html</span></span><br><span class="line">logfile /var/<span class="built_in">log</span>/ppp.log</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>添加用户</li>
-</ul>
-<p><code>vi /etc/ppp/chap-secrets</code> 在文件中按格式添加用户.</p>
-<ul>
-<li>使用的防火墙规则:</li>
-</ul>
-<p>这里直接放出我配置好的防火墙规则,这里真的是卡了好久,对iptables不是非常熟悉.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Mon Dec 22 21:49:43 2014</span></span><br><span class="line">*nat</span><br><span class="line">:PREROUTING ACCEPT [<span class="number">834</span>:<span class="number">63397</span>]</span><br><span class="line">:POSTROUTING ACCEPT [<span class="number">0</span>:<span class="number">0</span>]</span><br><span class="line">:OUTPUT ACCEPT [<span class="number">5</span>:<span class="number">365</span>]</span><br><span class="line">-A POSTROUTING <span class="operator">-s</span> <span class="number">192.168</span>.<span class="number">32.0</span>/<span class="number">24</span> -o eth0 -j MASQUERADE</span><br><span class="line">COMMIT</span><br><span class="line"><span class="comment"># Completed on Mon Dec 22 21:49:43 2014</span></span><br><span class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Mon Dec 22 21:49:43 2014</span></span><br><span class="line">*filter</span><br><span class="line">:INPUT ACCEPT [<span class="number">0</span>:<span class="number">0</span>]</span><br><span class="line">:FORWARD ACCEPT [<span class="number">0</span>:<span class="number">0</span>]</span><br><span class="line">:OUTPUT ACCEPT [<span class="number">300</span>:<span class="number">44294</span>]</span><br><span class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">-A INPUT -p icmp -j ACCEPT</span><br><span class="line">-A INPUT -i lo -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport <span class="number">22</span> -j ACCEPT</span><br><span class="line">-A INPUT -p udp -m state --state NEW -m udp --dport <span class="number">1701</span> -j ACCEPT</span><br><span class="line">-A INPUT -p udp -m state --state NEW -m udp --dport <span class="number">500</span> -j ACCEPT</span><br><span class="line">-A INPUT -p udp -m state --state NEW -m udp --dport <span class="number">4500</span> -j ACCEPT</span><br><span class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">-A FORWARD <span class="operator">-d</span> <span class="number">192.168</span>.<span class="number">32.0</span>/<span class="number">24</span> -j ACCEPT</span><br><span class="line">-A FORWARD <span class="operator">-s</span> <span class="number">192.168</span>.<span class="number">32.0</span>/<span class="number">24</span> -j ACCEPT</span><br><span class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">COMMIT</span><br><span class="line"><span class="comment"># Completed on Mon Dec 22 21:49:43 2014</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="最后">最后</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">service xl2tpd restart</span><br><span class="line">service iptables restart</span><br><span class="line">chkconfig xl2tpd on</span><br><span class="line">chkconfig iptables on</span><br><span class="line">chkconfig ipsec on</span><br></pre></td></tr></table></figure>
-<p>参考链接:<a href="http://linux.die.net/man/5/xl2tpd.conf" target="_blank" rel="external">http://linux.die.net/man/5/xl2tpd.conf</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>搭建了一个L2TP+IPSec的VPN,对于小菜来说着实花了一番功夫…记录过程与此<br>]]>
-    
-    </summary>
-    
-      <category term="CentOS" scheme="http://ohroot.com/tags/CentOS/"/>
-    
-      <category term="操作系统" scheme="http://ohroot.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[js匿名函数与感叹号]]></title>
-    <link href="http://ohroot.com/2014/12/08/js%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E4%B8%8E%E6%84%9F%E5%8F%B9%E5%8F%B7/"/>
-    <id>http://ohroot.com/2014/12/08/js匿名函数与感叹号/</id>
-    <published>2014-12-08T13:46:22.000Z</published>
-    <updated>2014-12-08T14:24:36.000Z</updated>
-    <content type="html"><![CDATA[<p>关于javascript函数定义……<br><a id="more"></a></p>
-<h2 id="函数的定义">函数的定义</h2><p>首先简单介绍一下函数的定义，大致介绍常见的两种<br>第一种<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">double</span><span class="params">(x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> * x;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>第二种：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> double = <span class="function"><span class="keyword">function</span><span class="params">(x)</span> </span>&#123; <span class="keyword">return</span> <span class="number">2</span>* x; &#125;</span><br></pre></td></tr></table></figure></p>
-<p>注意<code>=</code>右边的函数就是一个匿名函数，创造完毕函数后，又将该函数赋给了变量square。</p>
-<h2 id="匿名函数">匿名函数</h2><p>上面所讲的定义square函数的方式即为匿名函数，这也是最常用的方式之一。<br>还有一种方式，可能也是初学者比较困惑的方式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span><span class="params">(x, y)</span></span>&#123;</span><br><span class="line">    alert(x + y);  </span><br><span class="line">&#125;)(<span class="number">2</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure></p>
-<p>这里创建了一个匿名函数(在第一个括号内)，第二个括号用于调用该匿名函数，并传入参数,然后函数顺次执行，并返回<code>undefined</code>。</p>
-<h2 id="理论讲完了，讲点重点"><strong> 理论讲完了，讲点重点 </strong></h2><p>我之前看到别人这些写匿名函数很是困惑，匿名函数既然定义了之后就执行函数体，为什么不直接写代码呢，后来网上查阅了下，别人说的理由如下：</p>
-<ul>
-<li>避免占用全局变量名</li>
-<li>参数保护,函数是独立作用域,传递参数可以保护临时变量,闭包可以保存循环中需要保留的临时变量,还有组件开发时将命名空间传递到函数中用闭包保护起来,即使命名空间被后面的代码重置,原变量被闭包保护将仍然生存</li>
-<li>降低风险,因为没有变量名,中间代码又被闭包保护,js注入无法访问,减少被攻击风险</li>
-</ul>
-<p>好吧，好处显而易见</p>
-<hr>
-<h2 id="神奇的感叹号">神奇的感叹号</h2><p>后来我又看到类似这样的代码<code>!function(){alert(&#39;ohroot&#39;)}()</code>，在函数定义前面加了个<code>!</code>,函数体内代码正常执行，返回值<code>undefined</code>,瞬间又达到了匿名函数的效果。</p>
-<p>我们一般匿名函数长得像这样:<br><code>(function(){alert(&#39;ohroot&#39;)})()// true</code><br>或者：<br><code>(function(){alert(&#39;ohroot&#39;)}())// true</code></p>
-<p>其实无论是括号，还是感叹号，让整个语句合法做的事情只有一件，就是让一个函数声明语句变成了一个表达式。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span><span class="params">()</span></span>&#123;alert(<span class="string">'ohroot'</span>)&#125;<span class="comment">// undefined</span></span><br></pre></td></tr></table></figure></p>
-<p>这是一个函数声明，如果在这么一个声明后直接加上括号调用，解析器自然不会理解而报错：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span><span class="params">()</span></span>&#123;alert(<span class="string">'ohroot'</span>)&#125;()<span class="comment">// SyntaxError: unexpected_token</span></span><br></pre></td></tr></table></figure></p>
-<p>因为这样的代码混淆了函数声明和函数调用，以这种方式声明的函数a，就应该以a();的方式调用。</p>
-<p>但是括号则不同，它将一个函数声明转化成了一个表达式，解析器不再以函数声明的方式处理函数a，而是作为一个函数表达式处理，也因此只有在程序执行到函数a时它才能被访问。所以，任何消除函数声明和函数表达式间歧义的方法，都可以被解析器正确识别。比如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> <span class="number">10</span>&#125;();<span class="comment">// undefined  </span></span><br><span class="line"><span class="number">1</span> &amp;&amp; <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> <span class="literal">true</span>&#125;();<span class="comment">// true  </span></span><br><span class="line"><span class="number">1</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;alert(<span class="string">'ohroot'</span>)&#125;();<span class="comment">// undefined</span></span><br></pre></td></tr></table></figure></p>
-<p>赋值，逻辑，甚至是逗号，各种操作符都可以告诉解析器，这个不是函数声明，它是个函数表达式。并且，对函数一元运算可以算的上是消除歧义最快的方式，感叹号只是其中之一，如果不在乎返回值，这些一元运算都是有效的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;alert(<span class="string">'ohroot'</span>)&#125;()<span class="comment">// true</span></span><br><span class="line">+<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;alert(<span class="string">'ohroot'</span>)&#125;()<span class="comment">// NaN</span></span><br><span class="line">-<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;alert(<span class="string">'ohroot'</span>)&#125;()<span class="comment">// NaN</span></span><br><span class="line">~<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;alert(<span class="string">'ohroot'</span>)&#125;()<span class="comment">// -1</span></span><br></pre></td></tr></table></figure></p>
-<p>甚至下面这些关键字，都能很好的工作：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;alert(<span class="string">'ohroot'</span>)&#125;()<span class="comment">// undefined  </span></span><br><span class="line"><span class="keyword">new</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;alert(<span class="string">'ohroot'</span>)&#125;()<span class="comment">// Object  </span></span><br><span class="line"><span class="keyword">delete</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;alert(<span class="string">'ohroot'</span>)&#125;()<span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
-<p>最后，括号做的事情也是一样的，消除歧义才是它真正的工作，而不是把函数作为一个整体，所以无论括号括在声明上还是把整个函数都括在里面，都是合法的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;alert(<span class="string">'ohroot'</span>)&#125;)()<span class="comment">// undefined</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;alert(<span class="string">'ohroot'</span>)&#125;())<span class="comment">// undefined</span></span><br></pre></td></tr></table></figure></p>
-<p>参考文章：<a href="http://swordair.com/function-and-exclamation-mark/" target="_blank" rel="external">function与感叹号</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>关于javascript函数定义……<br>]]>
-    
-    </summary>
-    
-      <category term="javascript" scheme="http://ohroot.com/tags/javascript/"/>
-    
-      <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[hydra使用手记]]></title>
-    <link href="http://ohroot.com/2014/11/24/hydra%E4%BD%BF%E7%94%A8%E6%89%8B%E8%AE%B0/"/>
-    <id>http://ohroot.com/2014/11/24/hydra使用手记/</id>
-    <published>2014-11-24T13:26:24.000Z</published>
-    <updated>2015-03-12T14:00:49.000Z</updated>
-    <content type="html"><![CDATA[<p>听说hydra这个工具很好用，自己一直没探索过，以前做Dsploit二次开发的时候就晓得了这个强大的工具，今天试玩一下。<br><a id="more"></a></p>
-<p>简明试玩手记，就不讲述怎么安装云云了</p>
-<h2 id="参数说明">参数说明</h2><pre><code>hydra [[[-l LOGIN|-L FILE] [-p PASS|-P FILE]] | [-C FILE]] [-e ns]
-[-o FILE] [-t TASKS] [-M FILE [-T TASKS]] [-w TIME] [-f] [-s PORT] [-S] [-vV] server service [OPT]
--<span class="ruby"><span class="constant">R</span> 继续从上一次进度接着破解。
-</span>-<span class="ruby"><span class="constant">S</span> 采用<span class="constant">SSL</span>链接。
-</span>-<span class="ruby">s <span class="constant">PORT</span> 可通过这个参数指定非默认端口。
-</span>-<span class="ruby">l <span class="constant">LOGIN</span> 指定破解的用户，对特定用户破解。
-</span>-<span class="ruby"><span class="constant">L</span> <span class="constant">FILE</span> 指定用户名字典。
-</span>-<span class="ruby">p <span class="constant">PASS</span> 小写，指定密码破解，少用，一般是采用密码字典。
-</span>-<span class="ruby"><span class="constant">P</span> <span class="constant">FILE</span> 大写，指定密码字典。
-</span>-<span class="ruby">e ns 可选选项，n：空密码试探，s：使用指定用户和密码试探。
-</span>-<span class="ruby"><span class="constant">C</span> <span class="constant">FILE</span> 使用冒号分割格式，例如“登录名<span class="symbol">:</span>密码”来代替-<span class="constant">L</span>/-<span class="constant">P</span>参数。
-</span>-<span class="ruby"><span class="constant">M</span> <span class="constant">FILE</span> 指定目标列表文件一行一条。
-</span>-<span class="ruby">o <span class="constant">FILE</span> 指定结果输出文件。
-</span>-<span class="ruby">f 在使用-<span class="constant">M</span>参数以后，找到第一对登录名或者密码的时候中止破解。
-</span>-<span class="ruby">t <span class="constant">TASKS</span> 同时运行的线程数，默认为<span class="number">16</span>。
-</span>-<span class="ruby">w <span class="constant">TIME</span> 设置最大超时的时间，单位秒，默认是<span class="number">30</span>s。
-</span>-<span class="ruby">v / -<span class="constant">V</span> 显示详细过程。
-</span>server 目标ip
-service 指定服务名，支持的服务和协议：telnet ftp pop3[-ntlm] imap[-ntlm] smb smbnt http-{head|get} http-{get|post}-form http-proxy cisco cisco-enable vnc ldap2 ldap3 mssql mysql oracle-listener postgres nntp socks5 rexec rlogin pcnfs snmp rsh cvs svn icq sapr3 ssh smtp-auth[-ntlm] pcanywhere teamspeak sip vmauthd firebird ncp afp等等。
-OPT 可选项
-</code></pre><h2 id="测试实例">测试实例</h2><ol>
-<li><p>破解ssh：(测试成功)<br><code>hydra ip ssh -l 用户名 -P 密码字典 -t 线程 -o save.log -vV</code></p>
-</li>
-<li><p>破解ftp：(测试成功)<br><code>hydra ip ftp -l 用户名 -P 密码字典 -t 线程(默认16) -vV</code></p>
-</li>
-<li><p>get方式提交，破解web登录：(测试成功)<br><code>hydra -l 用户名 -p 密码字典 -t 线程 -vV -e ns -f ip http-get /admin/index.php</code></p>
-</li>
-<li><p>post方式提交，破解web登录：(测试成功)<br><code>hydra -l 用户名 -P 密码字典 -s 80 ip http-post-form &quot;/admin/login.php:username=^USER^&amp;password=^PASS^&amp;submit=login:sorry password&quot;</code><br>引号里面冒号分隔URL、POST内容、错误回显</p>
-</li>
-<li><p>破解https：<br><code>hydra -m /index.php -l muts -P pass.txt 10.36.16.18 https</code></p>
-</li>
-<li><p>破解teamspeak：<br><code>hydra -l 用户名 -P 密码字典 -s 端口号 -vV ip teamspeak</code></p>
-</li>
-<li><p>破解cisco：<br><code>hydra -P pass.txt 10.36.16.18 cisco</code><br><code>hydra -m cloud -P pass.txt 10.36.16.18 cisco-enable</code></p>
-</li>
-<li><p>破解smb：<br><code>hydra -l administrator -P pass.txt 10.36.16.18 smb</code></p>
-</li>
-<li><p>破解pop3：<br><code>hydra -l muts -P pass.txt my.pop3.mail pop3</code></p>
-</li>
-<li><p>破解rdp：<br><code>hydra ip rdp -l administrator -P pass.txt -V</code></p>
-</li>
-<li><p>破解http-proxy：<br><code>hydra -l admin -P pass.txt http-proxy://10.36.16.18</code></p>
-</li>
-<li><p>破解imap：<br><code>hydra -L user.txt -p secret 10.36.16.18 imap PLAIN</code><br><code>hydra -C defaults.txt -6 imap://[fe80::2c:31ff:fe12:ac11]:143/PLAIN</code></p>
-</li>
-</ol>
-<p>参考文章：<a href="http://www.ha97.com/5186.html" target="_blank" rel="external">Linux下的暴力密码在线破解工具Hydra详解</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>听说hydra这个工具很好用，自己一直没探索过，以前做Dsploit二次开发的时候就晓得了这个强大的工具，今天试玩一下。<br>]]>
-    
-    </summary>
-    
-      <category term="渗透测试" scheme="http://ohroot.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="渗透测试" scheme="http://ohroot.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
