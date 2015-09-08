@@ -205,6 +205,42 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-09-08T03:07:34.000Z"><a href="/2015/09/08/safety-problem-of-elasticsearch/">2015-09-08</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/09/08/safety-problem-of-elasticsearch/">ElasticSearch安全问题</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>这篇文章主要是研究下Elasticsearch的一些漏洞，因为自己开发的系统也用到了Elasticsearch，自己检测下，顺便学习下<br>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2015/09/08/safety-problem-of-elasticsearch/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-09-06T04:09:08.000Z"><a href="/2015/09/06/YII-study/">2015-09-06</a></time>
       
       
@@ -451,53 +487,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-05-18T13:36:31.000Z"><a href="/2015/05/18/debian下给php安装curl/">2015-05-18</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2015/05/18/debian下给php安装curl/">debian下给php安装curl</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-      
-        <a id="more"></a>
-<p>查看自己的php5是否已经安装了curl。</p>
-<ol>
-<li>在web服务器目录（ debian下的通常为 /var/www )新建test.php文件</li>
-<li>编辑文件，键入下面一行代码：<code>&lt;?php phpinfo(); ?&gt;</code></li>
-<li>保存文件</li>
-<li>打开浏览器，浏览该网页。例：<a href="http://localhost/test.php" target="_blank" rel="external">http://localhost/test.php</a></li>
-<li>搜索”curl”,看看是否已经安装了curl。没搜到的话肯定是没装了。</li>
-</ol>
-<p>安装方法很简单，只需要一条命令。<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install curl libcurl3 libcurl3-dev php5-curl</span><br></pre></td></tr></table></figure></p>
-<p>安装完毕。记得重启Apache服务器<code>/etc/init.d/apache2 restart</code></p>
-<p>如果仍然有问题，尝试编辑你的php.ini文件（我的是/etc/php5/apache2/php.ini),在最后加上一行：<code>extension=curl.so</code></p>
-<p>保存文件后重启Apache服务器。</p>
-<p>安装gd过程类似，运行下面命令即可：<code>apt-get install php5-gd</code></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -519,7 +508,7 @@
 <div class="widget tagcloud">
   <h3 class="title">标签云</h3>
   <div class="entry" id = "cloud3d">
-    <a href="/tags/Android/" style="font-size: 15px;">Android</a><a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a><a href="/tags/ElasticSearch/" style="font-size: 10px;">ElasticSearch</a><a href="/tags/Elasticsearch/" style="font-size: 12.5px;">Elasticsearch</a><a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mongodb/" style="font-size: 15px;">Mongodb</a><a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a><a href="/tags/Web运维/" style="font-size: 10px;">Web运维</a><a href="/tags/XSS/" style="font-size: 12.5px;">XSS</a><a href="/tags/hexo/" style="font-size: 17.5px;">hexo</a><a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a><a href="/tags/mssql/" style="font-size: 10px;">mssql</a><a href="/tags/mysql/" style="font-size: 15px;">mysql</a><a href="/tags/phantomjs/" style="font-size: 10px;">phantomjs</a><a href="/tags/proxy/" style="font-size: 10px;">proxy</a><a href="/tags/python/" style="font-size: 17.5px;">python</a><a href="/tags/sublime/" style="font-size: 10px;">sublime</a><a href="/tags/渗透测试/" style="font-size: 17.5px;">渗透测试</a><a href="/tags/编程/" style="font-size: 10px;">编程</a>
+    <a href="/tags/Android/" style="font-size: 15px;">Android</a><a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a><a href="/tags/ElasticSearch/" style="font-size: 12.5px;">ElasticSearch</a><a href="/tags/Elasticsearch/" style="font-size: 12.5px;">Elasticsearch</a><a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mongodb/" style="font-size: 15px;">Mongodb</a><a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a><a href="/tags/Web运维/" style="font-size: 10px;">Web运维</a><a href="/tags/XSS/" style="font-size: 12.5px;">XSS</a><a href="/tags/hexo/" style="font-size: 17.5px;">hexo</a><a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a><a href="/tags/mssql/" style="font-size: 10px;">mssql</a><a href="/tags/mysql/" style="font-size: 15px;">mysql</a><a href="/tags/phantomjs/" style="font-size: 10px;">phantomjs</a><a href="/tags/proxy/" style="font-size: 10px;">proxy</a><a href="/tags/python/" style="font-size: 17.5px;">python</a><a href="/tags/sublime/" style="font-size: 10px;">sublime</a><a href="/tags/渗透测试/" style="font-size: 17.5px;">渗透测试</a><a href="/tags/编程/" style="font-size: 10px;">编程</a>
   </div>
 </div>
 
@@ -531,7 +520,7 @@
   
     <li><a href="/categories/Android/">Android</a><small>3</small></li>
   
-    <li><a href="/categories/Web安全/">Web安全</a><small>6</small></li>
+    <li><a href="/categories/Web安全/">Web安全</a><small>7</small></li>
   
     <li><a href="/categories/Web运维/">Web运维</a><small>1</small></li>
   
@@ -559,6 +548,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/2015/09/08/safety-problem-of-elasticsearch/">ElasticSearch安全问题</a>
+      </li>
+    
+      <li>
         <a href="/2015/09/06/YII-study/">Yii2学习资料整理</a>
       </li>
     
@@ -572,10 +565,6 @@
     
       <li>
         <a href="/2015/06/24/JS可以实现的一些好玩的功能/">JS可以实现的一些好玩的功能</a>
-      </li>
-    
-      <li>
-        <a href="/2015/05/18/MySQL数据导入ElasticSearch/">MySQL数据导入ElasticSearch</a>
       </li>
     
   </ul>
