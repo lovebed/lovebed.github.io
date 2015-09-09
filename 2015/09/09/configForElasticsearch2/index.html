@@ -241,7 +241,7 @@
 </li>
 <li><p>内存交换<br>这个对于性能影响是致命的，可以使用命令<code>sudo swapoff -a</code>来暂时关闭，永久关闭需要编辑文件<code>/etc/fstab</code><br>也可以在配置文件中添加配置<code>bootstrap.mlockall: true</code>，这样jvm可以锁定这些内存，避免被交换到物理存储介质。</p>
 </li>
-<li><p>文件描述符<br>这个说法我也不知道对不对，或者叫文件句柄？反正就是file descriptor,这个主要是因为Lucene要打开很多文件，Elasticsearch要开启很多socket，在linux系统下这些都是通过文件来处理的，linux会限制每个进程开启的文件数，可以通过<code>sysctl -w vm.max_map_count=262144</code>来临时修改，或者修改配置文件<code>/etc/sysctl.conf</code>的<code>vm.max_map_count</code>设置，最后都要执行<code>sysctl -p</code>使设置生效。<br>然后我是通过elasticsearchservicewrapper来启动ES的这里还需要修改配置文件<code>./bin/service/elasticsearch</code>，将配置项<code>ULIMIT_N</code>前面的注释去掉，并配置相应的值，建议值是32000，然而我配置了64000。</p>
+<li><p>文件描述符<br>这个说法我也不知道对不对，或者叫文件句柄？反正就是file descriptor,这个主要是因为Lucene要打开很多文件，Elasticsearch要开启很多socket，在linux系统下这些都是通过文件来处理的，linux会限制每个进程开启的文件数，可以通过<code>sysctl -w vm.max_map_count=262144</code>来临时修改，或者修改配置文件<code>/etc/sysctl.conf</code>的<code>vm.max_map_count</code>设置，最后都要执行<code>sysctl -p</code>使设置生效。<br>然后我是通过elasticsearchservicewrapper来启动ES的这里还需要修改配置文件<code>./bin/service/elasticsearch</code>，将配置项<code>ULIMIT_N</code>前面的注释去掉，并配置相应的值，建议值是32000，然而我配置了64000。<br>查看是否设置成功<code>http://localhost:9200/_nodes/process?pretty</code>，里面的<code>max_file_descriptors</code>就是对应的值。</p>
 </li>
 </ul>
 
