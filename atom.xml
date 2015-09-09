@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Valar dohaeris]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2015-09-08T03:09:22.000Z</updated>
+  <updated>2015-09-09T09:03:01.000Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -13,6 +13,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Elasticsearch生产环境部署_配置]]></title>
+    <link href="http://ohroot.com/2015/09/09/configForElasticsearch2/"/>
+    <id>http://ohroot.com/2015/09/09/configForElasticsearch2/</id>
+    <published>2015-09-09T09:00:06.000Z</published>
+    <updated>2015-09-09T09:03:01.000Z</updated>
+    <content type="html"><![CDATA[<p>本文主要介绍Elasticsearch生产环境部署需要考虑的一些配置，自学&amp;分享</p>
+<a id="more"></a>
+<p>ES的默认的很多参数都是不需要改的，当遇到性能问题时首先应该考虑的是增加节点，和优化数据结构。<br>下面列举一些需要注意的配置项，首先是一般大家都知道的配置项：</p>
+<ul>
+<li>cluster.name: elasticsearch_production 集群名称还是要改一下，不要使用默认的，万一你在哪个内网，然后一台测试的笔记本开启了ES不是自动就加入了集群。</li>
+<li>node.name: elasticsearch_005_data 节点名称，这个也改下把，自己也清楚。看日志也明白些</li>
+<li>path.data: /path/to/data1 数据存储路径</li>
+<li>path.logs: /path/to/logs 日志路径</li>
+<li>path.plugins: /path/to/plugins 插件路径<br>上面三个初始目录都在安装目录下，主要考虑重装不会因为覆盖丢失数据</li>
+<li><p>discovery.zen.minimum_master_nodes 这个配置项主要是用于防止“脑裂”问题，具体设施可以看这篇文章：<a href="http://xingxiudong.com/2015/01/05/resolve-elasticsearch-split-brain/" target="_blank" rel="external">如何防止ElasticSearch集群出现脑裂现象</a></p>
+</li>
+<li><p>gateway.recover_after_nodes: n<br>这个设置主要防止不必要的数据处理，比如一个集群全部重启，然后有一个机器起的比较慢，然后机器就会组成集群，选出master，然后从备份中恢复出故障集群的数据。集群此时恢复正常。然后起的慢的机器又重启成功了，又会把数据同步到这台机器上并删除冗余数据。这项配置决定直到第n个节点可用才可以进行恢复操作</p>
+</li>
+<li>gateway.expected_nodes: 10 </li>
+<li><p>gateway.recover_after_time: 5m   这个配置一个是恢复的时间，上面配置的是5分钟<br>这三项要求首先等待n个节点恢复，然后等待5分钟或者10个节点已经加入了集群就开始数据恢复</p>
+</li>
+<li><p>discovery.zen.ping.multicast.enabled: false</p>
+</li>
+<li><p>discovery.zen.ping.unicast.hosts: [“host1”, “host2:port”]<br>ES通过UDP协议去发现节点，建议关闭multicast的自动发现节点机制，上面的配置主要一个是禁用multicast，一个是写出需要尝试连接的节点，如果有专门的master节点可以配置成master节点。</p>
+</li>
+<li><p>不要修改java的GC机制<br>线程池设置成内核数，比如八核机器就设置成8，很多阻塞的操作都是Lucene来操作的，比如硬盘读写。搜索的线程设置可以设置成内核数的三倍</p>
+</li>
+<li><p>Heap size设置<br>可以通过命令<code>export ES_HEAP_SIZE=10g</code>，或者启动时配置<code>./bin/elasticsearch -Xmx10g -Xms10g</code>，要让Xmx和Xms相等。也可以修改文件<code>./bin/elasticsearch.in.sh</code>,修改sh代码，修改相关配置<br>然后这个内存一般设置为内存的一半，因为还有内存要分配给Lucene使用。然后不管你有多大的内存，该项设置不要超过32GB，这个与JVM的一些特性有关<br>如果你是使用了服务的方式去启动ES，需要修改服务的配置文件<code>./bin/service/elasticsearch.conf</code>来实现相关配置。</p>
+</li>
+<li><p>内存交换<br>这个对于性能影响是致命的，可以使用命令<code>sudo swapoff -a</code>来暂时关闭，永久关闭需要编辑文件<code>/etc/fstab</code><br>也可以在配置文件中添加配置<code>bootstrap.mlockall: true</code>，这样jvm可以锁定这些内存，避免被交换到物理存储介质。</p>
+</li>
+<li><p>文件描述符<br>这个说法我也不知道对不对，或者叫文件句柄？反正就是file descriptor,这个主要是因为Lucene要打开很多文件，Elasticsearch要开启很多socket，在linux系统下这些都是通过文件来处理的，linux会限制每个进程开启的文件数，可以通过<code>sysctl -w vm.max_map_count=262144</code>来临时修改，或者修改配置文件<code>/etc/sysctl.conf</code>的<code>vm.max_map_count</code>设置，最后都要执行<code>sysctl -p</code>使设置生效。<br>然后我是通过elasticsearchservicewrapper来启动ES的这里还需要修改配置文件<code>./bin/service/elasticsearch</code>，将配置项<code>ULIMIT_N</code>前面的注释去掉，并配置相应的值，建议值是32000，然而我配置了64000。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>本文主要介绍Elasticsearch生产环境部署需要考虑的一些配置，自学&amp;分享</p>]]>
+    
+    </summary>
+    
+      <category term="Elasticsearch" scheme="http://ohroot.com/tags/Elasticsearch/"/>
+    
+      <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Elasticsearch生产环境部署_软硬件]]></title>
+    <link href="http://ohroot.com/2015/09/09/configForElasticsearch1/"/>
+    <id>http://ohroot.com/2015/09/09/configForElasticsearch1/</id>
+    <published>2015-09-09T09:00:03.000Z</published>
+    <updated>2015-09-09T09:02:54.000Z</updated>
+    <content type="html"><![CDATA[<p>本文主要考虑ES集群搭建时机器的硬件配置和软件选择，读了些老外的文章，分享下</p>
+<a id="more"></a>
+<h2 id="硬件">硬件</h2><p><strong>内存</strong> ，ES很多操作非常耗内存，推荐的最佳内存配置是64GB，32GB、16GB也是可以接受的，低于8GB可能就不太够用了，也不要大于64GB，会引起其他的内存问题。内存消耗高主要是查询需要内存，然后索引数据存储到硬盘也非常的耗内存</p>
+<p><strong>CPU</strong>，可选用2-8核不等的CPU，在CPU多核与CPU主频之间，尽量选择多核的CPU。这样可以使得集群更加适应并发。</p>
+<p><strong>硬盘</strong>  非常重要，很多系统瓶颈都在硬盘的读写速率上。建议采用SSD固态硬盘，当使用SSD时，linux系统要配置正确的I/O调度策略，命令<code>echo noop &gt; /sys/block/sda/queue/scheduler</code>。如果是一般的磁盘，尽量整速度快点的把，服务器raid建议做成raid0，因为ES已经有有主从分片的机制了。</p>
+<p><strong>网络</strong> 网速块集群间数据交互就快咯，建议上千兆或者万兆的。我就整了一个千兆网线然后接在千兆交换机上，当然机器也是千兆网口。<br>最后，建议不要使用什么大型机来代替集群的方案，但是可以使用类似像亚马逊EC2那种虚拟云主机，搞一堆云主机建集群也是可取的，这个我没玩过，看别人这么说的，不知道真实效率，这方面不是很懂。</p>
+<h2 id="软件">软件</h2><p>这里说的软件主要是jvm，ES依赖jvm，选择的原则是最好选用最新的jvm，然后openjdk也是可行的。<br>这个问题又想起了心酸往事，当时搭建集群的时候，买了一批机器，然后机器中有一条内存条存在质量问题，普通的使用发现不了问题，完全正常，可是就是我大量索引数据到ES的时候就会出现jvm的报错，内存溢出之类的错误，以及伴随这个错误的一系列错误，当时拿着错误信息google各种姿势搜索，完全找不到解决方法。我当时就觉得是jvm的问题，然后各种版本安装，恨不得把所有版本安装一遍。这个问题折腾了我差不多一个多月，终于有一天，这个机器不堪凌辱，挂掉了，才发现是内存坏的。。。说多了都是泪。。。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>本文主要考虑ES集群搭建时机器的硬件配置和软件选择，读了些老外的文章，分享下</p>]]>
+    
+    </summary>
+    
+      <category term="Elasticsearch" scheme="http://ohroot.com/tags/Elasticsearch/"/>
+    
+      <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[ElasticSearch安全问题]]></title>
@@ -42,7 +114,7 @@
     <link href="http://ohroot.com/2015/09/06/YII-study/"/>
     <id>http://ohroot.com/2015/09/06/YII-study/</id>
     <published>2015-09-06T04:09:08.000Z</published>
-    <updated>2015-09-06T04:10:20.000Z</updated>
+    <updated>2015-09-09T08:50:16.000Z</updated>
     <content type="html"><![CDATA[<p>自己学习YII框架还是走了不少坑，这里把学习资料整理下<br><a id="more"></a></p>
 <p>建议先看慕课网的视频，可以快速有一个了解。然后去看权威指南，去查参考手册，去看各种doc，看多了就会写了</p>
 <p>首先是一些链接：</p>
@@ -69,9 +141,9 @@
     
     </summary>
     
-      <category term="编程" scheme="http://ohroot.com/tags/%E7%BC%96%E7%A8%8B/"/>
+      <category term="Yii" scheme="http://ohroot.com/tags/Yii/"/>
     
-      <category term="yii" scheme="http://ohroot.com/categories/yii/"/>
+      <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -584,56 +656,6 @@
       <category term="mysql" scheme="http://ohroot.com/tags/mysql/"/>
     
       <category term="数据库" scheme="http://ohroot.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[linux配置证书登陆]]></title>
-    <link href="http://ohroot.com/2014/12/20/linux%E9%85%8D%E7%BD%AE%E8%AF%81%E4%B9%A6%E7%99%BB%E9%99%86/"/>
-    <id>http://ohroot.com/2014/12/20/linux配置证书登陆/</id>
-    <published>2014-12-20T03:11:46.000Z</published>
-    <updated>2014-12-20T04:26:30.000Z</updated>
-    <content type="html"><![CDATA[<a id="more"></a>
-<h2 id="客户端建立私钥和公钥">客户端建立私钥和公钥</h2><p>在客户端终端运行命令<code>ssh-keygen -t rsa</code><br>密码算法我们选择rsa，还有一种是dsa，证书登录常用的是rsa。<br>执行 ssh-keygen 时，才会在我的home目录底下的 .ssh/ 这个目录里面产生所需要的两把 Keys ，分别是私钥 (id_rsa) 与公钥 (id_rsa.pub)。为了安全我们最好对公钥设置上密码.</p>
-<h2 id="ssh服务端配置">ssh服务端配置</h2><p>ssh服务器配置如下:</p>
-<p>vim /etc/ssh/sshd_config<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 禁用root账户登录，非必要，但为了安全性，请配置</span></span><br><span class="line"><span class="title">PermitRootLogin</span> <span class="built_in">no</span></span><br><span class="line"><span class="comment"># 是否让 sshd 去检查用户家目录或相关档案的权限数据，这是为了担心使用者将某些重要档案的权限设错，可能会导致一些问题所致。例如使用者的 ~.ssh/ 权限设错时，某些特殊情况下会不许用户登入.</span></span><br><span class="line">StrictModes <span class="built_in">no</span></span><br><span class="line"><span class="comment"># 是否允许用户自行使用成对的密钥系统进行登入行为，仅针对 version 2。</span></span><br><span class="line"><span class="comment"># 至于自制的公钥数据就放置于用户家目录下的 .ssh/authorized_keys 内</span></span><br><span class="line">RSAAuthentication <span class="built_in">yes</span></span><br><span class="line">PubkeyAuthentication <span class="built_in">yes</span></span><br><span class="line">AuthorizedKeysFile %h/.ssh/authorized_keys</span><br><span class="line"><span class="comment">#有了证书登录了，就禁用密码登录吧，安全要紧</span></span><br><span class="line">PasswordAuthentication <span class="built_in">no</span></span><br></pre></td></tr></table></figure></p>
-<p>配置好ssh服务器的配置了，那么我们就要把客户端的公钥上传到服务器端，然后把客户端的公钥添加到authorized_keys</p>
-<p>在客户端执行命令<br><code>scp ~/.ssh/id_rsa.pub root@&lt;ssh_server_ip&gt;:~</code><br>在服务端执行命令<br><code>cp  id_rsa.pub ～/.ssh/authorized_keys</code><br>如果有修改配置/etc/ssh/sshd_config，需要重启ssh服务器<br><code>service sshd restart</code></p>
-<h2 id="客户端通过私钥登录ssh服务器">客户端通过私钥登录ssh服务器</h2><ul>
-<li>ssh命令<br><code>ssh -i ~/.ssh/id_rsa root@&lt;ssh_server_ip&gt;</code></li>
-<li>scp命令<br>`scp -i ~/.ssh/id_rsa filename root@<ssh_server_ip>:/filepath<br>每次敲命令，都要指定私钥，是一个很繁琐的事情，所以我们可以把私钥的路径加入ssh客户端的默认配置里<br>修改/etc/ssh/ssh_config<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#默认id_rsa就已经加入私钥的路径了</span></span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br><span class="line"><span class="comment">#如果有其他的私钥，还要再加入其他私钥的路径则在文件里面添加</span></span><br><span class="line">IdentityFile ~/.ssh/other_rsa</span><br></pre></td></tr></table></figure>
-</ssh_server_ip></li>
-</ul>
-<h2 id="windows上使用">windows上使用</h2><p>这里生成的公钥是OpenSSH格式,在window上可以通过小工具puttygen,点击窗口上的’Conversions’-&gt;’Import key’ 导入这个公钥,然后再导出成putty支持的证书格式即可使用putty登陆.<br>putty登陆指定证书方法:先正常填写IP,然后点击左侧的’Connection’-&gt;’SSH’-&gt;’Auth’,点击’Browse’导入公钥文件即可.<br>如果你是从windows的puttygen生成的公私钥,一样的需要导出成linux支持的OpenSSH格式.</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<a id="more"></a>
-<h2 id="客户端建立私钥和公钥">客户端建立私钥和公钥</h2><p>在客户端终端运行命令<code>ssh-keygen -t rsa</code><br>密码算法我们选择rsa，还有一种是dsa，证书登录常用的是rsa。<br>执行 ]]>
-    </summary>
-    
-      <category term="Linux" scheme="http://ohroot.com/tags/Linux/"/>
-    
-      <category term="操作系统" scheme="http://ohroot.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[linux安装为知笔记]]></title>
-    <link href="http://ohroot.com/2014/12/20/linux%E5%AE%89%E8%A3%85%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0/"/>
-    <id>http://ohroot.com/2014/12/20/linux安装为知笔记/</id>
-    <published>2014-12-20T02:42:38.000Z</published>
-    <updated>2014-12-20T02:47:19.000Z</updated>
-    <content type="html"><![CDATA[<a id="more"></a>
-<p>为知笔记无脑安装过程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:wiznote-team</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install wiznote</span><br></pre></td></tr></table></figure></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<a id="more"></a>
-<p>为知笔记无脑安装过程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span cl]]>
-    </summary>
-    
-      <category term="Linux" scheme="http://ohroot.com/tags/Linux/"/>
-    
-      <category term="操作系统" scheme="http://ohroot.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   

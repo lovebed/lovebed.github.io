@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>ElasticSearch | 半饱和</title>
+  <title>Elasticsearch生产环境部署_配置 | 半饱和</title>
   <meta name="author" content="Direwolf">
   
   <meta name="description" content="专注安全、专注生活、专注人生">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="Elasticsearch生产环境部署_配置"/>
   <meta property="og:site_name" content="半饱和"/>
 
   
@@ -198,37 +198,104 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">ElasticSearch</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-09-09T09:00:06.000Z"><a href="/2015/09/09/configForElasticsearch2/">2015-09-09</a></time>
+      
+      
+  
+    <h1 class="title">Elasticsearch生产环境部署_配置</h1>
+  
 
+    </header>
+    <div class="entry">
+      
+      
+        <p>本文主要介绍Elasticsearch生产环境部署需要考虑的一些配置，自学&amp;分享</p>
+<a id="more"></a>
+<p>ES的默认的很多参数都是不需要改的，当遇到性能问题时首先应该考虑的是增加节点，和优化数据结构。<br>下面列举一些需要注意的配置项，首先是一般大家都知道的配置项：</p>
+<ul>
+<li>cluster.name: elasticsearch_production 集群名称还是要改一下，不要使用默认的，万一你在哪个内网，然后一台测试的笔记本开启了ES不是自动就加入了集群。</li>
+<li>node.name: elasticsearch_005_data 节点名称，这个也改下把，自己也清楚。看日志也明白些</li>
+<li>path.data: /path/to/data1 数据存储路径</li>
+<li>path.logs: /path/to/logs 日志路径</li>
+<li>path.plugins: /path/to/plugins 插件路径<br>上面三个初始目录都在安装目录下，主要考虑重装不会因为覆盖丢失数据</li>
+<li><p>discovery.zen.minimum_master_nodes 这个配置项主要是用于防止“脑裂”问题，具体设施可以看这篇文章：<a href="http://xingxiudong.com/2015/01/05/resolve-elasticsearch-split-brain/" target="_blank" rel="external">如何防止ElasticSearch集群出现脑裂现象</a></p>
+</li>
+<li><p>gateway.recover_after_nodes: n<br>这个设置主要防止不必要的数据处理，比如一个集群全部重启，然后有一个机器起的比较慢，然后机器就会组成集群，选出master，然后从备份中恢复出故障集群的数据。集群此时恢复正常。然后起的慢的机器又重启成功了，又会把数据同步到这台机器上并删除冗余数据。这项配置决定直到第n个节点可用才可以进行恢复操作</p>
+</li>
+<li>gateway.expected_nodes: 10 </li>
+<li><p>gateway.recover_after_time: 5m   这个配置一个是恢复的时间，上面配置的是5分钟<br>这三项要求首先等待n个节点恢复，然后等待5分钟或者10个节点已经加入了集群就开始数据恢复</p>
+</li>
+<li><p>discovery.zen.ping.multicast.enabled: false</p>
+</li>
+<li><p>discovery.zen.ping.unicast.hosts: [“host1”, “host2:port”]<br>ES通过UDP协议去发现节点，建议关闭multicast的自动发现节点机制，上面的配置主要一个是禁用multicast，一个是写出需要尝试连接的节点，如果有专门的master节点可以配置成master节点。</p>
+</li>
+<li><p>不要修改java的GC机制<br>线程池设置成内核数，比如八核机器就设置成8，很多阻塞的操作都是Lucene来操作的，比如硬盘读写。搜索的线程设置可以设置成内核数的三倍</p>
+</li>
+<li><p>Heap size设置<br>可以通过命令<code>export ES_HEAP_SIZE=10g</code>，或者启动时配置<code>./bin/elasticsearch -Xmx10g -Xms10g</code>，要让Xmx和Xms相等。也可以修改文件<code>./bin/elasticsearch.in.sh</code>,修改sh代码，修改相关配置<br>然后这个内存一般设置为内存的一半，因为还有内存要分配给Lucene使用。然后不管你有多大的内存，该项设置不要超过32GB，这个与JVM的一些特性有关<br>如果你是使用了服务的方式去启动ES，需要修改服务的配置文件<code>./bin/service/elasticsearch.conf</code>来实现相关配置。</p>
+</li>
+<li><p>内存交换<br>这个对于性能影响是致命的，可以使用命令<code>sudo swapoff -a</code>来暂时关闭，永久关闭需要编辑文件<code>/etc/fstab</code><br>也可以在配置文件中添加配置<code>bootstrap.mlockall: true</code>，这样jvm可以锁定这些内存，避免被交换到物理存储介质。</p>
+</li>
+<li><p>文件描述符<br>这个说法我也不知道对不对，或者叫文件句柄？反正就是file descriptor,这个主要是因为Lucene要打开很多文件，Elasticsearch要开启很多socket，在linux系统下这些都是通过文件来处理的，linux会限制每个进程开启的文件数，可以通过<code>sysctl -w vm.max_map_count=262144</code>来临时修改，或者修改配置文件<code>/etc/sysctl.conf</code>的<code>vm.max_map_count</code>设置，最后都要执行<code>sysctl -p</code>使设置生效。<br>然后我是通过elasticsearchservicewrapper来启动ES的这里还需要修改配置文件<code>./bin/service/elasticsearch</code>，将配置项<code>ULIMIT_N</code>前面的注释去掉，并配置相应的值，建议值是32000，然而我配置了64000。</p>
+</li>
+</ul>
 
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2015-09-08T03:07:34.000Z"><a href="/2015/09/08/safety-problem-of-elasticsearch/">2015-09-08</a></time>
-            
-              <h1 class="title"><a href="/2015/09/08/safety-problem-of-elasticsearch/">ElasticSearch安全问题</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2015-05-18T13:37:54.000Z"><a href="/2015/05/18/MySQL数据导入ElasticSearch/">2015-05-18</a></time>
-            
-              <h1 class="title"><a href="/2015/05/18/MySQL数据导入ElasticSearch/">MySQL数据导入ElasticSearch</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/编程/">编程</a>
   </div>
+ 
+        
+  
+  <div class="tags">
+    <a href="/tags/Elasticsearch/">Elasticsearch</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+  
+  
+  <a href="/2015/09/09/configForElasticsearch1/" class="alignright next" >下一页</a>
+  
+  <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="_posts/configForElasticsearch2.md" data-title="Elasticsearch生产环境部署_配置" data-url="http://ohroot.com/2015/09/09/configForElasticsearch2/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
