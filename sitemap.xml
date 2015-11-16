@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ohroot.com/2015/11/16/linux-auto-start/</loc>
+    <lastmod>2015-11-16T12:35:32.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ohroot.com/2015/11/16/mysql-load-file/</loc>
     <lastmod>2015-11-16T01:52:32.000Z</lastmod>
   </url>

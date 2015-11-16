@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Valar dohaeris]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2015-11-16T01:52:32.000Z</updated>
+  <updated>2015-11-16T12:35:32.000Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -13,6 +13,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[linux设置开机自启动]]></title>
+    <link href="http://ohroot.com/2015/11/16/linux-auto-start/"/>
+    <id>http://ohroot.com/2015/11/16/linux-auto-start/</id>
+    <published>2015-11-16T12:32:03.000Z</published>
+    <updated>2015-11-16T12:35:32.000Z</updated>
+    <content type="html"><![CDATA[<p>linux设置开机自启动，探索记录</p>
+<a id="more"></a>
+<p>Linux系统任何时候都运行在一个指定的运行级上，并且不同的运行级程序和服务都不同，所要完成的工作和要达到的目的也不同，系统可以在这些运行级之间进行切换，来完成不同的工作。</p>
+<h2 id="运行级别等级：">运行级别等级：</h2><ul>
+<li>0        系统停机状态</li>
+<li>1        单用户模式，只准许root用户对系统进系维护</li>
+<li>2～5  多用户模式（其中3为字符界面、5为图形界面）</li>
+<li>6         重启启动</li>
+</ul>
+<p>在这里需要注意的是，在Debian系下level2～5是没有任何区别的。<br>使用以下命令，可以查看当前的运行级别：<code>runlevel</code><br>使用以下命令，可以切换运行级别：<code>init [123456]</code><br>例如，init 0表示关机，init 6表示重启。</p>
+<h2 id="一些命令">一些命令</h2><p>设置开机自启动的命令<br>命令1：<code>chkconfig</code>，最好多系统都用这个<br>命令2：<code>update-rc.d</code> debian早期系统默认用这个<br>命令3：<code>insserv -d mysql</code> 这个debian7.6开始就是这个命令了<br>命令4：<code>sysv-rc-conf</code> 这个要安装</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>linux设置开机自启动，探索记录</p>]]>
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://ohroot.com/tags/Linux/"/>
+    
+      <category term="操作系统" scheme="http://ohroot.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[mysql load_file函数一些敏感路径]]></title>
@@ -631,29 +660,6 @@
       <category term="Mongodb" scheme="http://ohroot.com/tags/Mongodb/"/>
     
       <category term="数据库" scheme="http://ohroot.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[dnspod动态域名解析]]></title>
-    <link href="http://ohroot.com/2015/03/11/dnspod%E5%8A%A8%E6%80%81%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/"/>
-    <id>http://ohroot.com/2015/03/11/dnspod动态域名解析/</id>
-    <published>2015-03-11T11:02:21.000Z</published>
-    <updated>2015-09-21T09:38:54.000Z</updated>
-    <content type="html"><![CDATA[<p>dnspod动态域名解析，write up.<br><a id="more"></a><br>添加DNSPOD记录</p>
-<p><a href="www.dnspod.cn/docs/index.html">api文档https</a><br><a href="https://gist.github.com/chuangbo/833369" target="_blank" rel="external">动态解析demo</a></p>
-<p>获得domain_id可以用curl<br><code>curl -k https://dnsapi.cn/Domain.List -d &quot;login_email=xxx&amp;login_password=xxx&quot;</code><br>获得record_id<br><code>curl -k https://dnsapi.cn/Record.List -d &quot;login_email=xxx&amp;login_password=xxx&amp;domain_id=xxx&quot;</code></p>
-<p>开机的时候自动运行这个脚本 ,在/etc/rc.local中加入一行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># run pypod.py ddns</span></span><br><span class="line">/usr/bin/python /home/pi/pypod.py</span><br></pre></td></tr></table></figure></p>
-<p>DNSPOD动态域名解析，ip获取有误修复<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> httplib, urllib</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"> </span><br><span class="line">params = dict(</span><br><span class="line">    login_email=<span class="string">"hisen@xx.com"</span>, <span class="comment"># replace with your email</span></span><br><span class="line">    login_password=<span class="string">"pwd"</span>, <span class="comment"># replace with your password</span></span><br><span class="line">    format=<span class="string">"json"</span>,</span><br><span class="line">    domain_id=xxxxxx, <span class="comment"># replace with your domain_od, can get it by API Domain.List</span></span><br><span class="line">    record_id=xxxxxx, <span class="comment"># replace with your record_id, can get it by API Record.List</span></span><br><span class="line">    sub_domain=<span class="string">"pi"</span>, <span class="comment"># replace with your sub_domain</span></span><br><span class="line">    record_line=<span class="string">"默认"</span>,</span><br><span class="line">)</span><br><span class="line">current_ip = <span class="keyword">None</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ddns</span><span class="params">(ip)</span>:</span></span><br><span class="line">    params.update(dict(value=ip))</span><br><span class="line">    headers = &#123;<span class="string">"Content-type"</span>: <span class="string">"application/x-www-form-urlencoded"</span>, <span class="string">"Accept"</span>: <span class="string">"text/json"</span>&#125;</span><br><span class="line">    conn = httplib.HTTPSConnection(<span class="string">"dnsapi.cn"</span>)</span><br><span class="line">    conn.request(<span class="string">"POST"</span>, <span class="string">"/Record.Ddns"</span>, urllib.urlencode(params), headers)</span><br><span class="line"> </span><br><span class="line">    response = conn.getresponse()</span><br><span class="line">    <span class="keyword">print</span> response.status, response.reason</span><br><span class="line">    data = response.read()</span><br><span class="line">    <span class="keyword">print</span> data</span><br><span class="line">    conn.close()</span><br><span class="line">    <span class="keyword">return</span> response.status == <span class="number">200</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getip</span><span class="params">()</span>:</span></span><br><span class="line">    url=<span class="string">'http://ip.taobao.com/service/getIpInfo.php?ip=myip'</span></span><br><span class="line">    page=urllib.urlopen(url)</span><br><span class="line">    data=page.read()</span><br><span class="line">    jsondata=json.loads(data)</span><br><span class="line">    ip = jsondata[<span class="string">'data'</span>][<span class="string">'ip'</span>]</span><br><span class="line">    <span class="keyword">return</span> ip</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            ip = getip()</span><br><span class="line">            <span class="keyword">print</span> ip</span><br><span class="line">            <span class="keyword">if</span> current_ip != ip:</span><br><span class="line">                <span class="keyword">if</span> ddns(ip):</span><br><span class="line">                    current_ip = ip</span><br><span class="line">        <span class="keyword">except</span> Exception, e:</span><br><span class="line">            <span class="keyword">print</span> e</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        time.sleep(<span class="number">30</span>)</span><br></pre></td></tr></table></figure></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>dnspod动态域名解析，write up.<br>]]>
-    
-    </summary>
-    
-      <category term="Web运维" scheme="http://ohroot.com/tags/Web%E8%BF%90%E7%BB%B4/"/>
-    
-      <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   

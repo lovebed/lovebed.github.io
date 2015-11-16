@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>hexo | 半饱和</title>
+  <title>linux设置开机自启动 | 半饱和</title>
   <meta name="author" content="Direwolf">
   
   <meta name="description" content="专注安全、专注生活、专注人生">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="linux设置开机自启动"/>
   <meta property="og:site_name" content="半饱和"/>
 
   
@@ -198,49 +198,86 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title category">hexo</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-11-16T12:32:03.000Z"><a href="/2015/11/16/linux-auto-start/">2015-11-16</a></time>
+      
+      
+  
+    <h1 class="title">linux设置开机自启动</h1>
+  
 
+    </header>
+    <div class="entry">
+      
+      
+        <p>linux设置开机自启动，探索记录</p>
+<a id="more"></a>
+<p>Linux系统任何时候都运行在一个指定的运行级上，并且不同的运行级程序和服务都不同，所要完成的工作和要达到的目的也不同，系统可以在这些运行级之间进行切换，来完成不同的工作。</p>
+<h2 id="运行级别等级：">运行级别等级：</h2><ul>
+<li>0        系统停机状态</li>
+<li>1        单用户模式，只准许root用户对系统进系维护</li>
+<li>2～5  多用户模式（其中3为字符界面、5为图形界面）</li>
+<li>6         重启启动</li>
+</ul>
+<p>在这里需要注意的是，在Debian系下level2～5是没有任何区别的。<br>使用以下命令，可以查看当前的运行级别：<code>runlevel</code><br>使用以下命令，可以切换运行级别：<code>init [123456]</code><br>例如，init 0表示关机，init 6表示重启。</p>
+<h2 id="一些命令">一些命令</h2><p>设置开机自启动的命令<br>命令1：<code>chkconfig</code>，最好多系统都用这个<br>命令2：<code>update-rc.d</code> debian早期系统默认用这个<br>命令3：<code>insserv -d mysql</code> 这个debian7.6开始就是这个命令了<br>命令4：<code>sysv-rc-conf</code> 这个要安装</p>
 
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-09-19T03:24:43.000Z"><a href="/2014/09/19/tagscloud/">2014-09-19</a></time>
-            
-              <h1 class="title"><a href="/2014/09/19/tagscloud/">为博客添加3D标签云</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-09-18T14:30:39.000Z"><a href="/2014/09/18/hexo使用/">2014-09-18</a></time>
-            
-              <h1 class="title"><a href="/2014/09/18/hexo使用/">hexo使用</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="photo">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-09-18T10:53:05.000Z"><a href="/2014/09/18/phototest/">2014-09-18</a></time>
-            
-              <h1 class="title"><a href="/2014/09/18/phototest/">第一篇-测试</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/操作系统/">操作系统</a>
   </div>
+ 
+        
+  
+  <div class="tags">
+    <a href="/tags/Linux/">Linux</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+  
+  
+  <a href="/2015/11/16/mysql-load-file/" class="alignright next" >下一页</a>
+  
+  <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="_posts/linux-auto-start.md" data-title="linux设置开机自启动" data-url="http://ohroot.com/2015/11/16/linux-auto-start/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
