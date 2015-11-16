@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Linux | 半饱和</title>
+  <title>mysql load_file函数一些敏感路径 | 半饱和</title>
   <meta name="author" content="Direwolf">
   
   <meta name="description" content="专注安全、专注生活、专注人生">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="mysql load_file函数一些敏感路径"/>
   <meta property="og:site_name" content="半饱和"/>
 
   
@@ -198,109 +198,78 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">Linux</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-11-16T01:50:10.000Z"><a href="/2015/11/16/mysql-load-file/">2015-11-16</a></time>
+      
+      
+  
+    <h1 class="title">mysql load_file函数一些敏感路径</h1>
+  
 
+    </header>
+    <div class="entry">
+      
+      
+        <p>本文列举一些load_file会涉及的一些目录，不定时更新<br><a id="more"></a></p>
+<p>当渗透测试过程中我们会遇到mysql用户的权限比较大，我们可以写文件，但是不知道网站路径。或者有权限执行load_file()函数。列举下可以读取的一些路径。<br>以下路径大部分参考<a href="https://github.com/nuke99/sqlnuke/blob/master/inputs/packset.lst:linux:" target="_blank" rel="external">sqlnuke中的配置文件</a><br>Linux系统<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> /etc/passwd    </span><br><span class="line"></span>-<span class="ruby"> /etc/shadow    </span><br><span class="line"></span>-<span class="ruby"> /etc/group    </span><br><span class="line"></span>-<span class="ruby"> /etc/hosts    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache2/logs/access.log    </span><br><span class="line"></span>-<span class="ruby"> /etc/httpd/access.log    </span><br><span class="line"></span>-<span class="ruby"> /etc/init.d/apache/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/init.d/apache/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/init.d/apache2/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /usr/local/apache2/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /usr/local/apache/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /home/apache/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /home/apache/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /opt/apache/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/httpd/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/httpd/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache/apache.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache2/apache2.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache2/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /usr/local/apache2/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /usr/local/apache/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /opt/apache/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /home/apache/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /home/apache/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache2/sites-available/default    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache2/vhosts.d/default_vhost.<span class="keyword">include</span>    </span><br><span class="line"></span>-<span class="ruby"> /var/www/vhosts/sitename/httpdocs/<span class="regexp">/etc/init</span>.d/apache    </span><br><span class="line"></span>-<span class="ruby"> /etc/nginx/nginx.conf</span></span><br></pre></td></tr></table></figure></p>
+<p>windows系统<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> <span class="constant">C</span><span class="symbol">:/wamp/bin/apache/logs/access</span>.log    </span><br><span class="line"></span>-<span class="ruby"> <span class="constant">C</span><span class="symbol">:/wamp/bin/mysql/mysql5</span>.<span class="number">5.24</span>/wampserver.conf    </span><br><span class="line"></span>-<span class="ruby"> <span class="constant">C</span><span class="symbol">:/wamp/bin/apache/apache2</span>.<span class="number">2.22</span>/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> <span class="constant">C</span><span class="symbol">:/wamp/bin/apache/apache2</span>.<span class="number">2.22</span>/conf/wampserver.conf    </span><br><span class="line"></span>-<span class="ruby"> <span class="constant">C</span><span class="symbol">:/wamp/bin/apache/apache2</span>.<span class="number">2.22</span>/conf/httpd.conf.build    </span><br><span class="line"></span>-<span class="ruby"> <span class="constant">C</span><span class="symbol">:/wamp/bin/apache/apache2</span>.<span class="number">2.22</span>/conf/httpd.conf.build</span></span><br></pre></td></tr></table></figure></p>
 
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2015-05-18T13:37:12.000Z"><a href="/2015/05/18/Linux下安装配置JDK8/">2015-05-18</a></time>
-            
-              <h1 class="title"><a href="/2015/05/18/Linux下安装配置JDK8/">Linux下安装配置JDK8</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2015-05-18T13:36:31.000Z"><a href="/2015/05/18/debian下给php安装curl/">2015-05-18</a></time>
-            
-              <h1 class="title"><a href="/2015/05/18/debian下给php安装curl/">debian下给php安装curl</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2015-03-15T13:35:14.000Z"><a href="/2015/03/15/ubuntu14-04下修复flash版本问题/">2015-03-15</a></time>
-            
-              <h1 class="title"><a href="/2015/03/15/ubuntu14-04下修复flash版本问题/">ubuntu14.04下修复flash版本问题</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-12-20T03:11:46.000Z"><a href="/2014/12/20/linux配置证书登陆/">2014-12-20</a></time>
-            
-              <h1 class="title"><a href="/2014/12/20/linux配置证书登陆/">linux配置证书登陆</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-12-20T02:42:38.000Z"><a href="/2014/12/20/linux安装为知笔记/">2014-12-20</a></time>
-            
-              <h1 class="title"><a href="/2014/12/20/linux安装为知笔记/">linux安装为知笔记</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-11-03T08:17:33.000Z"><a href="/2014/11/03/Linux日志文件/">2014-11-03</a></time>
-            
-              <h1 class="title"><a href="/2014/11/03/Linux日志文件/">Linux日志文件</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-10-17T02:16:11.000Z"><a href="/2014/10/17/系统安装与备份/">2014-10-17</a></time>
-            
-              <h1 class="title"><a href="/2014/10/17/系统安装与备份/">系统安装与备份</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2014-09-28T06:34:21.000Z"><a href="/2014/09/28/linux入门笔记/">2014-09-28</a></time>
-            
-              <h1 class="title"><a href="/2014/09/28/linux入门笔记/">linux入门笔记</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/渗透测试/">渗透测试</a>
   </div>
+ 
+        
+  
+  <div class="tags">
+    <a href="/tags/mysql/">mysql</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination" >
+  
+  
+  <a href="/2015/09/09/configForElasticsearch2/" class="alignright next" >下一页</a>
+  
+  <div class="clearfix"></div>
+</nav>
+
+<section id="comment">
+<!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="_posts/mysql-load-file.md" data-title="mysql load_file函数一些敏感路径" data-url="http://ohroot.com/2015/11/16/mysql-load-file/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">

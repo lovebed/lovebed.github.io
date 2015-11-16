@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Valar dohaeris]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2015-09-09T09:09:24.000Z</updated>
+  <updated>2015-11-16T01:52:32.000Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -13,6 +13,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[mysql load_file函数一些敏感路径]]></title>
+    <link href="http://ohroot.com/2015/11/16/mysql-load-file/"/>
+    <id>http://ohroot.com/2015/11/16/mysql-load-file/</id>
+    <published>2015-11-16T01:50:10.000Z</published>
+    <updated>2015-11-16T01:52:32.000Z</updated>
+    <content type="html"><![CDATA[<p>本文列举一些load_file会涉及的一些目录，不定时更新<br><a id="more"></a></p>
+<p>当渗透测试过程中我们会遇到mysql用户的权限比较大，我们可以写文件，但是不知道网站路径。或者有权限执行load_file()函数。列举下可以读取的一些路径。<br>以下路径大部分参考<a href="https://github.com/nuke99/sqlnuke/blob/master/inputs/packset.lst:linux:" target="_blank" rel="external">sqlnuke中的配置文件</a><br>Linux系统<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> /etc/passwd    </span><br><span class="line"></span>-<span class="ruby"> /etc/shadow    </span><br><span class="line"></span>-<span class="ruby"> /etc/group    </span><br><span class="line"></span>-<span class="ruby"> /etc/hosts    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache2/logs/access.log    </span><br><span class="line"></span>-<span class="ruby"> /etc/httpd/access.log    </span><br><span class="line"></span>-<span class="ruby"> /etc/init.d/apache/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/init.d/apache/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/init.d/apache2/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /usr/local/apache2/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /usr/local/apache/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /home/apache/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /home/apache/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /opt/apache/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/httpd/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/httpd/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache/apache.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache2/apache2.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache2/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /usr/local/apache2/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /usr/local/apache/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /opt/apache/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /home/apache/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /home/apache/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache2/sites-available/default    </span><br><span class="line"></span>-<span class="ruby"> /etc/apache2/vhosts.d/default_vhost.<span class="keyword">include</span>    </span><br><span class="line"></span>-<span class="ruby"> /var/www/vhosts/sitename/httpdocs/<span class="regexp">/etc/init</span>.d/apache    </span><br><span class="line"></span>-<span class="ruby"> /etc/nginx/nginx.conf</span></span><br></pre></td></tr></table></figure></p>
+<p>windows系统<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> <span class="constant">C</span><span class="symbol">:/wamp/bin/apache/logs/access</span>.log    </span><br><span class="line"></span>-<span class="ruby"> <span class="constant">C</span><span class="symbol">:/wamp/bin/mysql/mysql5</span>.<span class="number">5.24</span>/wampserver.conf    </span><br><span class="line"></span>-<span class="ruby"> <span class="constant">C</span><span class="symbol">:/wamp/bin/apache/apache2</span>.<span class="number">2.22</span>/conf/httpd.conf    </span><br><span class="line"></span>-<span class="ruby"> <span class="constant">C</span><span class="symbol">:/wamp/bin/apache/apache2</span>.<span class="number">2.22</span>/conf/wampserver.conf    </span><br><span class="line"></span>-<span class="ruby"> <span class="constant">C</span><span class="symbol">:/wamp/bin/apache/apache2</span>.<span class="number">2.22</span>/conf/httpd.conf.build    </span><br><span class="line"></span>-<span class="ruby"> <span class="constant">C</span><span class="symbol">:/wamp/bin/apache/apache2</span>.<span class="number">2.22</span>/conf/httpd.conf.build</span></span><br></pre></td></tr></table></figure></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>本文列举一些load_file会涉及的一些目录，不定时更新<br>]]>
+    
+    </summary>
+    
+      <category term="mysql" scheme="http://ohroot.com/tags/mysql/"/>
+    
+      <category term="渗透测试" scheme="http://ohroot.com/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Elasticsearch生产环境部署_配置]]></title>
@@ -633,29 +654,6 @@
       <category term="Web运维" scheme="http://ohroot.com/tags/Web%E8%BF%90%E7%BB%B4/"/>
     
       <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[MYSQL数据文件恢复]]></title>
-    <link href="http://ohroot.com/2014/12/22/MYSQL%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E6%81%A2%E5%A4%8D/"/>
-    <id>http://ohroot.com/2014/12/22/MYSQL数据文件恢复/</id>
-    <published>2014-12-22T09:57:29.000Z</published>
-    <updated>2014-12-22T12:03:05.000Z</updated>
-    <content type="html"><![CDATA[<p>有那么三个mysql问的文件,后缀为.frm.MYD.MYI,表的引擎是MyISAM,故事就是发生在这样的背景下<br><a id="more"></a></p>
-<h2 id="前言">前言</h2><p>本来MyISAM引擎的数据库文件,直接把这三个文件拷贝到对应的数据库文件夹下,对于Linux就再改一下权限就可以了,但是今天遇到了问题,导进去没能成功查询数据.数据很关键,决定想办法解决下.</p>
-<p>首先介绍下这三个文件<br>.frm文件: 这是表结构描述方面的文件<br>.MYD文件: 这是表的数据文件<br>.MYI文件: 这是数据表关于索引的文件</p>
-<h2 id="解决办法">解决办法</h2><p>首先把.frm文件拷贝到数据库目录下,然后建立两个空白文件,分别命名为<code>tablename.MYI</code>,<code>tablename.MYD</code>,把tablename换成对应的表名,然后再查看数据库就能看到数据表,只是表中内容是空的.<br>这时再把原来的MYI和MYD文件拷贝回来,替换掉两个空的MYI,MYD文件.</p>
-<p>下面再去看看数据库里面,表已经能正常执行增删改查了.</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>有那么三个mysql问的文件,后缀为.frm.MYD.MYI,表的引擎是MyISAM,故事就是发生在这样的背景下<br>]]>
-    
-    </summary>
-    
-      <category term="mysql" scheme="http://ohroot.com/tags/mysql/"/>
-    
-      <category term="数据库" scheme="http://ohroot.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
