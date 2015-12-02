@@ -61,7 +61,8 @@ treeJSON = d3.json("/js/security.json", function(error, treeData) {
         });
     }
     // Sort the tree initially incase the JSON isn't in a sorted order.
-    sortTree();
+    // 此处用于排序
+    // sortTree();
 
     // TODO: Pan function, can be better implemented.
 
