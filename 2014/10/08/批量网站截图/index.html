@@ -1,228 +1,145 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   
   <title>批量网站截图 | 半饱和</title>
-  <meta name="author" content="Direwolf">
-  
-  <meta name="description" content="专注安全、专注生活、专注人生">
-  
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="批量网站截图"/>
-  <meta property="og:site_name" content="半饱和"/>
-
   
-    <meta property="og:image" content="undefined"/>
+    <meta name="keywords" content="javascript,python," />
   
 
-  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  <meta name="description" content="在批量网站处理过程中，我们时常会需要打开大量的页面，查看页面内容是否是我们需要的。这种需求下，本文就主要研究懒人的处理技巧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="批量网站截图">
+<meta property="og:url" content="http://ohroot.com/2014/10/08/批量网站截图/index.html">
+<meta property="og:site_name" content="半饱和">
+<meta property="og:description" content="在批量网站处理过程中，我们时常会需要打开大量的页面，查看页面内容是否是我们需要的。这种需求下，本文就主要研究懒人的处理技巧。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="批量网站截图">
+<meta name="twitter:description" content="在批量网站处理过程中，我们时常会需要打开大量的页面，查看页面内容是否是我们需要的。这种需求下，本文就主要研究懒人的处理技巧。">
 
-  <link rel="alternate" href="/atom.xml" title="半饱和" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8f194a78c11f76027a96c6ec87298c62";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 </head>
 
-
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">半饱和</a></h1>
-  <h2><a href="/">Valar dohaeris</a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/about">About</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-      <li><a href="/urls">安全圈</a></li>
-    
-    <li> <a href="/atom.xml">RSS</a> </li>
-    <li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
-	function c() {
-		var e = document.createElement("link");
-		e.setAttribute("type", "text/css");
-		e.setAttribute("rel", "stylesheet");
-		e.setAttribute("href", f);
-		e.setAttribute("class", l);
-		document.body.appendChild(e)
-	}
- 
-	function h() {
-		var e = document.getElementsByClassName(l);
-		for (var t = 0; t < e.length; t++) {
-			document.body.removeChild(e[t])
-		}
-	}
- 
-	function p() {
-		var e = document.createElement("div");
-		e.setAttribute("class", a);
-		document.body.appendChild(e);
-		setTimeout(function() {
-			document.body.removeChild(e)
-		}, 100)
-	}
- 
-	function d(e) {
-		return {
-			height : e.offsetHeight,
-			width : e.offsetWidth
-		}
-	}
- 
-	function v(i) {
-		var s = d(i);
-		return s.height > e && s.height < n && s.width > t && s.width < r
-	}
- 
-	function m(e) {
-		var t = e;
-		var n = 0;
-		while (!!t) {
-			n += t.offsetTop;
-			t = t.offsetParent
-		}
-		return n
-	}
- 
-	function g() {
-		var e = document.documentElement;
-		if (!!window.innerWidth) {
-			return window.innerHeight
-		} else if (e && !isNaN(e.clientHeight)) {
-			return e.clientHeight
-		}
-		return 0
-	}
- 
-	function y() {
-		if (window.pageYOffset) {
-			return window.pageYOffset
-		}
-		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
-	}
- 
-	function E(e) {
-		var t = m(e);
-		return t >= w && t <= b + w
-	}
- 
-	function S() {
-		var e = document.createElement("audio");
-		e.setAttribute("class", l);
-		e.src = i;
-		e.loop = false;
-		e.addEventListener("canplay", function() {
-			setTimeout(function() {
-				x(k)
-			}, 500);
-			setTimeout(function() {
-				N();
-				p();
-				for (var e = 0; e < O.length; e++) {
-					T(O[e])
-				}
-			}, 15500)
-		}, true);
-		e.addEventListener("ended", function() {
-			N();
-			h()
-		}, true);
-		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
-		document.body.appendChild(e);
-		e.play()
-	}
- 
-	function x(e) {
-		e.className += " " + s + " " + o
-	}
- 
-	function T(e) {
-		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
-	}
- 
-	function N() {
-		var e = document.getElementsByClassName(s);
-		var t = new RegExp("\\b" + s + "\\b");
-		for (var n = 0; n < e.length; ) {
-			e[n].className = e[n].className.replace(t, "")
-		}
-	}
- 
-	var e = 30;
-	var t = 30;
-	var n = 350;
-	var r = 350;
-	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
-	var s = "mw-harlem_shake_me";
-	var o = "im_first";
-	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
-	var a = "mw-strobe_light";
-	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
-	var l = "mw_added_css";
-	var b = g();
-	var w = y();
-	var C = document.getElementsByTagName("*");
-	var k = null;
-	for (var L = 0; L < C.length; L++) {
-		var A = C[L];
-		if (v(A)) {
-			if (E(A)) {
-				k = A;
-				break
-			}
-		}
-	}
-	if (A === null) {
-		console.warn("Could not find a node of the right size. Please try a different page.");
-		return
-	}
-	c();
-	S();
-	var O = [];
-	for (var L = 0; L < C.length; L++) {
-		var A = C[L];
-		if (v(A)) {
-			O.push(A)
-		}
-	}
-	})()    '>High一下</a> </li>
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry hint hint--left" data-hint="点击返回首页" href="/">盒子</a>
+    <ul class="list-toolbox">
       
-        <div class="icon"></div>
-        <time datetime="2014-10-08T03:40:26.000Z"><a href="/2014/10/08/批量网站截图/">2014-10-08</a></time>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/">博客</a>
+          </li>
+        
       
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/">分类</a>
+          </li>
+        
       
-  
-    <h1 class="title">批量网站截图</h1>
-  
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/">标签</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/urls/">安全圈</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/">友链</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/">关于</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml">RSS</a>
+          </li>
+        
+      
+    </ul>
+  </div>
 
-    </header>
-    <div class="entry">
+
+</div>
+
+ 
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#python批量打开网页"><span class="toc-text">python批量打开网页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python网页截图"><span class="toc-text">python网页截图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方式一"><span class="toc-text">实现方式一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方式二"><span class="toc-text">实现方式二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方式三"><span class="toc-text">实现方式三</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript网页截图"><span class="toc-text">Javascript网页截图</span></a></li></ol>
+  </div>
+
+
+ <a class="back-top" href="#">
+  <i class="icon-angle-up"></i>
+</a>
+
+
+<div class="content-post CENTER">
+   <article id="post-批量网站截图" class="article article-type-post" itemscope itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">批量网站截图</h1>
+
+    <div class="article-meta">
+      <span>2014-10-08</span>
+
+      <span> | </span>
+
+      <span class="article-author">Direwolf</span>
+
+      <span> | </span>
+
       
-      
-            <div id="toc" class="toc-article">
-                <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#python批量打开网页"><span class="toc-number">1.</span> <span class="toc-text">python批量打开网页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python网页截图"><span class="toc-number">2.</span> <span class="toc-text">python网页截图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方式一"><span class="toc-number">2.1.</span> <span class="toc-text">实现方式一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方式二"><span class="toc-number">2.2.</span> <span class="toc-text">实现方式二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方式三"><span class="toc-number">2.3.</span> <span class="toc-text">实现方式三</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript网页截图"><span class="toc-number">3.</span> <span class="toc-text">Javascript网页截图</span></a></li></ol>
-            </div>
-            
-        <p>在批量网站处理过程中，我们时常会需要打开大量的页面，查看页面内容是否是我们需要的。这种需求下，本文就主要研究懒人的处理技巧。<br><a id="more"></a></p>
+  <span class="article-category">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+  </span>
+
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>在批量网站处理过程中，我们时常会需要打开大量的页面，查看页面内容是否是我们需要的。这种需求下，本文就主要研究懒人的处理技巧。<br><a id="more"></a></p>
 <h2 id="python批量打开网页">python批量打开网页</h2><p>本程序主要用于调用chrome浏览器，当然也可以修改源代码，支持其他浏览器，来批量打开浏览器，用户只需要查看后再关闭页面，即可实现批量网页查看的功能。具体代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> webbrowser</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">path = <span class="string">'./url.txt'</span></span><br><span class="line">myUrlFile = open(path)</span><br><span class="line">filelist = myUrlFile.readlines()</span><br><span class="line"></span><br><span class="line">chromePath = <span class="string">r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'</span></span><br><span class="line">webbrowser.register(<span class="string">'chrome'</span>, <span class="keyword">None</span>, webbrowser.BackgroundBrowser(chromePath))</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line">namecount = <span class="number">0</span></span><br><span class="line">dealcount = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> filelist:</span><br><span class="line">    count = count + <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> (count % <span class="number">5</span>) == <span class="number">0</span>:</span><br><span class="line">        keyput = raw_input(<span class="string">'Press any key to continue:'</span>);</span><br><span class="line">    webbrowser.get(<span class="string">'chrome'</span>).open_new_tab(s.strip())</span><br><span class="line">myUrlFile.close()</span><br></pre></td></tr></table></figure>
 <h2 id="python网页截图">python网页截图</h2><p>上面是python打开批量网页，懒人就是要突出一个懒，我还是觉得很麻烦，于是我想实现批量给这些网页截图，然后保存成一个页面，然后直接翻页查看。<br>linux下面有一个工具实现了这个功能，叫做Peepingtom，这里就不详细介绍这个软件了，经过本人实测，速度不是很满意，也有可能姿势不对。<br>于是我就琢磨着自己写一个啊，在网上找啊找，招到了如下三个脚本的实现方式，其实也就是两种思路，效果一样，差强人意。排除时间因素，他们还是蛮不错的，但是对于批量网站这种需求，该方案还是不行啊。这里列举其代码如下，代码中留有原作者信息。</p>
@@ -235,169 +152,38 @@
 <p>说明：页面中要引入那两个JS</p>
 <p>测试代码就写到这里，很多人说这种方法不支持跨域的图片截图问题，我也没有深入去研究，毕竟我的主要用途是截取webshell页面，基本不存在跨域问题。具体实现上可能还需要使用chrome插件的方式，留待后续研究吧。</p>
 
-      
-    </div>
-    <footer>
-      
-        
-  
-  <div class="categories">
-    <a href="/categories/编程/">编程</a>
-  </div>
- 
-        
-  
-  <div class="tags">
-    <a href="/tags/javascript/">javascript</a>, <a href="/tags/python/">python</a>
-  </div>
-
-      
-      <div class="clearfix"></div>
-    </footer>
+    
   </div>
 </article>
 
 
 
-<nav id="pagination" >
-  
-  <a href="/2014/10/17/系统安装与备份/" class="alignleft prev" >上一页</a>
-  
-  
-  <a href="/2014/09/28/ubuntu下Android开发问题汇总/" class="alignright next" >下一页</a>
-  
-  <div class="clearfix"></div>
-</nav>
 
-<section id="comment">
-<!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="_posts/批量网站截图.md" data-title="批量网站截图" data-url="http://ohroot.com/2014/10/08/批量网站截图/"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"bigegg"};
+
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="" data-title="批量网站截图" data-url="http://ohroot.com/2014/10/08/批量网站截图/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+</div>
+
+  
+
+  
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"bigegg"};
   (function() {
     var ds = document.createElement('script');
     ds.type = 'text/javascript';ds.async = true;
     ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
     ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
+    (document.getElementsByTagName('head')[0]
      || document.getElementsByTagName('body')[0]).appendChild(ds);
   })();
   </script>
-<!-- 多说公共JS代码 end -->
-</section>
 
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜索">
-    <input type="hidden" name="q" value="site:ohroot.com">
-  </form>
-</div>
-
-  
-<script type="text/javascript" src="/js/tag.js"></script>
-<div class="widget tagcloud">
-  <h3 class="title">标签云</h3>
-  <div class="entry" id = "cloud3d">
-    <a href="/tags/Android/" style="font-size: 14px;">Android</a><a href="/tags/CentOS/" style="font-size: 12px;">CentOS</a><a href="/tags/Elasticsearch/" style="font-size: 18px;">Elasticsearch</a><a href="/tags/Linux/" style="font-size: 20px;">Linux</a><a href="/tags/Mongodb/" style="font-size: 14px;">Mongodb</a><a href="/tags/Nginx/" style="font-size: 10px;">Nginx</a><a href="/tags/Web运维/" style="font-size: 10px;">Web运维</a><a href="/tags/XSS/" style="font-size: 12px;">XSS</a><a href="/tags/Yii/" style="font-size: 10px;">Yii</a><a href="/tags/hexo/" style="font-size: 16px;">hexo</a><a href="/tags/javascript/" style="font-size: 16px;">javascript</a><a href="/tags/mssql/" style="font-size: 10px;">mssql</a><a href="/tags/mysql/" style="font-size: 16px;">mysql</a><a href="/tags/phantomjs/" style="font-size: 10px;">phantomjs</a><a href="/tags/proxy/" style="font-size: 10px;">proxy</a><a href="/tags/python/" style="font-size: 16px;">python</a><a href="/tags/sublime/" style="font-size: 10px;">sublime</a><a href="/tags/渗透测试/" style="font-size: 16px;">渗透测试</a>
-  </div>
-</div>
-
-
-  
-<div class="widget tag">
-  <h3 class="title">分类</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/Android/">Android</a><small>3</small></li>
-  
-    <li><a href="/categories/Web安全/">Web安全</a><small>7</small></li>
-  
-    <li><a href="/categories/hexo/">hexo</a><small>3</small></li>
-  
-    <li><a href="/categories/工具使用/">工具使用</a><small>2</small></li>
-  
-    <li><a href="/categories/操作系统/">操作系统</a><small>11</small></li>
-  
-    <li><a href="/categories/数据库/">数据库</a><small>6</small></li>
-  
-    <li><a href="/categories/渗透测试/">渗透测试</a><small>2</small></li>
-  
-    <li><a href="/categories/编程/">编程</a><small>13</small></li>
-  
-  </ul>
-</div>
-
-
-  
-<div class="widget tag">
-  <h3 class="title">最新文章</h3>
-  <ul class="entry">
-    
-      <li>
-        <a href="/2015/11/16/linux-auto-start/">linux设置开机自启动</a>
-      </li>
-    
-      <li>
-        <a href="/2015/11/16/mysql-load-file/">mysql load_file函数一些敏感路径</a>
-      </li>
-    
-      <li>
-        <a href="/2015/09/09/configForElasticsearch2/">Elasticsearch生产环境部署_配置</a>
-      </li>
-    
-      <li>
-        <a href="/2015/09/09/configForElasticsearch1/">Elasticsearch生产环境部署_软硬件</a>
-      </li>
-    
-      <li>
-        <a href="/2015/09/08/safety-problem-of-elasticsearch/">ElasticSearch安全问题</a>
-      </li>
-    
-  </ul>
-</div>
-
-
-  <div class="widget tag">
-<h3 class="title">友情链接</h3>
-<ul class="entry">
-<li><a href="http://www.sec-wiki.com/" title="SecWiki">SecWiki</a></li>
-<li><a href="http://www.anquanquan.info/" title="anquanquan">安全圈</a></li>
-<li><a href="http://www.jinglingshu.org/" title="jinglingshu">精灵鼠</a></li>
-<li><a href="http://www.pang0lin.com/" title="pang0lin">pang0lin</a></li>
-<li><a href="http://wps2015.jinglingshu.org/" title="wps2015">wps2015</a></li>
-<li><a href="http://www.sccsec.com/" title="胖胖的博客">胖胖</a></li>
-</ul>
-</div>
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2015 Direwolf
-  
-</div>
-<div class="clearfix"></div></footer>
-  <script src="/js/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F8f194a78c11f76027a96c6ec87298c62' type='text/javascript'%3E%3C/script%3E"));
-</script>
-
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
 
 </body>
 </html>
