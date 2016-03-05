@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Valar dohaeris]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2015-12-24T12:38:45.000Z</updated>
+  <updated>2016-03-05T02:50:52.976Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -13,6 +13,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Yii2和sqlserver2014以及oracle的故事]]></title>
+    <link href="http://ohroot.com/2016/03/05/yii2-mssql-oracle/"/>
+    <id>http://ohroot.com/2016/03/05/yii2-mssql-oracle/</id>
+    <published>2016-03-05T02:45:49.000Z</published>
+    <updated>2016-03-05T02:50:52.976Z</updated>
+    <content type="html"><![CDATA[<p>没怎么用过SQLSERVER和Oracle，但是又有奇怪的需求要实现在一台电脑上同时安装三种数据库，并查询其中数据，无奈只好倒腾一下<br>由于sqlserver要装在windows机器上，所以我打算把这三个系统都装在server2008上，装起来感觉也简单点。</p>
+<a id="more"></a>
+<h2 id="SQLSERVER">SQLSERVER</h2><p>sqlserver相对我还倒腾的多一点，那么就先从sqlserver讲起，sqlserver我安装的sqlserver2014 Express版本，好像这个版本是免费的，下了一个，然后就是一路默认安装，完了发现连个管理工具都没有，于是又装了个navicat，用navicat去连接sqlserver的时候，发现连接不了，错误提示为什么管道什么的没打开，直觉告诉我一定是哪里需要配置下开启sqlserver外连</p>
+<p>找了一下安装产生的各种工具，发现开始菜单里面有一个配置工具，目录里面有一个SQL Server 2014配置管理器，点进去有一个SQL Server网络配置，然后点进去把Named Pipes和TCP/IP两个都启用，再次用navicat连接，就成功了。</p>
+<p>然后还要开启防火墙允许对SQL Server的访问，这个方法官网就有，<a href="https://msdn.microsoft.com/zh-cn/library/ms175043(v=sql.120" target="_blank" rel="external">链接在此</a>.aspx)</p>
+<p>下面就开始倒腾php查询mssql，然后打算用yii2做点测试</p>
+<h3 id="PHP_with_sqlserver">PHP with sqlserver</h3><p>我在Yii2的数据库配置页看到了下面针对SQLServer的三种配置，也不知道哪个好，只有一个一个了解下了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//<span class="string">'dsn'</span> =&gt; <span class="string">'sqlsrv:Server=localhost;Database=mydatabase'</span>, // MS SQL Server, sqlsrv driver</span><br><span class="line">//<span class="string">'dsn'</span> =&gt; <span class="string">'dblib:host=localhost;dbname=mydatabase'</span>, // MS SQL Server, dblib driver</span><br><span class="line">//<span class="string">'dsn'</span> =&gt; <span class="string">'mssql:host=localhost;dbname=mydatabase'</span>, // MS SQL Server, mssql driver</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>sqlsrv php的介绍如下<a href="http://php.net/manual/zh/book.sqlsrv.php，看了一下他主要用于windows平台。" target="_blank" rel="external">http://php.net/manual/zh/book.sqlsrv.php，看了一下他主要用于windows平台。</a></li>
+<li>dblib 这个好像可以支持linux，要安装FreeTDS,windows版本已经弃用了。</li>
+<li>mssql driver 这个确实不知道是指的什么</li>
+</ul>
+<p>查阅资料的过程中发现这个网站介绍挺好的-&gt;<a href="http://propelorm.org/Propel/cookbook/using-mssql-server.html" target="_blank" rel="external">地址</a></p>
+<p>上面的第一个windows下的一个驱动，我倒腾了好久都没成功，十分受伤，刚开始是自己的wamp中的php版本过低，没有支持的相应的sqlsrv的dll文件，然后我又把我的wamp升级到最新，配置相应的dll然后查看phpinfo，phpinfo中没有丝毫反映，网上还说啥只支持32位php，不支持64位的，倒腾好久放弃，试试别的方案。</p>
+<p>第二个驱动支持linux，而我又比较喜欢在linux下开发，我们需要安装FreeTDS，网上看了很多，基本说的要装的如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo apt-get <span class="operator"><span class="keyword">install</span> php5-sybase php5-odbc unixodbc tdsodbc freetds-common freetds-<span class="keyword">bin</span></span></span><br></pre></td></tr></table></figure></p>
+<p>安装完成后可运行命令查看FreeTDS安装状况</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">tsql -<span class="keyword">H</span> 192.168.32.77 -p 1433 -<span class="keyword">U</span> <span class="keyword">sa</span> -<span class="keyword">D</span> <span class="keyword">test</span>   #测试连接</span><br><span class="line">tsql -C  #查看配置</span><br></pre></td></tr></table></figure>
+<p>修改配置文件，我用的是xampp，路径为：<code>/opt/lampp/etc/freetds.conf</code>，默认路径是<code>/etc/freetds/freetds.conf</code><br>添加配置<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[mymssql]</span><br><span class="line">        <span class="variable">host =</span> <span class="number">192.168</span>.<span class="number">32.77</span></span><br><span class="line">        <span class="variable">port =</span> <span class="number">1433</span></span><br><span class="line">        tds <span class="variable">version =</span> <span class="number">7.0</span></span><br></pre></td></tr></table></figure></p>
+<p>然后测试代码如下，测试成功。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="preprocessor">&lt;?php</span></span><br><span class="line"></span><br><span class="line">  <span class="variable">$server</span> = <span class="string">'mymssql'</span>;</span><br><span class="line">  <span class="variable">$username</span> = <span class="string">'sa'</span>;</span><br><span class="line">  <span class="variable">$password</span> = <span class="string">'123'</span>;</span><br><span class="line">  <span class="variable">$database</span> = <span class="string">'test'</span>;</span><br><span class="line">  <span class="variable">$connection</span> = mssql_connect(<span class="variable">$server</span>, <span class="variable">$username</span>, <span class="variable">$password</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(<span class="variable">$connection</span> != <span class="keyword">FALSE</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Connected to the database server OK&lt;br /&gt;"</span>;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"Couldn't connect"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(mssql_select_db(<span class="variable">$database</span>, <span class="variable">$connection</span>))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Selected $database ok&lt;br /&gt;"</span>;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">'Failed to select DB'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="variable">$query_result</span> = mssql_query(<span class="string">'SELECT @@VERSION'</span>);</span><br><span class="line">  <span class="variable">$row</span> = mssql_fetch_array(<span class="variable">$query_result</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(<span class="variable">$row</span> != <span class="keyword">FALSE</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Version is &#123;$row[0]&#125;&lt;br /&gt;"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  mssql_free_result(<span class="variable">$query_result</span>);</span><br><span class="line">  mssql_close(<span class="variable">$connection</span>);</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">?&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>实际测试时，我发现只要安装<code>php5-sybase</code>和<code>freetds-bin</code>就可以连接了。<br>我先在自己的笔记本上倒腾，笔记本用的XAMPP，怎么装上面那段测试代码可以连接mssql，但是phpinfo里面就是没有pdo<em>dblib，然后我重新装了虚拟机，不用套件，一个个装apache2、mysql、php。装好之后又安装<code>php5-sybase</code>和<code>freetds-bin</code>。然后神奇的事情发生了，全都好了。截图如下，如果你装好后，<code>phpinfo()</code>中也包含这些内容就说明成功了<br>&lt;img src=”<a href="https://img.alicdn.com/imgextra/i1/192713264/TB2Hx2KkVXXXXamXXXXXXXXXXXX" target="_blank" rel="external">https://img.alicdn.com/imgextra/i1/192713264/TB2Hx2KkVXXXXamXXXXXXXXXXXX</a></em>!!192713264.png” alt=” mssql.png”/&gt;<br><img src="https://img.alicdn.com/imgextra/i1/192713264/TB2t9PwkVXXXXb_XXXXXXXXXXXX_!!192713264.png" alt=" pdo.png"></p>
+<p>下面使用PDO方式的连接，我们最终目标是使用YII2框架嘛，直接给出测试代码：<br>数据库配置：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'msdb'</span> =&gt; [</span><br><span class="line">    <span class="string">'class'</span> =&gt; <span class="string">'yii\db\Connection'</span>,</span><br><span class="line">    <span class="string">'dsn'</span> =&gt; <span class="string">'dblib:host=192.168.32.77:1433;dbname=test'</span>,</span><br><span class="line">    <span class="string">'username'</span> =&gt; <span class="string">'sa'</span>,</span><br><span class="line">    <span class="string">'password'</span> =&gt; <span class="string">'123'</span>,</span><br><span class="line">    <span class="string">'charset'</span> =&gt; <span class="string">'utf8'</span>,</span><br><span class="line">],</span><br></pre></td></tr></table></figure></p>
+<p>测试代码：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$connection</span> = \<span class="constant">Yii:</span><span class="symbol">:</span><span class="variable">$app</span>-&gt;msdb;</span><br><span class="line"><span class="variable">$connection</span>-&gt;open();</span><br><span class="line"><span class="variable">$command</span> = <span class="variable">$connection</span>-&gt;createCommand(<span class="string">'SELECT * FROM testtable'</span>);</span><br><span class="line"><span class="variable">$posts</span> = <span class="variable">$command</span>-&gt;queryAll();</span><br><span class="line">var_dump(<span class="variable">$posts</span>);</span><br></pre></td></tr></table></figure></p>
+<h2 id="Oracle">Oracle</h2><p>oracle的下载页面-&gt;<a href="http://www.oracle.com/technetwork/cn/database/enterprise-edition/downloads/index.html" target="_blank" rel="external">请猛戳</a>，我下载的版本是11g第二版</p>
+<p>同样的我们需要配置才能用php连接，并操作。我们需要下载配置oracle instant client来连接，下载地址：<a href="http://www.oracle.com/technetwork/cn/database/features/instant-client/index-092537-zhs.html" target="_blank" rel="external">Oracle Database Instant Client</a><br>下载对应版本的instantclient，有两个文件，一个是basic包，一个是SDK包，我下的文件名分别是：instantclient-basic-linux.x64-12.1.0.2.0.zip，instantclient-sdk-linux.x64-12.1.0.2.0.zip。如果你是centos系统，也可以直接下载相应的rpm包直接安装。rpm安装的路径为：<br><code>/usr/lib/oracle/12.1/client64/lib/</code>，我们也将上面两个文件在相同目录下解压，SDK压缩包的内容或解压到basic的子目录下，我们把解压的内容复制到上面的目录中，rpm安装，还会把一些头文件放置到<code>/usr/include/oracle/12.1/client64/</code>中，我们也把sdk下面的子目录里面的头文件拷贝到对应的目录，至此instantclient就安装完成了。</p>
+<h3 id="Oracle_使用">Oracle 使用</h3><p>Oracle还是有点复杂，这里简单写几个SQL语句，备忘<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">user</span> scott account <span class="keyword">lock</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">user</span> scott account <span class="keyword">unlock</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">user</span> scott <span class="keyword">identified</span> <span class="keyword">by</span> grace;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="PHP_with_Oracle">PHP with Oracle</h3><p>下面我们开始安装oci8扩展，我们使用pecl进行安装，如果你安装不了，那就只有下载相应的软件包编译安装了，首先需要安装一些编译安装所需的软件，build-essential提供编译C的一些工具，php5-dev提供phpize等一些工具，至于php-pear就是pecl命令所需的包。<br><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install build-essential</span><br><span class="line">sudo apt-<span class="built_in">get</span> install php5-<span class="built_in">dev</span> php-pear</span><br></pre></td></tr></table></figure></p>
+<p>然后使用pecl安装，这里要注意不能直接使用<code>pecl install oci8</code>，因为这样是直接给php7安装扩展的，我们是5.4安装方法如下：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pecl <span class="keyword">install</span> oci8-<span class="number">2.0</span>.<span class="number">10</span>  <span class="comment">#PHP 5.2 - PHP 5.6</span></span><br></pre></td></tr></table></figure></p>
+<p>然后在php.ini中添加<code>extension=oci8.so</code><br>再一次访问<code>phpinfo()</code>可以看到如下内容则安装成功。<br><img src="https://img.alicdn.com/imgextra/i2/192713264/TB2jF7MkVXXXXb_XXXXXXXXXXXX_!!192713264.png" alt=" oci.png"><br>然后我们可以使用代码测试下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="preprocessor">&lt;?php</span></span><br><span class="line">	<span class="comment">// Create connection to Oracle</span></span><br><span class="line">	<span class="variable">$conn</span> = oci_connect(<span class="string">"system"</span>, <span class="string">"test"</span>, <span class="string">"//192.168.32.77/orcl.test.com"</span>);</span><br><span class="line">	<span class="keyword">if</span> (!<span class="variable">$conn</span>) &#123;</span><br><span class="line">		<span class="variable">$m</span> = oci_error();</span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$m</span>[<span class="string">'message'</span>], <span class="string">"\n"</span>;</span><br><span class="line">		<span class="keyword">exit</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">print</span> <span class="string">"Connected to Oracle!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// Close the Oracle connection</span></span><br><span class="line">	oci_close(<span class="variable">$conn</span>);</span><br><span class="line"><span class="preprocessor">?&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>至于Yii2下直接有这么一个扩展，<a href="http://www.yiiframework.com/extension/yii2-osi8pdo" target="_blank" rel="external">yii2-osi8pdo</a>，扩展的使用不在本文的范围内。</p>
+<h2 id="写在最后">写在最后</h2><p>妈蛋的，受不了了，安个mssql的扩展windows搞，搞不定。linux搞，搞不定。网上的文章各种抄，各种过期的东西，真是日了狗，鄙视一切胡乱抄写，胡乱转载的行为</p>
+<h3 id="参考链接">参考链接</h3><ul>
+<li><a href="https://help.ubuntu.com/community/PHPOracle" target="_blank" rel="external">https://help.ubuntu.com/community/PHPOracle</a></li>
+<li><a href="http://www.oracle.com/technetwork/articles/technote-php-instant-084410.html" target="_blank" rel="external">http://www.oracle.com/technetwork/articles/technote-php-instant-084410.html</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>没怎么用过SQLSERVER和Oracle，但是又有奇怪的需求要实现在一台电脑上同时安装三种数据库，并查询其中数据，无奈只好倒腾一下<br>由于sqlserver要装在windows机器上，所以我打算把这三个系统都装在server2008上，装起来感觉也简单点。</p>]]>
+    
+    </summary>
+    
+      <category term="Oracle" scheme="http://ohroot.com/tags/Oracle/"/>
+    
+      <category term="Yii" scheme="http://ohroot.com/tags/Yii/"/>
+    
+      <category term="mssql" scheme="http://ohroot.com/tags/mssql/"/>
+    
+      <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[linux设置开机自启动]]></title>
@@ -607,54 +663,6 @@
     <![CDATA[<a id="more"></a>
 <p>Ubuntu下安装的Mongodb默认开机自启动，在自己的开发环境下很不喜欢这样，这里给出取消开机自启动的方法</p>
 <h2 id="配置方法">配置方法</h2><p>修改配置文件：<code>vim /etc/init/mongod]]>
-    </summary>
-    
-      <category term="Mongodb" scheme="http://ohroot.com/tags/Mongodb/"/>
-    
-      <category term="数据库" scheme="http://ohroot.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Mongodb安装笔记]]></title>
-    <link href="http://ohroot.com/2015/03/11/Mongodb%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/"/>
-    <id>http://ohroot.com/2015/03/11/Mongodb安装笔记/</id>
-    <published>2015-03-11T11:05:48.000Z</published>
-    <updated>2015-12-24T12:38:45.000Z</updated>
-    <content type="html"><![CDATA[<p>Mongodb初探<br><a id="more"></a><br>本文主要讲述ubuntu下安装Mongodb的简明教程</p>
-<h2 id="安装Mongodb">安装Mongodb</h2><p>执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:<span class="number">80</span> --recv <span class="number">7</span>F0CEB10</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"deb http://repo.mongodb.org/apt/ubuntu "</span>$(lsb_release -sc)<span class="string">"/mongodb-org/3.0 multiverse"</span> | sudo tee /etc/apt/sources.list.d/mongodb-org-<span class="number">3.0</span>.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install -y mongodb-org</span><br></pre></td></tr></table></figure></p>
-<h2 id="简单使用">简单使用</h2><p>MongoDB默认数据存储位置：<code>/var/lib/mongodb</code>，日志文件存储位置：<code>/var/log/mongodb</code>，配置文件位置：<code>/etc/mongod.conf</code>，可在配置文件中修改数据存储位置和日志文件存储位置。MongoDB默认的端口号为：27017。</p>
-<ul>
-<li>启用mongodb：<code>sudo service mongod start</code></li>
-<li>停用mongodb：<code>sudo service mongod stop</code></li>
-<li>重启mongodb：<code>sudo service mongod restart</code></li>
-</ul>
-<h2 id="MongoDB_的未授权访问漏洞">MongoDB 的未授权访问漏洞</h2><p>未授权访问漏洞成因：Mongodb 在启动的时候提供了很多参数，如日志记录到哪个文件夹，是否开启认证等。造成未授权访问的根本原因就在于启动Mongodb的时候未设置 —auth 也很少会有人会给数据库添加上账号密码（默认空口令，它像一张白纸，需要管理员自己去涂写账号)，使用默认空口令这将导致任何人无需进行账号认证就可以登陆到数据服务器。</p>
-<h3 id="解决方法">解决方法</h3><ul>
-<li>使用 iptables 控制端口 27017 (默认端口) 的访问;</li>
-<li>auth 模式下运行 mongodb;</li>
-</ul>
-<h4 id="开启_MongoDB授权">开启 MongoDB授权</h4><ol>
-<li><p>添加一个管理员用户</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt; use admin</span><br><span class="line">&gt; db.createUser( </span><br><span class="line">&#123; </span><br><span class="line">    user: <span class="string">"root"</span>, </span><br><span class="line">    <span class="built_in">pwd</span>: <span class="string">"YOUR PASSWORD"</span>, </span><br><span class="line">    roles: </span><br><span class="line">    [ </span><br><span class="line">      &#123; </span><br><span class="line">        role: <span class="string">"userAdminAnyDatabase"</span>, </span><br><span class="line">        db: <span class="string">"admin"</span> </span><br><span class="line">      &#125; </span><br><span class="line">    ] </span><br><span class="line">  &#125; </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>授权模式下运行 mongod</p>
-</li>
-</ol>
-<ul>
-<li><p>先停止服务:<code>$ sudo service mongod stop</code>。</p>
-</li>
-<li><p>编辑<code>/etc/mongod.conf</code>文件, 找到 <code>#auth=true</code> , 去掉注释。</p>
-</li>
-<li><p>重新运行服务:<code>$ sudo service mongod start</code>。</p>
-</li>
-<li><p>登录：<code>mongo admin -u 用户名 -p  密码 --port 端口号</code>。</p>
-</li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>Mongodb初探<br>]]>
-    
     </summary>
     
       <category term="Mongodb" scheme="http://ohroot.com/tags/Mongodb/"/>
