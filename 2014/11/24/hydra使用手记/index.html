@@ -141,27 +141,8 @@
     
       <p>听说hydra这个工具很好用，自己一直没探索过，以前做Dsploit二次开发的时候就晓得了这个强大的工具，今天试玩一下。<br><a id="more"></a></p>
 <p>简明试玩手记，就不讲述怎么安装云云了</p>
-<h2 id="参数说明">参数说明</h2><pre><code>hydra [[[-l LOGIN|-L FILE] [-p PASS|-P FILE]] | [-C FILE]] [-e ns]
-[-o FILE] [-t TASKS] [-M FILE [-T TASKS]] [-w TIME] [-f] [-s PORT] [-S] [-vV] server service [OPT]
--<span class="ruby"><span class="constant">R</span> 继续从上一次进度接着破解。
-</span>-<span class="ruby"><span class="constant">S</span> 采用<span class="constant">SSL</span>链接。
-</span>-<span class="ruby">s <span class="constant">PORT</span> 可通过这个参数指定非默认端口。
-</span>-<span class="ruby">l <span class="constant">LOGIN</span> 指定破解的用户，对特定用户破解。
-</span>-<span class="ruby"><span class="constant">L</span> <span class="constant">FILE</span> 指定用户名字典。
-</span>-<span class="ruby">p <span class="constant">PASS</span> 小写，指定密码破解，少用，一般是采用密码字典。
-</span>-<span class="ruby"><span class="constant">P</span> <span class="constant">FILE</span> 大写，指定密码字典。
-</span>-<span class="ruby">e ns 可选选项，n：空密码试探，s：使用指定用户和密码试探。
-</span>-<span class="ruby"><span class="constant">C</span> <span class="constant">FILE</span> 使用冒号分割格式，例如“登录名<span class="symbol">:</span>密码”来代替-<span class="constant">L</span>/-<span class="constant">P</span>参数。
-</span>-<span class="ruby"><span class="constant">M</span> <span class="constant">FILE</span> 指定目标列表文件一行一条。
-</span>-<span class="ruby">o <span class="constant">FILE</span> 指定结果输出文件。
-</span>-<span class="ruby">f 在使用-<span class="constant">M</span>参数以后，找到第一对登录名或者密码的时候中止破解。
-</span>-<span class="ruby">t <span class="constant">TASKS</span> 同时运行的线程数，默认为<span class="number">16</span>。
-</span>-<span class="ruby">w <span class="constant">TIME</span> 设置最大超时的时间，单位秒，默认是<span class="number">30</span>s。
-</span>-<span class="ruby">v / -<span class="constant">V</span> 显示详细过程。
-</span>server 目标ip
-service 指定服务名，支持的服务和协议：telnet ftp pop3[-ntlm] imap[-ntlm] smb smbnt http-{head|get} http-{get|post}-form http-proxy cisco cisco-enable vnc ldap2 ldap3 mssql mysql oracle-listener postgres nntp socks5 rexec rlogin pcnfs snmp rsh cvs svn icq sapr3 ssh smtp-auth[-ntlm] pcanywhere teamspeak sip vmauthd firebird ncp afp等等。
-OPT 可选项
-</code></pre><h2 id="测试实例">测试实例</h2><ol>
+<h2 id="参数说明">参数说明</h2><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">hydra [[[-l LOGIN|-L FILE] [-p PASS|-P FILE]] | [-C FILE]] [-e ns]</span><br><span class="line">[-o FILE] [-t TASKS] [-M FILE [-T TASKS]] [-w TIME] [-f] [-s PORT] [-S] [-vV] server service [OPT]</span><br><span class="line">-<span class="ruby"><span class="constant">R</span> 继续从上一次进度接着破解。</span><br><span class="line"></span>-<span class="ruby"><span class="constant">S</span> 采用<span class="constant">SSL</span>链接。</span><br><span class="line"></span>-<span class="ruby">s <span class="constant">PORT</span> 可通过这个参数指定非默认端口。</span><br><span class="line"></span>-<span class="ruby">l <span class="constant">LOGIN</span> 指定破解的用户，对特定用户破解。</span><br><span class="line"></span>-<span class="ruby"><span class="constant">L</span> <span class="constant">FILE</span> 指定用户名字典。</span><br><span class="line"></span>-<span class="ruby">p <span class="constant">PASS</span> 小写，指定密码破解，少用，一般是采用密码字典。</span><br><span class="line"></span>-<span class="ruby"><span class="constant">P</span> <span class="constant">FILE</span> 大写，指定密码字典。</span><br><span class="line"></span>-<span class="ruby">e ns 可选选项，n：空密码试探，s：使用指定用户和密码试探。</span><br><span class="line"></span>-<span class="ruby"><span class="constant">C</span> <span class="constant">FILE</span> 使用冒号分割格式，例如“登录名<span class="symbol">:</span>密码”来代替-<span class="constant">L</span>/-<span class="constant">P</span>参数。</span><br><span class="line"></span>-<span class="ruby"><span class="constant">M</span> <span class="constant">FILE</span> 指定目标列表文件一行一条。</span><br><span class="line"></span>-<span class="ruby">o <span class="constant">FILE</span> 指定结果输出文件。</span><br><span class="line"></span>-<span class="ruby">f 在使用-<span class="constant">M</span>参数以后，找到第一对登录名或者密码的时候中止破解。</span><br><span class="line"></span>-<span class="ruby">t <span class="constant">TASKS</span> 同时运行的线程数，默认为<span class="number">16</span>。</span><br><span class="line"></span>-<span class="ruby">w <span class="constant">TIME</span> 设置最大超时的时间，单位秒，默认是<span class="number">30</span>s。</span><br><span class="line"></span>-<span class="ruby">v / -<span class="constant">V</span> 显示详细过程。</span><br><span class="line"></span>server 目标ip</span><br><span class="line">service 指定服务名，支持的服务和协议：telnet ftp pop3[-ntlm] imap[-ntlm] smb smbnt http-&#123;head|get&#125; http-&#123;get|post&#125;-form http-proxy cisco cisco-enable vnc ldap2 ldap3 mssql mysql oracle-listener postgres nntp socks5 rexec rlogin pcnfs snmp rsh cvs svn icq sapr3 ssh smtp-auth[-ntlm] pcanywhere teamspeak sip vmauthd firebird ncp afp等等。</span><br><span class="line">OPT 可选项</span><br></pre></td></tr></table></figure>
+<h2 id="测试实例">测试实例</h2><ol>
 <li><p>破解ssh：(测试成功)<br><code>hydra ip ssh -l 用户名 -P 密码字典 -t 线程 -o save.log -vV</code></p>
 </li>
 <li><p>破解ftp：(测试成功)<br><code>hydra ip ftp -l 用户名 -P 密码字典 -t 线程(默认16) -vV</code></p>
