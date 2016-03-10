@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Valar dohaeris]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2016-03-05T02:54:02.568Z</updated>
+  <updated>2016-03-10T13:05:22.069Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -13,6 +13,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[WPScan使用笔记]]></title>
+    <link href="http://ohroot.com/2016/03/10/wpscan-usage/"/>
+    <id>http://ohroot.com/2016/03/10/wpscan-usage/</id>
+    <published>2016-03-10T13:02:40.000Z</published>
+    <updated>2016-03-10T13:05:22.069Z</updated>
+    <content type="html"><![CDATA[<p>这是一款Wordpress的专用扫描器，Wordpress作为三大建站模板之一，在全世界范围内有大量的用户，这也导致白帽子都回去跟踪wordpress的安全漏洞，Wordpress自诞生起也出现了很多漏洞。Wordpress还可以使用插件、主题。于是Wordpress本身很难挖掘什么安全问题的时候，安全研究者开始研究其插件、主题的漏洞。通过插件、主题的漏洞去渗透Wordpress站点，于是WPScan应运而生，收集Wordpress的各种漏洞，形成一个Wordpress专用扫描器。<br><a id="more"></a><br>该扫描器可以实现获取站点用户名，获取安装的所有插件、主题，以及存在漏洞的插件、主题，并提供漏洞信息。同时还可以实现对未加防护的Wordpress站点暴力破解用户名密码。</p>
+<h2 id="参数选项">参数选项</h2><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">-update                           更新数据库</span><br><span class="line"></span>-<span class="ruby">-url       | -u &lt;target url&gt;      配置扫描<span class="constant">URL</span></span><br><span class="line"></span>-<span class="ruby">-force     | -f                   强制让wpscan不要验证目标是否是wordpress</span><br><span class="line"></span>-<span class="ruby">-enumerate | -e [option(s)]       枚举信息</span><br><span class="line"></span>  选项:</span><br><span class="line">    u                              枚举用户名，默认从1-10</span><br><span class="line">    u[10-20]                       枚举用户名，配置从10-20</span><br><span class="line">    p                              枚举插件</span><br><span class="line">    vp                             只枚举有漏洞的插件</span><br><span class="line">    ap                             枚举所有插件，时间较长</span><br><span class="line">    tt                             列举缩略图相关的文件</span><br><span class="line">    t                              枚举主题信息</span><br><span class="line">    vt                             只枚举存在漏洞的主题</span><br><span class="line">    at                             枚举所有主题，时间较长</span><br><span class="line">  可以指定多个扫描选项，例："-e tt,p"</span><br><span class="line">  如果没有指定选项，默认选项为："vt,tt,u,vp"</span><br><span class="line"></span><br><span class="line">-<span class="ruby">-exclude-content-based <span class="string">"&lt;regexp or string&gt;"</span></span><br><span class="line"></span>                                   当使用枚举选项时，可以使用该参数做一些过滤，基于正则或者字符串，可以不写正则分隔符，但要用单引号或双引号包裹</span><br><span class="line">-<span class="ruby">-config-file  | -c &lt;config file&gt;   使用指定的配置文件</span><br><span class="line"></span>-<span class="ruby">-user-agent   | -a &lt;<span class="constant">User</span>-<span class="constant">Agent</span>&gt;    指定<span class="constant">User</span>-<span class="constant">Agent</span></span><br><span class="line"></span>-<span class="ruby">-cookie &lt;<span class="constant">String</span>&gt;                   指定cookie</span><br><span class="line"></span>-<span class="ruby">-random-agent | -r                 使用随机<span class="constant">User</span>-<span class="constant">Agent</span></span><br><span class="line"></span>-<span class="ruby">-follow-redirection                如果目标包含一个重定向，则直接跟随跳转</span><br><span class="line"></span>-<span class="ruby">-batch                             无需用户交互，都使用默认行为</span><br><span class="line"></span>-<span class="ruby">-no-color                          不要采用彩色输出</span><br><span class="line"></span>-<span class="ruby">-wp-content-dir &lt;wp content dir&gt;   <span class="constant">WPScan</span>会去发现wp-content目录，用户可手动指定</span><br><span class="line"></span>-<span class="ruby">-wp-plugins-dir &lt;wp plugins dir&gt;   指定wp插件目录，默认是wp-content/plugins</span><br><span class="line"></span>-<span class="ruby">-proxy &lt;[<span class="symbol">protocol:</span>/<span class="regexp">/]host:port&gt;    设置一个代理，可以使用HTTP、SOCKS4、SOCKS4A、SOCKS5，如果未设置默认是HTTP协议</span><br><span class="line"></span></span>-<span class="ruby">-proxy-auth &lt;<span class="symbol">username:</span>password&gt;    设置代理登陆信息</span><br><span class="line"></span>-<span class="ruby">-basic-auth &lt;<span class="symbol">username:</span>password&gt;    设置基础认证信息</span><br><span class="line"></span>-<span class="ruby">-wordlist | -w &lt;wordlist&gt;          指定密码字典</span><br><span class="line"></span>-<span class="ruby">-username | -<span class="constant">U</span> &lt;username&gt;          指定爆破的用户名</span><br><span class="line"></span>-<span class="ruby">-usernames     &lt;path-to-file&gt;      指定爆破用户名字典</span><br><span class="line"></span>-<span class="ruby">-threads  | -t &lt;number of threads&gt; 指定多线程</span><br><span class="line"></span>-<span class="ruby">-cache-ttl       &lt;cache-ttl&gt;       设置 cache <span class="constant">TTL</span>.</span><br><span class="line"></span>-<span class="ruby">-request-timeout &lt;request-timeout&gt; 请求超时时间</span><br><span class="line"></span>-<span class="ruby">-connect-timeout &lt;connect-timeout&gt; 连接超时时间</span><br><span class="line"></span>-<span class="ruby">-max-threads     &lt;max-threads&gt;     最大线程数</span><br><span class="line"></span>-<span class="ruby">-throttle        &lt;milliseconds&gt;    当线程数设置为<span class="number">1</span>时，设置两个请求之间的间隔</span><br><span class="line"></span>-<span class="ruby">-help     | -h                     输出帮助信息</span><br><span class="line"></span>-<span class="ruby">-verbose  | -v                     输出<span class="constant">Verbose</span></span><br><span class="line"></span>-<span class="ruby">-version                           输出当前版本</span></span><br></pre></td></tr></table></figure>
+<h2 id="常用选项">常用选项</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#非入侵式检测</span><br><span class="line">wpscan -u www<span class="class">.example</span><span class="class">.com</span></span><br><span class="line">#默认选项枚举信息</span><br><span class="line">wpscan -u www<span class="class">.example</span><span class="class">.com</span> -e</span><br><span class="line">#枚举插件信息</span><br><span class="line">wpscan -u www<span class="class">.example</span><span class="class">.com</span> -e <span class="tag">p</span></span><br><span class="line">#爆破用户名admin的密码</span><br><span class="line">wpscan -u www<span class="class">.example</span><span class="class">.com</span> --wordlist darkc0de<span class="class">.lst</span> --username admin --threads <span class="number">50</span></span><br></pre></td></tr></table></figure>
+<h2 id="安全加固">安全加固</h2><h3 id="如何避免WordPress用户被枚举">如何避免WordPress用户被枚举</h3><p>枚举用户的原理，<a href="http://www.example.com/?author=1，替换后面的数字即可枚举用户" target="_blank" rel="external">http://www.example.com/?author=1，替换后面的数字即可枚举用户</a><br>如果你想要避免WordPress用户列表被列举，不要把用户名作为昵称，并且不要使用已经被大众知道的用户名。最好的方式是选择一个包含随机字符的名字做用户名并且使用其他名字作为昵称。WPScan扫描URL来获取用户名，所以如果你不使用这个用户名，你肯定不会被WPScan搜索到。</p>
+<h3 id="功能如何避免WordPress密码被暴力破解">功能如何避免WordPress密码被暴力破解</h3><p>最好的方式避免暴力破解就是限制登录次数和IP地址。最新版本的WordPress默认有这个选项。确保你限制输入条目最大为3，增加锁定功能（即6次密码尝试就上锁）。</p>
+<p>参考链接：</p>
+<ul>
+<li><a href="http://www.freebuf.com/tools/88653.html" target="_blank" rel="external">http://www.freebuf.com/tools/88653.html</a></li>
+<li>官网：<a href="http://wpscan.org/" target="_blank" rel="external">http://wpscan.org/</a></li>
+<li>github：<a href="https://github.com/wpscanteam/wpscan" target="_blank" rel="external">https://github.com/wpscanteam/wpscan</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>这是一款Wordpress的专用扫描器，Wordpress作为三大建站模板之一，在全世界范围内有大量的用户，这也导致白帽子都回去跟踪wordpress的安全漏洞，Wordpress自诞生起也出现了很多漏洞。Wordpress还可以使用插件、主题。于是Wordpress本身很难挖掘什么安全问题的时候，安全研究者开始研究其插件、主题的漏洞。通过插件、主题的漏洞去渗透Wordpress站点，于是WPScan应运而生，收集Wordpress的各种漏洞，形成一个Wordpress专用扫描器。<br>]]>
+    
+    </summary>
+    
+      <category term="渗透测试" scheme="http://ohroot.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="工具使用" scheme="http://ohroot.com/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Yii2和sqlserver2014以及oracle的故事]]></title>
@@ -642,30 +671,6 @@
     </summary>
     
       <category term="mysql" scheme="http://ohroot.com/tags/mysql/"/>
-    
-      <category term="数据库" scheme="http://ohroot.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Mongodb取消开机自启动]]></title>
-    <link href="http://ohroot.com/2015/03/11/Mongodb%E5%8F%96%E6%B6%88%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/"/>
-    <id>http://ohroot.com/2015/03/11/Mongodb取消开机自启动/</id>
-    <published>2015-03-11T11:07:27.000Z</published>
-    <updated>2015-12-24T12:38:46.000Z</updated>
-    <content type="html"><![CDATA[<a id="more"></a>
-<p>Ubuntu下安装的Mongodb默认开机自启动，在自己的开发环境下很不喜欢这样，这里给出取消开机自启动的方法</p>
-<h2 id="配置方法">配置方法</h2><p>修改配置文件：<code>vim /etc/init/mongod.conf</code>，因为Ubuntu默认启动工作在runlevel2，则将配置文件中：<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">start</span> <span class="literal">on</span> runlevel<span class="sqbracket"> [2345]</span></span><br><span class="line"><span class="keyword">stop</span> <span class="literal">on</span> runlevel<span class="sqbracket"> [06]</span></span><br></pre></td></tr></table></figure></p>
-<p>改成<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">start</span> <span class="literal">on</span> runlevel<span class="sqbracket"> [345]</span></span><br><span class="line"><span class="keyword">stop</span> <span class="literal">on</span> runlevel<span class="sqbracket"> [026]</span></span><br></pre></td></tr></table></figure></p>
-<p>mysql取消开机自启动的方法也是类似的。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<a id="more"></a>
-<p>Ubuntu下安装的Mongodb默认开机自启动，在自己的开发环境下很不喜欢这样，这里给出取消开机自启动的方法</p>
-<h2 id="配置方法">配置方法</h2><p>修改配置文件：<code>vim /etc/init/mongod]]>
-    </summary>
-    
-      <category term="Mongodb" scheme="http://ohroot.com/tags/Mongodb/"/>
     
       <category term="数据库" scheme="http://ohroot.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
