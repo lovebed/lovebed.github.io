@@ -160,7 +160,10 @@
 <li>将<code>#listen_addresses = &#39;localhost&#39;</code>改为<code>listen_addresses = &#39;*&#39;</code></li>
 </ul>
 </li>
-<li>编辑<code>/etc/postgresql/9.4/main/pg_hba.conf</code>，并在文档末尾加上以下内容<code>host all all 0.0.0.0 0.0.0.0 md5</code></li>
+<li>编辑<code>/etc/postgresql/9.4/main/pg_hba.conf</code><ul>
+<li>在文档末尾加上以下内容<code>host all all 0.0.0.0 0.0.0.0 md5</code></li>
+</ul>
+</li>
 <li>重启PostgreSQL数据库</li>
 </ul>
 <h2 id="导入数据">导入数据</h2><p>命令行下执行如下命令，可将相应SQL文件导入到数据库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -h localhost  <span class="operator">-d</span> databaseName  -U username <span class="operator">-f</span>  filename</span><br></pre></td></tr></table></figure></p>
