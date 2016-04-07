@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Valar dohaeris]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2016-04-07T09:55:41.961Z</updated>
+  <updated>2016-04-07T09:57:45.844Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -19,12 +19,12 @@
     <link href="http://ohroot.com/2016/04/07/about-machine-learning/"/>
     <id>http://ohroot.com/2016/04/07/about-machine-learning/</id>
     <published>2016-04-07T09:10:44.000Z</published>
-    <updated>2016-04-07T09:55:41.961Z</updated>
+    <updated>2016-04-07T09:57:45.844Z</updated>
     <content type="html"><![CDATA[<a id="more"></a>
 <p>最近很苦恼，很苦恼，学习了很多理论知识，然而却感觉并没有神码卵用</p>
 <p>对于一个搞Web安全的，迈不过毕业小论文的坎，更逃不过自己的毕业论文，于是我决定研究下机器学习算法，这是这东西让我感觉苦海无边。</p>
 <p>学习路线还是学习了<strong>机器学习实战</strong>那本书，通读了分类算法和聚类算法，因为我的一些idea永不到回归方法所以并未去研究（也是因为看不懂，不想看，数学渣，真可怜）</p>
-<p><img src="https://img3.doubanio.com/lpic/s26696371.jpg" width="324" height="408" alt="图片名称" align="center"></p>
+<p><img src="https://img3.doubanio.com/lpic/s26696371.jpg" width="50%" height="50%" alt="图片名称" align="center"></p>
 <p>然后，发现这些算法还是解决不了自己的问题，又在网上找资料看论文，看到了有个层次聚类算法好像可以解决我的问题，可是书上都没提过这个算法，无奈只好网上找资料。逛了一天还是只是了解其原理，又顺便了解了很多知识，例如什么谱聚类，什么DBSCAN，都是大概了解其原理</p>
 <p>无奈想起ourren给我分享过的<a href="http://scikit-learn.org/stable/" target="_blank" rel="external">scikit-learn</a>,据说可以不用太了解具体算法原理也可以解决自己的问题。好吧，听起来正符合我的需求，解决问题！！然后开始阅读文档，才发现算法好多啊，好多啊，好多啊… 英语有点读不懂啊，读不懂啊…</p>
 <p>然而看scikit-learn的文档我还是了解了整个机器学习体系的，就在文档的<a href="http://scikit-learn.org/stable/tutorial/basic/tutorial.html" target="_blank" rel="external">Quick Start</a>页面，机器学习主要分为监督学习和无监督学习。其中监督学习中的训练数据都具有分类标签，它又可分为分类方法和回归方法，其中分类算法就是很常见的，将一些有标签的样本进行训练，然后有未分类的数据，可实现对未分类数据判别分类。而回归方法据说是用于输出是一个或者多个连续的变量。无监督学习是我研究的重点，我的数据都是没有便签的，而聚类方法就是将相似的样本聚成一个样本集形成一个个新的分类。无监督学习也包括聚类、密度估计等多种方法。</p>
