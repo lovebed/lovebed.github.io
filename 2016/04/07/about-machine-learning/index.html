@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>机器学习之瞎BB | 半饱和</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="机器学习," />
+  
+
+  <meta name="description" content="最近很苦恼，很苦恼，学习了很多理论知识，然而却感觉并没有神码卵用
+对于一个搞Web安全的，迈不过毕业小论文的坎，更逃不过自己的毕业论文，于是我决定研究下机器学习算法，这是这东西让我感觉苦海无边。
+学习路线还是学习了机器学习实战那本书，通读了分类算法和聚类算法，因为我的一些idea永不到回归方法所以并未去研究（也是因为看不懂，不想看，数学渣，真可怜）
+
+然后，发现这些算法还是解决不了自己的问题，又在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习之瞎BB">
+<meta property="og:url" content="http://ohroot.com/2016/04/07/about-machine-learning/index.html">
+<meta property="og:site_name" content="半饱和">
+<meta property="og:description" content="最近很苦恼，很苦恼，学习了很多理论知识，然而却感觉并没有神码卵用
+对于一个搞Web安全的，迈不过毕业小论文的坎，更逃不过自己的毕业论文，于是我决定研究下机器学习算法，这是这东西让我感觉苦海无边。
+学习路线还是学习了机器学习实战那本书，通读了分类算法和聚类算法，因为我的一些idea永不到回归方法所以并未去研究（也是因为看不懂，不想看，数学渣，真可怜）
+
+然后，发现这些算法还是解决不了自己的问题，又在">
+<meta property="og:image" content="https://img3.doubanio.com/lpic/s26696371.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习之瞎BB">
+<meta name="twitter:description" content="最近很苦恼，很苦恼，学习了很多理论知识，然而却感觉并没有神码卵用
+对于一个搞Web安全的，迈不过毕业小论文的坎，更逃不过自己的毕业论文，于是我决定研究下机器学习算法，这是这东西让我感觉苦海无边。
+学习路线还是学习了机器学习实战那本书，通读了分类算法和聚类算法，因为我的一些idea永不到回归方法所以并未去研究（也是因为看不懂，不想看，数学渣，真可怜）
+
+然后，发现这些算法还是解决不了自己的问题，又在">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8f194a78c11f76027a96c6ec87298c62";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry hint hint--left" data-hint="点击返回首页" href="/">盒子</a>
+    <ul class="list-toolbox">
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/">博客</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/">分类</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/">标签</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/urls/">安全圈</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/">友链</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/">关于</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml">RSS</a>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+
+</div>
+
+ 
+
+ <a class="back-top" href="#">
+  <i class="icon-angle-up"></i>
+</a>
+
+
+<div class="content-post CENTER">
+   <article id="post-about-machine-learning" class="article article-type-post" itemscope itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">机器学习之瞎BB</h1>
+
+    <div class="article-meta">
+      <span>2016-04-07</span>
+
+      <span> | </span>
+
+      <span class="article-author">Direwolf</span>
+
+      <span> | </span>
+
+      
+  <span class="article-category">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+  </span>
+
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <a id="more"></a>
+<p>最近很苦恼，很苦恼，学习了很多理论知识，然而却感觉并没有神码卵用</p>
+<p>对于一个搞Web安全的，迈不过毕业小论文的坎，更逃不过自己的毕业论文，于是我决定研究下机器学习算法，这是这东西让我感觉苦海无边。</p>
+<p>学习路线还是学习了<strong>机器学习实战</strong>那本书，通读了分类算法和聚类算法，因为我的一些idea永不到回归方法所以并未去研究（也是因为看不懂，不想看，数学渣，真可怜）</p>
+<p><img src="https://img3.doubanio.com/lpic/s26696371.jpg" alt=""></p>
+<p>然后，发现这些算法还是解决不了自己的问题，又在网上找资料看论文，看到了有个层次聚类算法好像可以解决我的问题，可是书上都没提过这个算法，无奈只好网上找资料。逛了一天还是只是了解其原理，又顺便了解了很多知识，例如什么谱聚类，什么DBSCAN，都是大概了解其原理</p>
+<p>无奈想起ourren给我分享过的<a href="http://scikit-learn.org/stable/" target="_blank" rel="external">scikit-learn</a>,据说可以不用太了解具体算法原理也可以解决自己的问题。好吧，听起来正符合我的需求，解决问题！！然后开始阅读文档，才发现算法好多啊，好多啊，好多啊… 英语有点读不懂啊，读不懂啊…</p>
+<p>然而看scikit-learn的文档我还是了解了整个机器学习体系的，就在文档的<a href="http://scikit-learn.org/stable/tutorial/basic/tutorial.html" target="_blank" rel="external">Quick Start</a>页面，机器学习主要分为监督学习和无监督学习。其中监督学习中的训练数据都具有分类标签，它又可分为分类方法和回归方法，其中分类算法就是很常见的，将一些有标签的样本进行训练，然后有未分类的数据，可实现对未分类数据判别分类。而回归方法据说是用于输出是一个或者多个连续的变量。无监督学习是我研究的重点，我的数据都是没有便签的，而聚类方法就是将相似的样本聚成一个样本集形成一个个新的分类。无监督学习也包括聚类、密度估计等多种方法。</p>
+<p>说了这么多，也不能解决我的问题，继续看文档去了，但是我可以感觉到<a href="http://scikit-learn.org/stable/modules/clustering.html#hierarchical-clustering" target="_blank" rel="external">Hierarchical clustering</a>应该可以解决我的问题。看文档去了</p>
+
+    
+  </div>
+</article>
+
+
+
+
+
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="" data-title="机器学习之瞎BB" data-url="http://ohroot.com/2016/04/07/about-machine-learning/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+</div>
+
+  
+
+  
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+</body>
+</html>
