@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ohroot.com/2016/04/12/hexo-deploy-with-github-and-coding/</loc>
+    <lastmod>2016-04-12T07:46:55.948Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ohroot.com/2016/04/07/about-machine-learning/</loc>
     <lastmod>2016-04-07T10:01:38.480Z</lastmod>
   </url>
@@ -49,11 +54,6 @@
   <url>
     <loc>http://ohroot.com/category/index.html</loc>
     <lastmod>2016-03-04T03:17:55.660Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ohroot.com/2014/12/19/ubuntu%E5%AE%89%E8%A3%85nodejs/</loc>
-    <lastmod>2015-12-24T12:38:46.000Z</lastmod>
   </url>
   
   <url>
@@ -152,6 +152,11 @@
   </url>
   
   <url>
+    <loc>http://ohroot.com/2014/09/21/Android%E5%9C%A8ubuntu%E4%B8%8B%E7%9C%9F%E6%9C%BA%E8%B0%83%E8%AF%95/</loc>
+    <lastmod>2015-12-24T12:38:46.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ohroot.com/2015/03/11/Mongodb%E5%8F%96%E6%B6%88%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/</loc>
     <lastmod>2015-12-24T12:38:46.000Z</lastmod>
   </url>
@@ -172,7 +177,7 @@
   </url>
   
   <url>
-    <loc>http://ohroot.com/2014/09/21/Android%E5%9C%A8ubuntu%E4%B8%8B%E7%9C%9F%E6%9C%BA%E8%B0%83%E8%AF%95/</loc>
+    <loc>http://ohroot.com/2014/12/19/ubuntu%E5%AE%89%E8%A3%85nodejs/</loc>
     <lastmod>2015-12-24T12:38:46.000Z</lastmod>
   </url>
   

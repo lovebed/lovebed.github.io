@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Valar dohaeris]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2016-04-07T10:01:38.480Z</updated>
+  <updated>2016-04-12T07:46:55.948Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -13,6 +13,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[hexo部署在github和coding进行分流]]></title>
+    <link href="http://ohroot.com/2016/04/12/hexo-deploy-with-github-and-coding/"/>
+    <id>http://ohroot.com/2016/04/12/hexo-deploy-with-github-and-coding/</id>
+    <published>2016-04-12T07:17:43.000Z</published>
+    <updated>2016-04-12T07:46:55.948Z</updated>
+    <content type="html"><![CDATA[<a id="more"></a>
+<p>本文主要描述将hexo博客同时搭建在github和coding上，并实现分流，使得国内用户访问时访问的是coding上的博客，国外用户访问时访问的是github上的博客</p>
+<p>首先贴出<code>_config.yml</code>中的配置，使得<code>hexo d</code>部署的时候可以同时将代码推送到github和coding。<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">- <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:username/username.github.io.git</span><br><span class="line">- <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: git<span class="variable">@git</span>.coding.<span class="attribute">net</span>:username/username.git</span><br><span class="line">  <span class="attribute">branch</span>: gitcafe-pages</span><br></pre></td></tr></table></figure></p>
+<p>我以前国内使用的是gitcafe，后来gitcafe被coding收购了又迁到coding，所以你的上述配置可能需要稍作修改。</p>
+<p>刚开始我做的分流是主域名解析到github然后，www子域名解析到coding，这个方案显然不好。</p>
+<p>后来，我发现在godaddy上域名解析有点慢，就把域名解析迁移到dnspod上了，这个方法不详述，可查看<a href="https://support.dnspod.cn/Kb/showarticle/tsid/28" target="_blank" rel="external">官方文档</a>。</p>
+<p>然后呢，dnspod域名解析和godaddy上有些不一样，它可以指定国内国外，如下图所示<br><img src="https://img.alicdn.com/imgextra/i4/192713264/TB20vIpmVXXXXaHXXXXXXXXXXXX_!!192713264.png" alt=" dnspod.png"><br>将域名设置两个cname，一个指向国内，一个指向国外，就搞定了</p>
+<p>设置好之后我们最好还是要测试下，推荐一个小工具特别好用：MTR</p>
+<p>windows下可以使用<a href="https://sourceforge.net/projects/winmtr/" target="_blank" rel="external">&gt;&gt;这个&lt;&lt;</a></p>
+<p>Linux下安装<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="operator"><span class="keyword">install</span> mtr</span><br><span class="line">apt-<span class="keyword">get</span> <span class="keyword">install</span> mtr-tiny</span></span><br></pre></td></tr></table></figure></p>
+<p>使用方法就不详细说了，直接help查看就知道咋用了。这东西就类似tracert，好不好用，用了就知道。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<a id="more"></a>
+<p>本文主要描述将hexo博客同时搭建在github和coding上，并实现分流，使得国内用户访问时访问的是coding上的博客，国外用户访问时访问的是github上的博客</p>
+<p>首先贴出<code>_config.yml</code]]>
+    </summary>
+    
+      <category term="hexo" scheme="http://ohroot.com/tags/hexo/"/>
+    
+      <category term="hexo" scheme="http://ohroot.com/categories/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[机器学习之瞎BB]]></title>
@@ -642,32 +672,6 @@
       <category term="python" scheme="http://ohroot.com/tags/python/"/>
     
       <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[我与Shadowsocks]]></title>
-    <link href="http://ohroot.com/2015/04/16/%E6%88%91%E4%B8%8EShadowsocks/"/>
-    <id>http://ohroot.com/2015/04/16/我与Shadowsocks/</id>
-    <published>2015-04-16T06:09:00.000Z</published>
-    <updated>2015-12-24T12:38:46.000Z</updated>
-    <content type="html"><![CDATA[<p>之前一直采用Goagent应对GFW问题，这几日发现实在卡的不得了，有些链接都打不开了，于是就看下有没有啥好的替换方案，就去看了下Shadowsocks，发现使用起来还是非常简单方便的。<br><a id="more"></a></p>
-<h2 id="资源链接">资源链接</h2><ol>
-<li><a href="https://github.com/shadowsocks/shadowsocks" target="_blank" rel="external">Shadowsocks的Github地址</a>,这里有简单的使用说明</li>
-<li><a href="http://sourceforge.net/projects/shadowsocksgui/files/dist/" target="_blank" rel="external">Windows客户端下载地址</a>，可根据<a href="https://github.com/shadowsocks/shadowsocks-csharp" target="_blank" rel="external">Github上该软件的说明</a>来下载对应的版本</li>
-<li>免费的<a href="http://www.hidess.com/shadowsocks/" target="_blank" rel="external">服务端信息</a>，这个网站有提供免费的服务端</li>
-</ol>
-<h2 id="安装使用">安装使用</h2><h3 id="window平台">window平台</h3><p>直接下载对应版本的软件，双击执行就可以了，你的设备需要使用系统代理，我发现Shadowsocks还会有PAC，用过Goagent的人一定会觉得这两货功能还挺像</p>
-<h3 id="Linux平台">Linux平台</h3><p>我用的是Ubuntu，所以我只记录下Ubuntu下的安装使用，其他的或许以后用到再更新吧。<br>好像有好多种方法可以使用，我就选择了安装有图形界面的，不是很习惯每次启动都要敲命令，Qt5版的安装方法如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install shadowsocks-qt5</span><br></pre></td></tr></table></figure>]]></content>
-    <summary type="html">
-    <![CDATA[<p>之前一直采用Goagent应对GFW问题，这几日发现实在卡的不得了，有些链接都打不开了，于是就看下有没有啥好的替换方案，就去看了下Shadowsocks，发现使用起来还是非常简单方便的。<br>]]>
-    
-    </summary>
-    
-      <category term="proxy" scheme="http://ohroot.com/tags/proxy/"/>
-    
-      <category term="工具使用" scheme="http://ohroot.com/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
     
   </entry>
   

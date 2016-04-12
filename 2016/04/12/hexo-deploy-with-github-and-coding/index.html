@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hexo部署在github和coding进行分流 | 半饱和</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="hexo," />
+  
+
+  <meta name="description" content="本文主要描述将hexo博客同时搭建在github和coding上，并实现分流，使得国内用户访问时访问的是coding上的博客，国外用户访问时访问的是github上的博客
+首先贴出_config.yml中的配置，使得hexo d部署的时候可以同时将代码推送到github和coding。123456deploy:- type: git  repo: git@github.com:username/us">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo部署在github和coding进行分流">
+<meta property="og:url" content="http://ohroot.com/2016/04/12/hexo-deploy-with-github-and-coding/index.html">
+<meta property="og:site_name" content="半饱和">
+<meta property="og:description" content="本文主要描述将hexo博客同时搭建在github和coding上，并实现分流，使得国内用户访问时访问的是coding上的博客，国外用户访问时访问的是github上的博客
+首先贴出_config.yml中的配置，使得hexo d部署的时候可以同时将代码推送到github和coding。123456deploy:- type: git  repo: git@github.com:username/us">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i4/192713264/TB20vIpmVXXXXaHXXXXXXXXXXXX_!!192713264.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo部署在github和coding进行分流">
+<meta name="twitter:description" content="本文主要描述将hexo博客同时搭建在github和coding上，并实现分流，使得国内用户访问时访问的是coding上的博客，国外用户访问时访问的是github上的博客
+首先贴出_config.yml中的配置，使得hexo d部署的时候可以同时将代码推送到github和coding。123456deploy:- type: git  repo: git@github.com:username/us">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8f194a78c11f76027a96c6ec87298c62";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry hint hint--left" data-hint="点击返回首页" href="/">盒子</a>
+    <ul class="list-toolbox">
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/">博客</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/">分类</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/">标签</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/urls/">安全圈</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/">友链</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/">关于</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml">RSS</a>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+
+</div>
+
+ 
+
+ <a class="back-top" href="#">
+  <i class="icon-angle-up"></i>
+</a>
+
+
+<div class="content-post CENTER">
+   <article id="post-hexo-deploy-with-github-and-coding" class="article article-type-post" itemscope itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">hexo部署在github和coding进行分流</h1>
+
+    <div class="article-meta">
+      <span>2016-04-12</span>
+
+      <span> | </span>
+
+      <span class="article-author">Direwolf</span>
+
+      <span> | </span>
+
+      
+  <span class="article-category">
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+  </span>
+
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <a id="more"></a>
+<p>本文主要描述将hexo博客同时搭建在github和coding上，并实现分流，使得国内用户访问时访问的是coding上的博客，国外用户访问时访问的是github上的博客</p>
+<p>首先贴出<code>_config.yml</code>中的配置，使得<code>hexo d</code>部署的时候可以同时将代码推送到github和coding。<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">- <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:username/username.github.io.git</span><br><span class="line">- <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: git<span class="variable">@git</span>.coding.<span class="attribute">net</span>:username/username.git</span><br><span class="line">  <span class="attribute">branch</span>: gitcafe-pages</span><br></pre></td></tr></table></figure></p>
+<p>我以前国内使用的是gitcafe，后来gitcafe被coding收购了又迁到coding，所以你的上述配置可能需要稍作修改。</p>
+<p>刚开始我做的分流是主域名解析到github然后，www子域名解析到coding，这个方案显然不好。</p>
+<p>后来，我发现在godaddy上域名解析有点慢，就把域名解析迁移到dnspod上了，这个方法不详述，可查看<a href="https://support.dnspod.cn/Kb/showarticle/tsid/28" target="_blank" rel="external">官方文档</a>。</p>
+<p>然后呢，dnspod域名解析和godaddy上有些不一样，它可以指定国内国外，如下图所示<br><img src="https://img.alicdn.com/imgextra/i4/192713264/TB20vIpmVXXXXaHXXXXXXXXXXXX_!!192713264.png" alt=" dnspod.png"><br>将域名设置两个cname，一个指向国内，一个指向国外，就搞定了</p>
+<p>设置好之后我们最好还是要测试下，推荐一个小工具特别好用：MTR</p>
+<p>windows下可以使用<a href="https://sourceforge.net/projects/winmtr/" target="_blank" rel="external">&gt;&gt;这个&lt;&lt;</a></p>
+<p>Linux下安装<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="operator"><span class="keyword">install</span> mtr</span><br><span class="line">apt-<span class="keyword">get</span> <span class="keyword">install</span> mtr-tiny</span></span><br></pre></td></tr></table></figure></p>
+<p>使用方法就不详细说了，直接help查看就知道咋用了。这东西就类似tracert，好不好用，用了就知道。</p>
+
+    
+  </div>
+</article>
+
+
+
+
+
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="" data-title="hexo部署在github和coding进行分流" data-url="http://ohroot.com/2016/04/12/hexo-deploy-with-github-and-coding/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+</div>
+
+  
+
+  
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+</body>
+</html>
