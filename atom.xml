@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Valar dohaeris]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2016-04-12T07:46:55.948Z</updated>
+  <updated>2016-04-13T12:38:10.198Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -13,6 +13,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[ssh端口转发]]></title>
+    <link href="http://ohroot.com/2016/04/13/ssh-port-forwarding/"/>
+    <id>http://ohroot.com/2016/04/13/ssh-port-forwarding/</id>
+    <published>2016-04-13T12:35:13.000Z</published>
+    <updated>2016-04-13T12:38:10.198Z</updated>
+    <content type="html"><![CDATA[<a id="more"></a>
+<p>ssh端口转发在渗透测试中是一个非常好用，可实现将本地端口转发到远程端口，或者本地端口到本地端口，总之很多姿势，之前在乌云drops上经常看别人提到这个，一直没有去亲自实战。终于有一天，我们需要将内网的机器映射到外网，通常这个时候我都会选择路由器端口转发，但是，不幸的是我们的光猫不是桥接模式。。。总之就是不能映射出去，于是我想到了使用ssh端口映射。</p>
+<p>这种方法肯定不是长久之计，我们也没打算长久映射，下面开始说方法</p>
+<h2 id="ssh参数说明">ssh参数说明</h2><p>首先将下文可能用到的参数说明如下：<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">f    要求 ssh 在执行命令前退至后台. 它用于当 ssh 准备询问口令或密语, 但是用户希望它在后台进行. 该选项隐含了 -n 选项. 在远端机器上启动</span><br><span class="line"></span>-<span class="ruby"><span class="constant">N</span>    不执行远程命令. 用于转发端口.</span><br><span class="line"></span>-<span class="ruby"><span class="constant">C</span>    要求进行数据压缩 (包括 stdin, stdout, stderr 以及转发 <span class="constant">X11</span> 和 <span class="constant">TCP</span>/<span class="constant">IP</span> 连接 的数据).压缩算法和 gzip(<span class="number">1</span>) 的一样, 协议第一版中,压缩级别 “level” 用<span class="constant">CompressionLevel</span> 选项控制. 压缩技术在 modem 线路或其他慢速连接上很有用, 但是在高速网络上反而 可能降低速度.可以在配置文件中对每个主机单独设定这个参数.</span><br><span class="line"></span>-<span class="ruby">g    允许远端主机连接本地转发的端口</span><br><span class="line"></span>-<span class="ruby">q    安静模式. 消除所有的警告和诊断信息</span><br><span class="line"></span>-<span class="ruby"><span class="constant">T</span>    禁止分配伪终端</span><br><span class="line"></span>-<span class="ruby">n    把 stdin 重定向到 /dev/null (实际上防止从 stdin 读取数据).  ssh 在后台运行时一定会用到这个选项. 它的常用技巧是远程运行 <span class="constant">X11</span> 程序.</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="在_Linux_上设置反向_SSH_隧道">在 Linux 上设置反向 SSH 隧道</h2><p>在内网机器上，运行如下命令，其中1.1.1.1为VPS的IP，运行后需要输入relayserver_user的密码<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">ssh</span> <span class="tag">-fN</span> <span class="tag">-R</span> 10022<span class="pseudo">:localhost</span><span class="pseudo">:22</span> <span class="tag">relayserver_user</span><span class="at_rule">@<span class="keyword">1.1.1.1</span></span></span><br></pre></td></tr></table></figure></p>
+<p>然后在VPS上查看10022端口，端口开放说明成功了<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo netstat -nap <span class="string">| grep 10022</span></span><br><span class="line"><span class="preprocessor"># tcp 0 0 127.0.0.1:10022 0.0.0.0:* LISTEN 8493/sshd</span></span><br></pre></td></tr></table></figure></p>
+<p>然后可以在VPS上运行命令：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">ssh</span> -p <span class="number">10022</span> homeserver_user<span class="variable">@localhost</span></span><br></pre></td></tr></table></figure></p>
+<p>即可连接内网的机器，同样的道理，我们把22端口换成80端口，即可将80端口映射到VPS上，在VPS上可以使用curl进行测试。</p>
+<h2 id="VPS做转发">VPS做转发</h2><p>我们需要的不仅仅是自己登陆VPS可以操作内网的机器，我们需要的是任意一台主机访问我VPS上的指定端口，然后可以转发到内网，姿势如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">ssh</span> <span class="tag">-qTfnN</span> <span class="tag">-R</span> <span class="pseudo">:8888</span><span class="pseudo">:127</span><span class="class">.0</span><span class="class">.0</span><span class="class">.1</span><span class="pseudo">:80</span> <span class="tag">root</span><span class="at_rule">@<span class="keyword">1.1.1.1</span> -o GatewayPorts=yes</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="参考链接:">参考链接:</h2><ul>
+<li><a href="http://blog.jobbole.com/89281/" target="_blank" rel="external">如何通过反向 SSH 隧道访问 NAT 后面的 Linux 服务器</a></li>
+<li><a href="https://github.com/l3m0n/pentest_study" target="_blank" rel="external">pentest_study</a></li>
+<li><a href="http://drops.wooyun.org/tips/5234" target="_blank" rel="external">内网渗透随想</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<a id="more"></a>
+<p>ssh端口转发在渗透测试中是一个非常好用，可实现将本地端口转发到远程端口，或者本地端口到本地端口，总之很多姿势，之前在乌云drops上经常看别人提到这个，一直没有去亲自实战。终于有一天，我们需要将内网的机器映射到外网，通常这个时候我都会选]]>
+    </summary>
+    
+      <category term="渗透测试" scheme="http://ohroot.com/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="工具使用" scheme="http://ohroot.com/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[hexo部署在github和coding进行分流]]></title>
@@ -644,32 +676,6 @@
     </summary>
     
       <category term="Linux" scheme="http://ohroot.com/tags/Linux/"/>
-    
-      <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[python进行Elasticsearch批量索引]]></title>
-    <link href="http://ohroot.com/2015/04/28/python%E8%BF%9B%E8%A1%8CElasticsearch%E6%89%B9%E9%87%8F%E7%B4%A2%E5%BC%95/"/>
-    <id>http://ohroot.com/2015/04/28/python进行Elasticsearch批量索引/</id>
-    <published>2015-04-28T07:23:58.000Z</published>
-    <updated>2015-12-24T12:38:46.000Z</updated>
-    <content type="html"><![CDATA[<p>本文分享使用python脚本进行Elasticsearch的批量索引<br><a id="more"></a><br>之前主要还是采用jdbc-river的方式将数据从MySQL索引到Elasticsearch，但是由于有些数据表字符各种奇怪的，导入总是报各种错，于是自己折腾个python脚本导入数据，这里列出主要函数。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取表数据量</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getTablesCounts</span><span class="params">(_cursor, _tablename)</span>:</span></span><br><span class="line">    _querySQL = <span class="string">'select count(*) from `%s`'</span>%_tablename</span><br><span class="line">    retNum = _cursor.execute(_querySQL)</span><br><span class="line">    <span class="keyword">return</span> _cursor.fetchone();</span><br><span class="line"></span><br><span class="line"><span class="comment">#从数据库中获取一条数据</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getFromId</span><span class="params">(_cursor, _id,_tablename)</span>:</span></span><br><span class="line">    _querySQL = <span class="string">"select * from `%s` where id = %s "</span>%(_tablename, _id)</span><br><span class="line">    retNum = _cursor.execute(_querySQL)</span><br><span class="line">    <span class="keyword">return</span> _cursor.fetchone();</span><br><span class="line"></span><br><span class="line"><span class="comment">#将数据导入ES，bulk数据的大小为500000</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bulkData</span><span class="params">(_cur, _tableCounts)</span>:</span></span><br><span class="line">    es = Elasticsearch(<span class="string">"192.168.88.88"</span>)</span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    count = _tableCounts</span><br><span class="line">    actions = []</span><br><span class="line">    <span class="keyword">while</span> (j &lt; count):</span><br><span class="line">        oneRec = getFromId(_cur, j+<span class="number">1</span>, tablename)</span><br><span class="line">        action = &#123;</span><br><span class="line">            <span class="string">"_index"</span>: indexname,</span><br><span class="line">            <span class="string">"_type"</span>: typename,</span><br><span class="line">            <span class="string">"_id"</span>: j + <span class="number">1</span>,</span><br><span class="line">            <span class="string">"_source"</span>: &#123;</span><br><span class="line">                <span class="string">"column1"</span>:oneRec[<span class="number">1</span>],</span><br><span class="line">                <span class="string">"column2"</span>:oneRec[<span class="number">2</span>],</span><br><span class="line">                <span class="string">"column3"</span>:oneRec[<span class="number">3</span>],</span><br><span class="line">                <span class="string">"column4"</span>:oneRec[<span class="number">4</span>],</span><br><span class="line">                <span class="string">"column5"</span>:oneRec[<span class="number">5</span>],</span><br><span class="line">                <span class="string">"column6"</span>:oneRec[<span class="number">6</span>]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        actions.append(action)</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> (len(actions) == <span class="number">500000</span>):</span><br><span class="line">            <span class="keyword">print</span> j</span><br><span class="line">            helpers.bulk(es, actions)</span><br><span class="line">            <span class="keyword">del</span> actions[<span class="number">0</span>:len(actions)]</span><br><span class="line">    <span class="keyword">if</span> (len(actions) &gt; <span class="number">0</span>):</span><br><span class="line">        helpers.bulk(es, actions)</span><br><span class="line">        <span class="keyword">del</span> actions[<span class="number">0</span>:len(actions)]</span><br></pre></td></tr></table></figure></p>
-<p>【参考文章】</p>
-<ul>
-<li><a href="http://www.justinablog.com/archives/967" target="_blank" rel="external">使用Python进行Elasticsearch数据索引</a></li>
-<li><a href="http://chenlinux.com/2015/02/11/python-elasticsearch-bulk/" target="_blank" rel="external">Python 批量写入 Elasticsearch 脚本</a></li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>本文分享使用python脚本进行Elasticsearch的批量索引<br>]]>
-    
-    </summary>
-    
-      <category term="Elasticsearch" scheme="http://ohroot.com/tags/Elasticsearch/"/>
-    
-      <category term="python" scheme="http://ohroot.com/tags/python/"/>
     
       <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
     

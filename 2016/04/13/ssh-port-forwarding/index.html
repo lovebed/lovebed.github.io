@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ssh端口转发 | 半饱和</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="渗透测试," />
+  
+
+  <meta name="description" content="ssh端口转发在渗透测试中是一个非常好用，可实现将本地端口转发到远程端口，或者本地端口到本地端口，总之很多姿势，之前在乌云drops上经常看别人提到这个，一直没有去亲自实战。终于有一天，我们需要将内网的机器映射到外网，通常这个时候我都会选择路由器端口转发，但是，不幸的是我们的光猫不是桥接模式。。。总之就是不能映射出去，于是我想到了使用ssh端口映射。
+这种方法肯定不是长久之计，我们也没打算长久映射">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssh端口转发">
+<meta property="og:url" content="http://ohroot.com/2016/04/13/ssh-port-forwarding/index.html">
+<meta property="og:site_name" content="半饱和">
+<meta property="og:description" content="ssh端口转发在渗透测试中是一个非常好用，可实现将本地端口转发到远程端口，或者本地端口到本地端口，总之很多姿势，之前在乌云drops上经常看别人提到这个，一直没有去亲自实战。终于有一天，我们需要将内网的机器映射到外网，通常这个时候我都会选择路由器端口转发，但是，不幸的是我们的光猫不是桥接模式。。。总之就是不能映射出去，于是我想到了使用ssh端口映射。
+这种方法肯定不是长久之计，我们也没打算长久映射">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ssh端口转发">
+<meta name="twitter:description" content="ssh端口转发在渗透测试中是一个非常好用，可实现将本地端口转发到远程端口，或者本地端口到本地端口，总之很多姿势，之前在乌云drops上经常看别人提到这个，一直没有去亲自实战。终于有一天，我们需要将内网的机器映射到外网，通常这个时候我都会选择路由器端口转发，但是，不幸的是我们的光猫不是桥接模式。。。总之就是不能映射出去，于是我想到了使用ssh端口映射。
+这种方法肯定不是长久之计，我们也没打算长久映射">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8f194a78c11f76027a96c6ec87298c62";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry hint hint--left" data-hint="点击返回首页" href="/">盒子</a>
+    <ul class="list-toolbox">
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/">博客</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/">分类</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/">标签</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/urls/">安全圈</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/">友链</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/">关于</a>
+          </li>
+        
+      
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml">RSS</a>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+
+</div>
+
+ 
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh参数说明"><span class="toc-text">ssh参数说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在_Linux_上设置反向_SSH_隧道"><span class="toc-text">在 Linux 上设置反向 SSH 隧道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VPS做转发"><span class="toc-text">VPS做转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接:"><span class="toc-text">参考链接:</span></a></li></ol>
+  </div>
+
+
+ <a class="back-top" href="#">
+  <i class="icon-angle-up"></i>
+</a>
+
+
+<div class="content-post CENTER">
+   <article id="post-ssh-port-forwarding" class="article article-type-post" itemscope itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">ssh端口转发</h1>
+
+    <div class="article-meta">
+      <span>2016-04-13</span>
+
+      <span> | </span>
+
+      <span class="article-author">Direwolf</span>
+
+      <span> | </span>
+
+      
+  <span class="article-category">
+    <a class="article-category-link" href="/categories/工具使用/">工具使用</a>
+  </span>
+
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <a id="more"></a>
+<p>ssh端口转发在渗透测试中是一个非常好用，可实现将本地端口转发到远程端口，或者本地端口到本地端口，总之很多姿势，之前在乌云drops上经常看别人提到这个，一直没有去亲自实战。终于有一天，我们需要将内网的机器映射到外网，通常这个时候我都会选择路由器端口转发，但是，不幸的是我们的光猫不是桥接模式。。。总之就是不能映射出去，于是我想到了使用ssh端口映射。</p>
+<p>这种方法肯定不是长久之计，我们也没打算长久映射，下面开始说方法</p>
+<h2 id="ssh参数说明">ssh参数说明</h2><p>首先将下文可能用到的参数说明如下：<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">f    要求 ssh 在执行命令前退至后台. 它用于当 ssh 准备询问口令或密语, 但是用户希望它在后台进行. 该选项隐含了 -n 选项. 在远端机器上启动</span><br><span class="line"></span>-<span class="ruby"><span class="constant">N</span>    不执行远程命令. 用于转发端口.</span><br><span class="line"></span>-<span class="ruby"><span class="constant">C</span>    要求进行数据压缩 (包括 stdin, stdout, stderr 以及转发 <span class="constant">X11</span> 和 <span class="constant">TCP</span>/<span class="constant">IP</span> 连接 的数据).压缩算法和 gzip(<span class="number">1</span>) 的一样, 协议第一版中,压缩级别 “level” 用<span class="constant">CompressionLevel</span> 选项控制. 压缩技术在 modem 线路或其他慢速连接上很有用, 但是在高速网络上反而 可能降低速度.可以在配置文件中对每个主机单独设定这个参数.</span><br><span class="line"></span>-<span class="ruby">g    允许远端主机连接本地转发的端口</span><br><span class="line"></span>-<span class="ruby">q    安静模式. 消除所有的警告和诊断信息</span><br><span class="line"></span>-<span class="ruby"><span class="constant">T</span>    禁止分配伪终端</span><br><span class="line"></span>-<span class="ruby">n    把 stdin 重定向到 /dev/null (实际上防止从 stdin 读取数据).  ssh 在后台运行时一定会用到这个选项. 它的常用技巧是远程运行 <span class="constant">X11</span> 程序.</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="在_Linux_上设置反向_SSH_隧道">在 Linux 上设置反向 SSH 隧道</h2><p>在内网机器上，运行如下命令，其中1.1.1.1为VPS的IP，运行后需要输入relayserver_user的密码<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">ssh</span> <span class="tag">-fN</span> <span class="tag">-R</span> 10022<span class="pseudo">:localhost</span><span class="pseudo">:22</span> <span class="tag">relayserver_user</span><span class="at_rule">@<span class="keyword">1.1.1.1</span></span></span><br></pre></td></tr></table></figure></p>
+<p>然后在VPS上查看10022端口，端口开放说明成功了<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo netstat -nap <span class="string">| grep 10022</span></span><br><span class="line"><span class="preprocessor"># tcp 0 0 127.0.0.1:10022 0.0.0.0:* LISTEN 8493/sshd</span></span><br></pre></td></tr></table></figure></p>
+<p>然后可以在VPS上运行命令：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">ssh</span> -p <span class="number">10022</span> homeserver_user<span class="variable">@localhost</span></span><br></pre></td></tr></table></figure></p>
+<p>即可连接内网的机器，同样的道理，我们把22端口换成80端口，即可将80端口映射到VPS上，在VPS上可以使用curl进行测试。</p>
+<h2 id="VPS做转发">VPS做转发</h2><p>我们需要的不仅仅是自己登陆VPS可以操作内网的机器，我们需要的是任意一台主机访问我VPS上的指定端口，然后可以转发到内网，姿势如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">ssh</span> <span class="tag">-qTfnN</span> <span class="tag">-R</span> <span class="pseudo">:8888</span><span class="pseudo">:127</span><span class="class">.0</span><span class="class">.0</span><span class="class">.1</span><span class="pseudo">:80</span> <span class="tag">root</span><span class="at_rule">@<span class="keyword">1.1.1.1</span> -o GatewayPorts=yes</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="参考链接:">参考链接:</h2><ul>
+<li><a href="http://blog.jobbole.com/89281/" target="_blank" rel="external">如何通过反向 SSH 隧道访问 NAT 后面的 Linux 服务器</a></li>
+<li><a href="https://github.com/l3m0n/pentest_study" target="_blank" rel="external">pentest_study</a></li>
+<li><a href="http://drops.wooyun.org/tips/5234" target="_blank" rel="external">内网渗透随想</a></li>
+</ul>
+
+    
+  </div>
+</article>
+
+
+
+
+
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="" data-title="ssh端口转发" data-url="http://ohroot.com/2016/04/13/ssh-port-forwarding/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+</div>
+
+  
+
+  
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+</body>
+</html>
