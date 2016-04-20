@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Valar dohaeris]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2016-04-13T12:38:10.198Z</updated>
+  <updated>2016-04-13T13:03:05.854Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://ohroot.com/2016/04/13/ssh-port-forwarding/"/>
     <id>http://ohroot.com/2016/04/13/ssh-port-forwarding/</id>
     <published>2016-04-13T12:35:13.000Z</published>
-    <updated>2016-04-13T12:38:10.198Z</updated>
+    <updated>2016-04-13T13:03:05.854Z</updated>
     <content type="html"><![CDATA[<a id="more"></a>
 <p>ssh端口转发在渗透测试中是一个非常好用，可实现将本地端口转发到远程端口，或者本地端口到本地端口，总之很多姿势，之前在乌云drops上经常看别人提到这个，一直没有去亲自实战。终于有一天，我们需要将内网的机器映射到外网，通常这个时候我都会选择路由器端口转发，但是，不幸的是我们的光猫不是桥接模式。。。总之就是不能映射出去，于是我想到了使用ssh端口映射。</p>
 <p>这种方法肯定不是长久之计，我们也没打算长久映射，下面开始说方法</p>
