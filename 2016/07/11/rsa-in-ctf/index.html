@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>CTF中的RSA算法 | 半饱和</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="CTF," />
+  
+
+  <meta name="description" content="密码算法有很多种，要讲就要讲久了，自行脑补一本厚厚的密码学书。
+我们经常用到的算法包括对称加密算法和非对称加密算法。本文主要介绍CTF中经常遇到的RSA加密题的一些解法
+算法原理简介
+随机选择大素数p,q,并计算：
+
+1n = p*q&amp;#10;&amp;#10;\phi(n) = (p-1)(q-1)
+
+选择一个随机数e，1 &amp;lt; e &amp;lt; ϕ(n)，且 gcd(e, ϕ(n)) = 1，并计算:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF中的RSA算法">
+<meta property="og:url" content="http://ohroot.com/2016/07/11/rsa-in-ctf/index.html">
+<meta property="og:site_name" content="半饱和">
+<meta property="og:description" content="密码算法有很多种，要讲就要讲久了，自行脑补一本厚厚的密码学书。
+我们经常用到的算法包括对称加密算法和非对称加密算法。本文主要介绍CTF中经常遇到的RSA加密题的一些解法
+算法原理简介
+随机选择大素数p,q,并计算：
+
+1n = p*q&amp;#10;&amp;#10;\phi(n) = (p-1)(q-1)
+
+选择一个随机数e，1 &amp;lt; e &amp;lt; ϕ(n)，且 gcd(e, ϕ(n)) = 1，并计算:">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CTF中的RSA算法">
+<meta name="twitter:description" content="密码算法有很多种，要讲就要讲久了，自行脑补一本厚厚的密码学书。
+我们经常用到的算法包括对称加密算法和非对称加密算法。本文主要介绍CTF中经常遇到的RSA加密题的一些解法
+算法原理简介
+随机选择大素数p,q,并计算：
+
+1n = p*q&amp;#10;&amp;#10;\phi(n) = (p-1)(q-1)
+
+选择一个随机数e，1 &amp;lt; e &amp;lt; ϕ(n)，且 gcd(e, ϕ(n)) = 1，并计算:">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=0a48fd1a" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css" type="text/css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8f194a78c11f76027a96c6ec87298c62";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/urls/"
+            target="_blank"
+            >
+            安全圈
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法原理简介"><span class="toc-text">算法原理简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#加密"><span class="toc-text">加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解密"><span class="toc-text">解密</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关工具"><span class="toc-text">相关工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CTF示例"><span class="toc-text">CTF示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安恒CTF"><span class="toc-text">安恒CTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SCTF"><span class="toc-text">SCTF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#level0"><span class="toc-text">level0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#level0-1"><span class="toc-text">level0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#level2"><span class="toc-text">level2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#level5"><span class="toc-text">level5</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#level3"><span class="toc-text">level3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#level4"><span class="toc-text">level4</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-rsa-in-ctf" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">CTF中的RSA算法</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.07.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Direwolf</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Web安全/">Web安全</a>
+  </span>
+
+
+
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <a id="more"></a>
+<p>密码算法有很多种，要讲就要讲久了，自行脑补一本厚厚的密码学书。</p>
+<p>我们经常用到的算法包括对称加密算法和非对称加密算法。本文主要介绍CTF中经常遇到的RSA加密题的一些解法</p>
+<h2 id="算法原理简介">算法原理简介</h2><ul>
+<li>随机选择大素数p,q,并计算：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n = p*q&#10;&#10;\phi(n) = (p-1)(q-1)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>选择一个随机数e，<code>1 &lt; e &lt; ϕ(n)</code>，且 <code>gcd(e, ϕ(n)) = 1</code>，并计算:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;d = e^&#123;-1&#125;mod(\phi(n))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择<code>(e,n)</code>为公钥，<code>d</code>为私钥</p>
+</li>
+</ul>
+<h3 id="加密">加密</h3><p>对明文<code>m &lt; n</code>，其对应的密文为：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c=m^e mod n</span><br></pre></td></tr></table></figure></p>
+<h3 id="解密">解密</h3><p>对于密文c，对应的明文为：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m = c^d mod n</span><br></pre></td></tr></table></figure></p>
+<h2 id="相关工具">相关工具</h2><p>首先介绍下我自己改写的一个工具<a href="https://github.com/lovebed/rsatools" target="_blank" rel="external">&gt;&gt;rsatools&lt;&lt;</a>, 该项目主要代码源于<a href="https://github.com/Ganapati/RsaCtfTool" target="_blank" rel="external">RsaCtfTool</a>,我只是对其进行了改写。参加了几次CTF之后，只是想让这个工具能够适用于更多的情况。</p>
+<ul>
+<li>RSA大数分解网站 <a href="http://www.factordb.com/index.php" target="_blank" rel="external">http://www.factordb.com/index.php</a></li>
+<li><p>大数分解平台 <a href="https://cloud.sagemath.com/" target="_blank" rel="external">https://cloud.sagemath.com/</a></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">factor</span><span class="params">(<span class="number">0</span>x123)</span></span></span><br><span class="line"><span class="function"><span class="title">factor</span><span class="params">(<span class="number">123</span>)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>RSA-Tool 2</p>
+</li>
+<li><p>yafu 如果两个素数相差很近，可采用费马分解</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">factor</span><span class="params">(<span class="number">0</span>x123)</span></span></span><br><span class="line"><span class="function"><span class="title">factor</span><span class="params">(<span class="number">123</span>)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>rsatool.py 标准工具 用于已有p,q生成私钥</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./rsatool<span class="class">.py</span> -<span class="tag">p</span> num1 -<span class="tag">q</span> num2 -o priv.key</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>openssl</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输出公钥信息</span><br><span class="line">openssl rsa -noout -text -inform PEM -<span class="keyword">in</span> public<span class="class">.key</span> -pubin</span><br><span class="line"></span><br><span class="line">openssl rsautl -decrypt -<span class="keyword">in</span> level1bin<span class="class">.passwd</span><span class="class">.enc</span> -inkey ../priv<span class="class">.key</span> -out level1<span class="class">.passwd</span> -oaep</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="CTF示例">CTF示例</h2><h3 id="安恒CTF">安恒CTF</h3><p>给出的文件<a href="https://raw.githubusercontent.com/lovebed/rsatools/master/demos/%E5%AE%89%E6%81%92ctf/rsa/data.txt%20(2" target="_blank" rel="external">&gt;&gt;在这里&lt;&lt;</a>),这里就比较直白能看出是RSA加密，然后分解大数直接暴力跑就行了，当时也是专门搞了个脚本处理这种加密。<a href="https://raw.githubusercontent.com/lovebed/rsatools/master/rsa.py" target="_blank" rel="external">&gt;&gt;代码戳这里&lt;&lt;</a>,直接看代码就能明白了</p>
+<h3 id="SCTF">SCTF</h3><p>SCTF的RSA加解密难度较大，我也是在其中学到很多技巧。</p>
+<h4 id="level0">level0</h4><p>第一个压缩包中包含<a href="https://raw.githubusercontent.com/lovebed/rsatools/master/demos/sctf/rsa1/level0/level1.passwd.enc" target="_blank" rel="external">密文</a>，以及<a href="https://raw.githubusercontent.com/lovebed/rsatools/master/demos/sctf/rsa1/level0/public.key" target="_blank" rel="external">公钥证书</a>.我们需要从公钥证书中找到大数N，然后去分解大素数<br>采用我自己改写的脚本可直接输出公钥中的N和E：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python RsaCtfTool.py --pkey ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span><span class="keyword">public</span>.key</span><br></pre></td></tr></table></figure></p>
+<p>N = 18762288330807505336471569952368628968038915032364773203018829070696227411217877868952724842039756288121734420378039301563905037169196320417706839549744629044465352679919380329435329653365900312498712121432190200717072138327379844913608851715404086200984072727408758802012147296753317519612628629535373054730645471938738605688629618951071483635716677866010394704066696480858977560809007683074249820225609075518509112704549293147063971302640066331096645041521401155565628466857211261242132897152403975836705170916276159246187173035660820037820087171748591660487636434105623595720788169970861783452500198572918584010881<br>e = 65537<br>直接在sagemath中跑：<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">factor<span class="comment">(18762288330807505336471569952368628968038915032364773203018829070696227411217877868952724842039756288121734420378039301563905037169196320417706839549744629044465352679919380329435329653365900312498712121432190200717072138327379844913608851715404086200984072727408758802012147296753317519612628629535373054730645471938738605688629618951071483635716677866010394704066696480858977560809007683074249820225609075518509112704549293147063971302640066331096645041521401155565628466857211261242132897152403975836705170916276159246187173035660820037820087171748591660487636434105623595720788169970861783452500198572918584010881)</span></span><br><span class="line"><span class="title">#output</span><br><span class="line">250527704258269</span> * <span class="number">74891071972884336452892671945839935839027130680745292701175368094445819328761543101567760612778187287503041052186054409602799660254304070752542327616415127619185118484301676127655806327719998855075907042722072624352495417865982621374198943186383488123852345021090112675763096388320624127451586578874243946255833495297552979177208715296225146999614483257176865867572412311362252398105201644557511678179053171328641678681062496129308882700731534684329411768904920421185529144505494827908706070460177001921614692189821267467546120600239688527687872217881231173729468019623441005792563703237475678063375349</span></span><br></pre></td></tr></table></figure></p>
+<p>这个实测RSA-Tool 2 中还要快一些，然后还是用脚本解密<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python RsaCtfTool<span class="class">.py</span> --pqne <span class="number">250527704258269</span>,<span class="number">74891071972884336452892671945839935839027130680745292701175368094445819328761543101567760612778187287503041052186054409602799660254304070752542327616415127619185118484301676127655806327719998855075907042722072624352495417865982621374198943186383488123852345021090112675763096388320624127451586578874243946255833495297552979177208715296225146999614483257176865867572412311362252398105201644557511678179053171328641678681062496129308882700731534684329411768904920421185529144505494827908706070460177001921614692189821267467546120600239688527687872217881231173729468019623441005792563703237475678063375349</span>,<span class="number">18762288330807505336471569952368628968038915032364773203018829070696227411217877868952724842039756288121734420378039301563905037169196320417706839549744629044465352679919380329435329653365900312498712121432190200717072138327379844913608851715404086200984072727408758802012147296753317519612628629535373054730645471938738605688629618951071483635716677866010394704066696480858977560809007683074249820225609075518509112704549293147063971302640066331096645041521401155565628466857211261242132897152403975836705170916276159246187173035660820037820087171748591660487636434105623595720788169970861783452500198572918584010881</span>,<span class="number">65537</span> --crypto ../sctf/rsa1/level0/level1<span class="class">.passwd</span><span class="class">.enc</span> --format base64</span><br></pre></td></tr></table></figure></p>
+<p>解出来时乱码，我们就要考虑填充的问题,我写的脚本还没支持不同的填充，尝试用openssl解密，成功解密<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1.passwd.enc | base64 -d &gt; ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1bin.passwd.enc</span><br><span class="line">openssl rsautl -decrypt -<span class="keyword">in</span> ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1bin.passwd.enc -inkey ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/priv.key -out ../</span>sctf<span class="regexp">/rsa1/</span>level0/level1.passwd -oaep</span><br></pre></td></tr></table></figure></p>
+<h4 id="level0-1">level0</h4><p>这一层还是查看N&amp;e,N&amp;e，然后分解大数，sage很久都没分出来，RSA-Tool 2也是，最终发现是P和Q相近，可采用费马分解。我们可以采用yafu这个工具进行分解。<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">factor(24635380199162576175626733825654993088774186468424341251485528171539392839329146412615013362980283492199482296250229443925899183941601282092332843476617277156184507685928193519623765855782976047363883665283424473545877969718710272046261654326391840252190462805782777380937446430987284386172226304759726517529843564412091984328980979115111158624673855166379221415935217206920980564900414671064827167187417932475583509599802648238573603298428445177957392893928492353538844661418085667022331283805225000341955464473332333141637604132197773189903937879276873131228814365139541968760521539920817629563995110317306270531197)</span><br><span class="line"></span><br><span class="line"><span class="comment"># output</span></span><br><span class="line"><span class="constant">P309</span> = 156956618844706820397012891168512561016172926274406409351605204875848894134762425857160007206769208250966468865321072899370821460169563046304363342283383730448855887559714662438206600780443071125634394511976108979417302078289773847706397371335621757603520669919857006339473738564640521800108990424511408496383</span><br><span class="line"><span class="constant">P309</span> = 156956618844706820397012891168512561016172926274406409351605204875848894134762425857160007206769208250966468865321072899370821460169563046304363342283383730448855887559714662438206600780443071125634394511976108979417302078289773847706397371335621757603520669919857006339473738564640521800108990424511408496259</span><br></pre></td></tr></table></figure></p>
+<p>然后同level0的方式进入level2<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python RsaCtfTool.py --pqne <span class="number">156956618844706820397012891168512561016172926274406409351605204875848894134762425857160007206769208250966468865321072899370821460169563046304363342283383730448855887559714662438206600780443071125634394511976108979417302078289773847706397371335621757603520669919857006339473738564640521800108990424511408496383</span>,<span class="number">156956618844706820397012891168512561016172926274406409351605204875848894134762425857160007206769208250966468865321072899370821460169563046304363342283383730448855887559714662438206600780443071125634394511976108979417302078289773847706397371335621757603520669919857006339473738564640521800108990424511408496259</span>,<span class="number">24635380199162576175626733825654993088774186468424341251485528171539392839329146412615013362980283492199482296250229443925899183941601282092332843476617277156184507685928193519623765855782976047363883665283424473545877969718710272046261654326391840252190462805782777380937446430987284386172226304759726517529843564412091984328980979115111158624673855166379221415935217206920980564900414671064827167187417932475583509599802648238573603298428445177957392893928492353538844661418085667022331283805225000341955464473332333141637604132197773189903937879276873131228814365139541968760521539920817629563995110317306270531197</span>,<span class="number">65537</span> --pri</span><br><span class="line">openssl rsautl -decrypt -<span class="keyword">in</span> ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1<span class="regexp">/level2.passwd.enc -inkey ../</span>sctf<span class="regexp">/rsa1/</span>level0<span class="regexp">/level1/</span>pri.key -out ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1/level2.passwd</span><br></pre></td></tr></table></figure></p>
+<h4 id="level2">level2</h4><p>这一题用同样的方法可以看到E很大，存在低解密指数攻击（Wiener’s Attack），e太大，可直接算出d<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"n"</span> <span class="keyword">is</span>:<span class="number">310417953704722170730847224402877983815425243802949146921747155554873214220856824312098961643471840575991636613043700912852694476430642621109657293199766030858364981594359341335457943511388291654144608627164424697545853589150385759857708455254761227678476750080293606809444462895661894497915336651794981901683</span></span><br><span class="line"><span class="string">"e"</span> <span class="keyword">is</span>:<span class="number">180160219817657029643391514538629205160228298622505654076129556003630962924040643558658232436259668646427759588151297967578950689360985724312726411880635697242206899247553123368979139238838216404056134080086977722515560207477455248034027633490880147280702252198966243510960816978036425871522668587833586334027</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python RsaCtfTool.py --pkey ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1<span class="regexp">/level2/</span><span class="keyword">public</span>.key --pri</span><br><span class="line">openssl rsautl -decrypt -<span class="keyword">in</span> ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1<span class="regexp">/level2/</span>level3.passwd.enc -inkey ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1<span class="regexp">/level2/</span>pri.key -out ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1<span class="regexp">/level2/</span>level3.passwd</span><br></pre></td></tr></table></figure>
+<p>至此rsa第一题通关</p>
+<h4 id="level5">level5</h4><p>这个也是RSA第二题，下面的题都是针对RSA特定情形下的攻击，该题考察共享素数攻击，两个模共享一个素因子，可以用gcd快速算出模的共享素因子。题目给了一个流量包syc_security_system_traffic2.pcap，分析流量包，可以看到10个明文TCP会话，会话中包含加密的公钥（n，e）和加密后的level5的密码。其中e都是65537。所以随机选取两个n，这里我们选取第4个和第5个会话，写个sage脚本得到p和q。事实上你会发现这里所有的n都不是互素的。<br><a href="https://raw.githubusercontent.com/lovebed/rsatools/master/demos/sctf/rsa2/sage.py" target="_blank" rel="external">&gt;&gt;sage脚本&lt;&lt;</a></p>
+<h4 id="level3">level3</h4><p>这题可以使用相关消息攻击（Franklin-Reiter related-message attack），也可以采用Hastad attack。最后看writeup，有好多种解法。通信过程中有一组还使用了同一个公钥，解法非常多。<br>最后，我用改写的脚本直接解密，<a href="https://github.com/lovebed/rsatools/blob/master/demos/sctf/rsa3/myrsa.py" target="_blank" rel="external">解密脚本</a></p>
+<h4 id="level4">level4</h4><p>这题考察广播攻击（Hastad’s Broadcast Attack），e较小，用相同的e和不同的n加密线性相关的消息，可以用多个密文m和模n算出明文。我也是找到了类似的题，改了改别人的脚本解出该题<a href="https://raw.githubusercontent.com/lovebed/rsatools/master/demos/sctf/rsa3/mayday/flag.py" target="_blank" rel="external">&gt;&gt;code&lt;&lt;</a>。详细分析可以<a href="https://github.com/pcchou/ctf-writeups/tree/master/2016/tw-edu-ctf/mayday" target="_blank" rel="external">看这里</a>。</p>
+<h2 id="总结">总结</h2><p>本文是在做了几个CTF题之后总结了下RSA相关题的解法，希望能对大家有所帮助，这类题还是比较简单，一般问题现在网上都能搜到答案。我想去做一个通用的工具，但是偶尔又感觉没什么意义，一直未果。</p>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/urls/"
+              target="_blank"
+              >
+              安全圈
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="" data-title="CTF中的RSA算法" data-url="http://ohroot.com/2016/07/11/rsa-in-ctf/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+
+
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235687', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
