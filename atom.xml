@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Valar dohaeris]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2016-09-18T07:18:34.726Z</updated>
+  <updated>2016-09-18T07:20:40.046Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://ohroot.com/2016/09/18/ddos-introduction/"/>
     <id>http://ohroot.com/2016/09/18/ddos-introduction/</id>
     <published>2016-09-18T07:15:43.000Z</published>
-    <updated>2016-09-18T07:18:34.726Z</updated>
+    <updated>2016-09-18T07:20:40.046Z</updated>
     <content type="html"><![CDATA[<a id="more"></a>
 <p>最新找工作，笔试经常被问到DDOS的攻击原理和防御，以前学习过一些基础知识，然后耐不住久不用就忘记了，总结下，免得再吃亏</p>
 <h2 id="DDOS攻击分类">DDOS攻击分类</h2><p>DDOS可以分为网络层攻击（SYN-flood、ACK-flood、UDP-flood、ICMP-flood等）、应用层攻击（CC攻击、DNS-flood、慢速连接攻击）。<br>按攻击方式可以分为：反射型、流量放大型、混合型等。</p>
@@ -37,7 +37,7 @@
 <p>目前出现了一些变种，http慢速的post请求和慢速的read请求都是基于相同的原理。<br>其他包括JavaScript-based DDoS、WordPress pingback DDoS和Joomla反射攻击。</p>
 <p><strong>JavaScript-based DDoS</strong>：在海量访问的网页嵌入指向攻击目标网站的恶意JavaScript代码，当互联网用户访问该网页时，则流量被指向攻击目标网站。典型攻击事件是GitHub DDoS攻击。</p>
 <p><strong>WordPress pingback DDoS</strong>：基于wordpress搭建的WEB网站默认开放XML-RPC pingback服务，该服务是用来通知第三方网站blog系统有文章被引用。攻击者假冒攻击目标网站的IP地址给数以万计wordpress站点发送pingback请求，开放pingback服务的网站会向攻击目标网站发送HTTP get请求。</p>
-<h3 id="NTP反射型DDos攻击">NTP反射型DDos攻击</h3><h2 id="按攻击方式分类">按攻击方式分类</h2><h3 id="反射型">反射型</h3><p>反射型攻击的本质是利用“质询-应答”式协议，将质询包的源地址通过原始套接字伪造设置为目标地址，则应答的“回包”都被发送至目标，如果回包体积比较大或协议支持递归效果，攻击流量会被放大，成为一种高性价比的流量型攻击。<br>例如通过将SYN包的源地址设置为目标地址，然后向大量的真实TCP服务器发送TCP的SYN包，而这些收到SYN包的TCP服务器为了完成3次握手把SYN|ACK包“应答”给目标地址，完成了一次“反射”攻击，攻击者隐藏了自身。<br>反射型攻击利用的协议目前包括NTP、Chargen、SSDP、DNS、RPC portmap等</p>
+<h2 id="按攻击方式分类">按攻击方式分类</h2><h3 id="反射型">反射型</h3><p>反射型攻击的本质是利用“质询-应答”式协议，将质询包的源地址通过原始套接字伪造设置为目标地址，则应答的“回包”都被发送至目标，如果回包体积比较大或协议支持递归效果，攻击流量会被放大，成为一种高性价比的流量型攻击。<br>例如通过将SYN包的源地址设置为目标地址，然后向大量的真实TCP服务器发送TCP的SYN包，而这些收到SYN包的TCP服务器为了完成3次握手把SYN|ACK包“应答”给目标地址，完成了一次“反射”攻击，攻击者隐藏了自身。<br>反射型攻击利用的协议目前包括NTP、Chargen、SSDP、DNS、RPC portmap等</p>
 <h3 id="流量放大型">流量放大型</h3><p>通过递归等手法将攻击流量方法的攻击类型</p>
 <h3 id="混合型">混合型</h3><p>即混合多种攻击方式</p>
 <h3 id="脉冲型">脉冲型</h3><p>即DDOS攻击流量呈现脉冲状，难以防御</p>
