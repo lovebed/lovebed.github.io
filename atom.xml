@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Valar dohaeris]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ohroot.com/"/>
-  <updated>2016-07-11T02:45:22.750Z</updated>
+  <updated>2016-09-18T07:18:34.726Z</updated>
   <id>http://ohroot.com/</id>
   
   <author>
@@ -15,11 +15,58 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[DDOS攻击简介]]></title>
+    <link href="http://ohroot.com/2016/09/18/ddos-introduction/"/>
+    <id>http://ohroot.com/2016/09/18/ddos-introduction/</id>
+    <published>2016-09-18T07:15:43.000Z</published>
+    <updated>2016-09-18T07:18:34.726Z</updated>
+    <content type="html"><![CDATA[<a id="more"></a>
+<p>最新找工作，笔试经常被问到DDOS的攻击原理和防御，以前学习过一些基础知识，然后耐不住久不用就忘记了，总结下，免得再吃亏</p>
+<h2 id="DDOS攻击分类">DDOS攻击分类</h2><p>DDOS可以分为网络层攻击（SYN-flood、ACK-flood、UDP-flood、ICMP-flood等）、应用层攻击（CC攻击、DNS-flood、慢速连接攻击）。<br>按攻击方式可以分为：反射型、流量放大型、混合型等。</p>
+<p>在讲DDOS原理前我还是先找了一个TCP连接的三次握手，四次分手的流程图，以方便描述一些攻击过程的原理。<br><img src="https://img.alicdn.com/imgextra/i3/192713264/TB2IB51XobA11BjSspiXXa7EXXa_!!192713264.jpg" alt=""></p>
+<h2 id="网络层攻击">网络层攻击</h2><h3 id="1-_SYN-flood">1. SYN-flood</h3><p>TCP 连接三次握手过程中，通过原始套接字发送源地址虚假的SYN数据包、使目标主机永远无法完成三次握手，系统的协议栈队列占满，资源得不到释放造成拒绝服务。</p>
+<p>一些简单的防御方法包括调整内核参数的方法，可以减少等待及重试，加速资源释放，在小流量syn-flood的情况下可以缓解，但流量稍大时完全不抵用。防御syn-flood的常见方法有：syn proxy、syn cookies、首包（第一次请求的syn包）丢弃等。</p>
+<h3 id="2-_ACK-flood">2. ACK-flood</h3><p>对于虚假的ACK包，目标设备会直接回复RST包丢弃连接，所以伤害值远不如syn-flood。DDOS的一种原始方式。</p>
+<h3 id="3-_UDP-flood">3. UDP-flood</h3><p>使用原始套接字伪造大量虚假源地址的UDP包，以DNS协议为主。</p>
+<h3 id="4-_ICMP-flood">4. ICMP-flood</h3><p>Ping洪水，比较古老的方式。</p>
+<hr>
+<h2 id="应用层攻击">应用层攻击</h2><h3 id="1-_CC攻击">1. CC攻击</h3><p>CC攻击(ChallengeCollapsar)的名字源于挑战国内知名安全厂商绿盟的抗DDOS设备-“黑洞”。通过僵尸网络或大量匿名代理服务器，向目标发起大量真实的http请求，最终消耗掉大量的并发资源，拖慢整个网站，造成拒绝服务。</p>
+<p>CC攻击的目的就是占满服务器并发连接数，尽可能使请求避开缓存而直接读数据库，读数据库要找最消耗资源的查询，最好无法利用索引，每个查询都全表扫描，这样就能用最小的攻击资源起到最大的拒绝服务效果。CC攻击就是寻找系统脆弱点占满系统资源导致拒绝服务。</p>
+<h3 id="2-_DNS-flood">2. DNS-flood</h3><p>伪造源地址向目标DNS服务器发送大量DNS请求，而且查找的域名通常不存在。DNS服务器首先会查找是否有对应的缓存，如果查找不到并且该域名无法直接由服务器解析的时候，DNS服务器会向其上层DNS服务器递归查询域名信息。域名解析的过程给服务器带来了很大的负载，最终大量请求导致拒绝服务。</p>
+<h3 id="3-_慢速连接攻击">3. 慢速连接攻击</h3><p>针对http协议，以知名的slowloris攻击为例：先建立http连接，设置一个较大的content-length，每次只发送很少的字节，让服务器一直以为http头部没有传输完成，这样的连接一多很快就会出现连接耗尽。</p>
+<p>目前出现了一些变种，http慢速的post请求和慢速的read请求都是基于相同的原理。<br>其他包括JavaScript-based DDoS、WordPress pingback DDoS和Joomla反射攻击。</p>
+<p><strong>JavaScript-based DDoS</strong>：在海量访问的网页嵌入指向攻击目标网站的恶意JavaScript代码，当互联网用户访问该网页时，则流量被指向攻击目标网站。典型攻击事件是GitHub DDoS攻击。</p>
+<p><strong>WordPress pingback DDoS</strong>：基于wordpress搭建的WEB网站默认开放XML-RPC pingback服务，该服务是用来通知第三方网站blog系统有文章被引用。攻击者假冒攻击目标网站的IP地址给数以万计wordpress站点发送pingback请求，开放pingback服务的网站会向攻击目标网站发送HTTP get请求。</p>
+<h3 id="NTP反射型DDos攻击">NTP反射型DDos攻击</h3><h2 id="按攻击方式分类">按攻击方式分类</h2><h3 id="反射型">反射型</h3><p>反射型攻击的本质是利用“质询-应答”式协议，将质询包的源地址通过原始套接字伪造设置为目标地址，则应答的“回包”都被发送至目标，如果回包体积比较大或协议支持递归效果，攻击流量会被放大，成为一种高性价比的流量型攻击。<br>例如通过将SYN包的源地址设置为目标地址，然后向大量的真实TCP服务器发送TCP的SYN包，而这些收到SYN包的TCP服务器为了完成3次握手把SYN|ACK包“应答”给目标地址，完成了一次“反射”攻击，攻击者隐藏了自身。<br>反射型攻击利用的协议目前包括NTP、Chargen、SSDP、DNS、RPC portmap等</p>
+<h3 id="流量放大型">流量放大型</h3><p>通过递归等手法将攻击流量方法的攻击类型</p>
+<h3 id="混合型">混合型</h3><p>即混合多种攻击方式</p>
+<h3 id="脉冲型">脉冲型</h3><p>即DDOS攻击流量呈现脉冲状，难以防御</p>
+<h3 id="链路泛洪">链路泛洪</h3><p>在链路上进行攻击目标的“上一跳”</p>
+<h2 id="DDOS攻击防御">DDOS攻击防御</h2><p>1、近源清洗<br>2、CDN、云清洗<br>在攻击发生时，设置CNAME，进行云清洗<br>3、ADS设备<br>目前在ADS设备里覆盖了3-4,7这三层的解决方案。<br><img src="https://img.alicdn.com/imgextra/i4/192713264/TB2Aas8aF_AQeBjSZFyXXb1bXXa_!!192713264.png" alt="ADS"><br>4、OS/APP层<br>做应用层的一些防护、设置反向代理，根据请求内容，进行请求计数，然后超过一定的次数，阻断或者弹出验证码等</p>
+<p>留待后续继续完善。。。</p>
+<h2 id="参考文章">参考文章</h2><ul>
+<li><a href="http://www.ayazero.com/?p=75" target="_blank" rel="external">浅析大规模DDOS防御架构-应对T级攻防</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MjM5Njc3NjM4MA==&amp;mid=402475339&amp;idx=1&amp;sn=530182906bc56ff37d11cc42abf12f0e" target="_blank" rel="external">华为《2015僵尸网络与DDoS攻击专题报告》</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<a id="more"></a>
+<p>最新找工作，笔试经常被问到DDOS的攻击原理和防御，以前学习过一些基础知识，然后耐不住久不用就忘记了，总结下，免得再吃亏</p>
+<h2 id="DDOS攻击分类">DDOS攻击分类</h2><p>DDOS可以分为网络层攻击（SYN-fl]]>
+    </summary>
+    
+      <category term="DDOS" scheme="http://ohroot.com/tags/DDOS/"/>
+    
+      <category term="安全研究" scheme="http://ohroot.com/categories/%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[CTF中的RSA算法]]></title>
     <link href="http://ohroot.com/2016/07/11/rsa-in-ctf/"/>
     <id>http://ohroot.com/2016/07/11/rsa-in-ctf/</id>
     <published>2016-07-11T02:40:04.000Z</published>
-    <updated>2016-07-11T02:45:22.750Z</updated>
+    <updated>2016-07-12T03:32:33.038Z</updated>
     <content type="html"><![CDATA[<a id="more"></a>
 <p>密码算法有很多种，要讲就要讲久了，自行脑补一本厚厚的密码学书。</p>
 <p>我们经常用到的算法包括对称加密算法和非对称加密算法。本文主要介绍CTF中经常遇到的RSA加密题的一些解法</p>
@@ -60,7 +107,7 @@
 <p>N = 18762288330807505336471569952368628968038915032364773203018829070696227411217877868952724842039756288121734420378039301563905037169196320417706839549744629044465352679919380329435329653365900312498712121432190200717072138327379844913608851715404086200984072727408758802012147296753317519612628629535373054730645471938738605688629618951071483635716677866010394704066696480858977560809007683074249820225609075518509112704549293147063971302640066331096645041521401155565628466857211261242132897152403975836705170916276159246187173035660820037820087171748591660487636434105623595720788169970861783452500198572918584010881<br>e = 65537<br>直接在sagemath中跑：<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">factor<span class="comment">(18762288330807505336471569952368628968038915032364773203018829070696227411217877868952724842039756288121734420378039301563905037169196320417706839549744629044465352679919380329435329653365900312498712121432190200717072138327379844913608851715404086200984072727408758802012147296753317519612628629535373054730645471938738605688629618951071483635716677866010394704066696480858977560809007683074249820225609075518509112704549293147063971302640066331096645041521401155565628466857211261242132897152403975836705170916276159246187173035660820037820087171748591660487636434105623595720788169970861783452500198572918584010881)</span></span><br><span class="line"><span class="title">#output</span><br><span class="line">250527704258269</span> * <span class="number">74891071972884336452892671945839935839027130680745292701175368094445819328761543101567760612778187287503041052186054409602799660254304070752542327616415127619185118484301676127655806327719998855075907042722072624352495417865982621374198943186383488123852345021090112675763096388320624127451586578874243946255833495297552979177208715296225146999614483257176865867572412311362252398105201644557511678179053171328641678681062496129308882700731534684329411768904920421185529144505494827908706070460177001921614692189821267467546120600239688527687872217881231173729468019623441005792563703237475678063375349</span></span><br></pre></td></tr></table></figure></p>
 <p>这个实测RSA-Tool 2 中还要快一些，然后还是用脚本解密<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python RsaCtfTool<span class="class">.py</span> --pqne <span class="number">250527704258269</span>,<span class="number">74891071972884336452892671945839935839027130680745292701175368094445819328761543101567760612778187287503041052186054409602799660254304070752542327616415127619185118484301676127655806327719998855075907042722072624352495417865982621374198943186383488123852345021090112675763096388320624127451586578874243946255833495297552979177208715296225146999614483257176865867572412311362252398105201644557511678179053171328641678681062496129308882700731534684329411768904920421185529144505494827908706070460177001921614692189821267467546120600239688527687872217881231173729468019623441005792563703237475678063375349</span>,<span class="number">18762288330807505336471569952368628968038915032364773203018829070696227411217877868952724842039756288121734420378039301563905037169196320417706839549744629044465352679919380329435329653365900312498712121432190200717072138327379844913608851715404086200984072727408758802012147296753317519612628629535373054730645471938738605688629618951071483635716677866010394704066696480858977560809007683074249820225609075518509112704549293147063971302640066331096645041521401155565628466857211261242132897152403975836705170916276159246187173035660820037820087171748591660487636434105623595720788169970861783452500198572918584010881</span>,<span class="number">65537</span> --crypto ../sctf/rsa1/level0/level1<span class="class">.passwd</span><span class="class">.enc</span> --format base64</span><br></pre></td></tr></table></figure></p>
 <p>解出来时乱码，我们就要考虑填充的问题,我写的脚本还没支持不同的填充，尝试用openssl解密，成功解密<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1.passwd.enc | base64 -d &gt; ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1bin.passwd.enc</span><br><span class="line">openssl rsautl -decrypt -<span class="keyword">in</span> ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1bin.passwd.enc -inkey ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/priv.key -out ../</span>sctf<span class="regexp">/rsa1/</span>level0/level1.passwd -oaep</span><br></pre></td></tr></table></figure></p>
-<h4 id="level0-1">level0</h4><p>这一层还是查看N&amp;e,N&amp;e，然后分解大数，sage很久都没分出来，RSA-Tool 2也是，最终发现是P和Q相近，可采用费马分解。我们可以采用yafu这个工具进行分解。<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">factor(24635380199162576175626733825654993088774186468424341251485528171539392839329146412615013362980283492199482296250229443925899183941601282092332843476617277156184507685928193519623765855782976047363883665283424473545877969718710272046261654326391840252190462805782777380937446430987284386172226304759726517529843564412091984328980979115111158624673855166379221415935217206920980564900414671064827167187417932475583509599802648238573603298428445177957392893928492353538844661418085667022331283805225000341955464473332333141637604132197773189903937879276873131228814365139541968760521539920817629563995110317306270531197)</span><br><span class="line"></span><br><span class="line"><span class="comment"># output</span></span><br><span class="line"><span class="constant">P309</span> = 156956618844706820397012891168512561016172926274406409351605204875848894134762425857160007206769208250966468865321072899370821460169563046304363342283383730448855887559714662438206600780443071125634394511976108979417302078289773847706397371335621757603520669919857006339473738564640521800108990424511408496383</span><br><span class="line"><span class="constant">P309</span> = 156956618844706820397012891168512561016172926274406409351605204875848894134762425857160007206769208250966468865321072899370821460169563046304363342283383730448855887559714662438206600780443071125634394511976108979417302078289773847706397371335621757603520669919857006339473738564640521800108990424511408496259</span><br></pre></td></tr></table></figure></p>
+<h4 id="level1">level1</h4><p>这一层还是查看N&amp;e,N&amp;e，然后分解大数，sage很久都没分出来，RSA-Tool 2也是，最终发现是P和Q相近，可采用费马分解。我们可以采用yafu这个工具进行分解。<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">factor(24635380199162576175626733825654993088774186468424341251485528171539392839329146412615013362980283492199482296250229443925899183941601282092332843476617277156184507685928193519623765855782976047363883665283424473545877969718710272046261654326391840252190462805782777380937446430987284386172226304759726517529843564412091984328980979115111158624673855166379221415935217206920980564900414671064827167187417932475583509599802648238573603298428445177957392893928492353538844661418085667022331283805225000341955464473332333141637604132197773189903937879276873131228814365139541968760521539920817629563995110317306270531197)</span><br><span class="line"></span><br><span class="line"><span class="comment"># output</span></span><br><span class="line"><span class="constant">P309</span> = 156956618844706820397012891168512561016172926274406409351605204875848894134762425857160007206769208250966468865321072899370821460169563046304363342283383730448855887559714662438206600780443071125634394511976108979417302078289773847706397371335621757603520669919857006339473738564640521800108990424511408496383</span><br><span class="line"><span class="constant">P309</span> = 156956618844706820397012891168512561016172926274406409351605204875848894134762425857160007206769208250966468865321072899370821460169563046304363342283383730448855887559714662438206600780443071125634394511976108979417302078289773847706397371335621757603520669919857006339473738564640521800108990424511408496259</span><br></pre></td></tr></table></figure></p>
 <p>然后同level0的方式进入level2<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python RsaCtfTool.py --pqne <span class="number">156956618844706820397012891168512561016172926274406409351605204875848894134762425857160007206769208250966468865321072899370821460169563046304363342283383730448855887559714662438206600780443071125634394511976108979417302078289773847706397371335621757603520669919857006339473738564640521800108990424511408496383</span>,<span class="number">156956618844706820397012891168512561016172926274406409351605204875848894134762425857160007206769208250966468865321072899370821460169563046304363342283383730448855887559714662438206600780443071125634394511976108979417302078289773847706397371335621757603520669919857006339473738564640521800108990424511408496259</span>,<span class="number">24635380199162576175626733825654993088774186468424341251485528171539392839329146412615013362980283492199482296250229443925899183941601282092332843476617277156184507685928193519623765855782976047363883665283424473545877969718710272046261654326391840252190462805782777380937446430987284386172226304759726517529843564412091984328980979115111158624673855166379221415935217206920980564900414671064827167187417932475583509599802648238573603298428445177957392893928492353538844661418085667022331283805225000341955464473332333141637604132197773189903937879276873131228814365139541968760521539920817629563995110317306270531197</span>,<span class="number">65537</span> --pri</span><br><span class="line">openssl rsautl -decrypt -<span class="keyword">in</span> ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1<span class="regexp">/level2.passwd.enc -inkey ../</span>sctf<span class="regexp">/rsa1/</span>level0<span class="regexp">/level1/</span>pri.key -out ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1/level2.passwd</span><br></pre></td></tr></table></figure></p>
 <h4 id="level2">level2</h4><p>这一题用同样的方法可以看到E很大，存在低解密指数攻击（Wiener’s Attack），e太大，可直接算出d<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"n"</span> <span class="keyword">is</span>:<span class="number">310417953704722170730847224402877983815425243802949146921747155554873214220856824312098961643471840575991636613043700912852694476430642621109657293199766030858364981594359341335457943511388291654144608627164424697545853589150385759857708455254761227678476750080293606809444462895661894497915336651794981901683</span></span><br><span class="line"><span class="string">"e"</span> <span class="keyword">is</span>:<span class="number">180160219817657029643391514538629205160228298622505654076129556003630962924040643558658232436259668646427759588151297967578950689360985724312726411880635697242206899247553123368979139238838216404056134080086977722515560207477455248034027633490880147280702252198966243510960816978036425871522668587833586334027</span></span><br></pre></td></tr></table></figure></p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python RsaCtfTool.py --pkey ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1<span class="regexp">/level2/</span><span class="keyword">public</span>.key --pri</span><br><span class="line">openssl rsautl -decrypt -<span class="keyword">in</span> ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1<span class="regexp">/level2/</span>level3.passwd.enc -inkey ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1<span class="regexp">/level2/</span>pri.key -out ..<span class="regexp">/sctf/</span>rsa1<span class="regexp">/level0/</span>level1<span class="regexp">/level2/</span>level3.passwd</span><br></pre></td></tr></table></figure>
@@ -670,52 +717,6 @@
       <category term="Elasticsearch" scheme="http://ohroot.com/tags/Elasticsearch/"/>
     
       <category term="编程" scheme="http://ohroot.com/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Linux下安装配置JDK8]]></title>
-    <link href="http://ohroot.com/2015/05/18/Linux%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEJDK8/"/>
-    <id>http://ohroot.com/2015/05/18/Linux下安装配置JDK8/</id>
-    <published>2015-05-18T13:37:12.000Z</published>
-    <updated>2015-12-24T12:38:46.000Z</updated>
-    <content type="html"><![CDATA[<p>linux安装jdk的方法、笔记<br><a id="more"></a></p>
-<h2 id="安装JDK8">安装JDK8</h2><ul>
-<li><p>下载JDK,地址：<a href="http://www.oracle.com/technetwork/cn/java/javase/downloads/index.html" target="_blank" rel="external">click here</a></p>
-</li>
-<li><p>解压安装<br>我们把JDK安装到这个路径：<code>/usr/lib/jvm</code>,如果没有这个目录（第一次当然没有），我们就新建一个目录</p>
-<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/lib</span><br><span class="line">sudo <span class="built_in">mkdir</span> jvm</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>建立好了以后，我们来到刚才下载好的压缩包的目录，解压到我们刚才新建的文件夹里面去，并且修改好名字方便我们管理<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo tar zxvf ./jdk-<span class="number">8</span>u20-linux-x64<span class="class">.tar</span><span class="class">.gz</span>  -C /usr/lib/jvm</span><br><span class="line">cd /usr/lib/jvm</span><br><span class="line">sudo mv <span class="function"><span class="title">jdk_</span><span class="params">(版本号)</span></span>/ jdk8</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>配置环境变量, <code>gedit ~/.bashrc</code>, 在打开的文件的末尾添加<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/lib/jvm/jdk8</span><br><span class="line"><span class="built_in">export</span> JRE_HOME=<span class="variable">$&#123;JAVA_HOME&#125;</span>/jre</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$&#123;JAVA_HOME&#125;</span>/lib:<span class="variable">$&#123;JRE_HOME&#125;</span>/lib</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>保存退出，然后输入下面的命令来使之生效<code>source ~/.bashrc</code></p>
-<ul>
-<li>配置默认JDK<br>由于一些Linux的发行版中已经存在默认的JDK，如OpenJDK等。所以为了使得我们刚才安装好的JDK版本能成为默认的JDK版本，我们还要进行下面的配置。<br>执行下面的命令：<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">update-alternatives --install <span class="regexp">/usr/</span>bin<span class="regexp">/java java /</span>usr<span class="regexp">/lib/</span>jvm<span class="regexp">/jdk8/</span>bin/java <span class="number">300</span> </span><br><span class="line">update-alternatives --install <span class="regexp">/usr/</span>bin<span class="regexp">/javac javac /</span>usr<span class="regexp">/lib/</span>jvm<span class="regexp">/jdk8/</span>bin/javac <span class="number">300</span> </span><br><span class="line">update-alternatives --install <span class="regexp">/usr/</span>bin<span class="regexp">/jar jar /</span>usr<span class="regexp">/lib/</span>jvm<span class="regexp">/jdk8/</span>bin/jar <span class="number">300</span>  </span><br><span class="line">update-alternatives --install <span class="regexp">/usr/</span>bin<span class="regexp">/javah javah /</span>usr<span class="regexp">/lib/</span>jvm<span class="regexp">/jdk8/</span>bin/javah <span class="number">300</span>  </span><br><span class="line">update-alternatives --install <span class="regexp">/usr/</span>bin<span class="regexp">/javap javap /</span>usr<span class="regexp">/lib/</span>jvm<span class="regexp">/jdk8/</span>bin/javap <span class="number">300</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>注意：如果以上两个命令出现找不到路径问题，只要重启一下计算机在重复上面两行代码就OK了。<br>执行下面的代码可以看到当前各种JDK版本和配置：<code>sudo update-alternatives --config java</code></p>
-<ul>
-<li>测试<br>打开一个终端，输入下面命令：<code>java -version</code>，显示java版本号，即表示java命令已经可以运行了。</li>
-</ul>
-<h2 id="安装_OpenJDK">安装 OpenJDK</h2><ol>
-<li>安装 OpenJDK:<code>sudo apt-get install openjdk-6-jre</code></li>
-<li>检查安装是否成功:<code>java -version</code></li>
-<li>设置 JAVA_HOME 环境变量,在 <code>~/.bashrc</code> 中增加下面一行<code>export JAVA_HOME=/usr/lib/jvm/java-6-openjdk</code></li>
-</ol>
-<p>摘自：<a href="http://dawndiy.com/archives/155/" target="_blank" rel="external">Linux 下安装配置 JDK7</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>linux安装jdk的方法、笔记<br>]]>
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://ohroot.com/tags/Linux/"/>
-    
-      <category term="操作系统" scheme="http://ohroot.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>DDOS攻击简介 | 半饱和</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="DDOS," />
+  
+
+  <meta name="description" content="最新找工作，笔试经常被问到DDOS的攻击原理和防御，以前学习过一些基础知识，然后耐不住久不用就忘记了，总结下，免得再吃亏
+DDOS攻击分类DDOS可以分为网络层攻击（SYN-flood、ACK-flood、UDP-flood、ICMP-flood等）、应用层攻击（CC攻击、DNS-flood、慢速连接攻击）。按攻击方式可以分为：反射型、流量放大型、混合型等。
+在讲DDOS原理前我还是先找了一个TC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DDOS攻击简介">
+<meta property="og:url" content="http://ohroot.com/2016/09/18/ddos-introduction/index.html">
+<meta property="og:site_name" content="半饱和">
+<meta property="og:description" content="最新找工作，笔试经常被问到DDOS的攻击原理和防御，以前学习过一些基础知识，然后耐不住久不用就忘记了，总结下，免得再吃亏
+DDOS攻击分类DDOS可以分为网络层攻击（SYN-flood、ACK-flood、UDP-flood、ICMP-flood等）、应用层攻击（CC攻击、DNS-flood、慢速连接攻击）。按攻击方式可以分为：反射型、流量放大型、混合型等。
+在讲DDOS原理前我还是先找了一个TC">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i3/192713264/TB2IB51XobA11BjSspiXXa7EXXa_!!192713264.jpg">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i4/192713264/TB2Aas8aF_AQeBjSZFyXXb1bXXa_!!192713264.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DDOS攻击简介">
+<meta name="twitter:description" content="最新找工作，笔试经常被问到DDOS的攻击原理和防御，以前学习过一些基础知识，然后耐不住久不用就忘记了，总结下，免得再吃亏
+DDOS攻击分类DDOS可以分为网络层攻击（SYN-flood、ACK-flood、UDP-flood、ICMP-flood等）、应用层攻击（CC攻击、DNS-flood、慢速连接攻击）。按攻击方式可以分为：反射型、流量放大型、混合型等。
+在讲DDOS原理前我还是先找了一个TC">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=0a48fd1a" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css" type="text/css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?8f194a78c11f76027a96c6ec87298c62";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/urls/"
+            target="_blank"
+            >
+            安全圈
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DDOS攻击分类"><span class="toc-text">DDOS攻击分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络层攻击"><span class="toc-text">网络层攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_SYN-flood"><span class="toc-text">1. SYN-flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_ACK-flood"><span class="toc-text">2. ACK-flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_UDP-flood"><span class="toc-text">3. UDP-flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_ICMP-flood"><span class="toc-text">4. ICMP-flood</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用层攻击"><span class="toc-text">应用层攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_CC攻击"><span class="toc-text">1. CC攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_DNS-flood"><span class="toc-text">2. DNS-flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_慢速连接攻击"><span class="toc-text">3. 慢速连接攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NTP反射型DDos攻击"><span class="toc-text">NTP反射型DDos攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#按攻击方式分类"><span class="toc-text">按攻击方式分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#反射型"><span class="toc-text">反射型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流量放大型"><span class="toc-text">流量放大型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#混合型"><span class="toc-text">混合型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#脉冲型"><span class="toc-text">脉冲型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链路泛洪"><span class="toc-text">链路泛洪</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DDOS攻击防御"><span class="toc-text">DDOS攻击防御</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-text">参考文章</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-ddos-introduction" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">DDOS攻击简介</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.09.18</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Direwolf</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/安全研究/">安全研究</a>
+  </span>
+
+
+
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <a id="more"></a>
+<p>最新找工作，笔试经常被问到DDOS的攻击原理和防御，以前学习过一些基础知识，然后耐不住久不用就忘记了，总结下，免得再吃亏</p>
+<h2 id="DDOS攻击分类">DDOS攻击分类</h2><p>DDOS可以分为网络层攻击（SYN-flood、ACK-flood、UDP-flood、ICMP-flood等）、应用层攻击（CC攻击、DNS-flood、慢速连接攻击）。<br>按攻击方式可以分为：反射型、流量放大型、混合型等。</p>
+<p>在讲DDOS原理前我还是先找了一个TCP连接的三次握手，四次分手的流程图，以方便描述一些攻击过程的原理。<br><img src="https://img.alicdn.com/imgextra/i3/192713264/TB2IB51XobA11BjSspiXXa7EXXa_!!192713264.jpg" alt=""></p>
+<h2 id="网络层攻击">网络层攻击</h2><h3 id="1-_SYN-flood">1. SYN-flood</h3><p>TCP 连接三次握手过程中，通过原始套接字发送源地址虚假的SYN数据包、使目标主机永远无法完成三次握手，系统的协议栈队列占满，资源得不到释放造成拒绝服务。</p>
+<p>一些简单的防御方法包括调整内核参数的方法，可以减少等待及重试，加速资源释放，在小流量syn-flood的情况下可以缓解，但流量稍大时完全不抵用。防御syn-flood的常见方法有：syn proxy、syn cookies、首包（第一次请求的syn包）丢弃等。</p>
+<h3 id="2-_ACK-flood">2. ACK-flood</h3><p>对于虚假的ACK包，目标设备会直接回复RST包丢弃连接，所以伤害值远不如syn-flood。DDOS的一种原始方式。</p>
+<h3 id="3-_UDP-flood">3. UDP-flood</h3><p>使用原始套接字伪造大量虚假源地址的UDP包，以DNS协议为主。</p>
+<h3 id="4-_ICMP-flood">4. ICMP-flood</h3><p>Ping洪水，比较古老的方式。</p>
+<hr>
+<h2 id="应用层攻击">应用层攻击</h2><h3 id="1-_CC攻击">1. CC攻击</h3><p>CC攻击(ChallengeCollapsar)的名字源于挑战国内知名安全厂商绿盟的抗DDOS设备-“黑洞”。通过僵尸网络或大量匿名代理服务器，向目标发起大量真实的http请求，最终消耗掉大量的并发资源，拖慢整个网站，造成拒绝服务。</p>
+<p>CC攻击的目的就是占满服务器并发连接数，尽可能使请求避开缓存而直接读数据库，读数据库要找最消耗资源的查询，最好无法利用索引，每个查询都全表扫描，这样就能用最小的攻击资源起到最大的拒绝服务效果。CC攻击就是寻找系统脆弱点占满系统资源导致拒绝服务。</p>
+<h3 id="2-_DNS-flood">2. DNS-flood</h3><p>伪造源地址向目标DNS服务器发送大量DNS请求，而且查找的域名通常不存在。DNS服务器首先会查找是否有对应的缓存，如果查找不到并且该域名无法直接由服务器解析的时候，DNS服务器会向其上层DNS服务器递归查询域名信息。域名解析的过程给服务器带来了很大的负载，最终大量请求导致拒绝服务。</p>
+<h3 id="3-_慢速连接攻击">3. 慢速连接攻击</h3><p>针对http协议，以知名的slowloris攻击为例：先建立http连接，设置一个较大的content-length，每次只发送很少的字节，让服务器一直以为http头部没有传输完成，这样的连接一多很快就会出现连接耗尽。</p>
+<p>目前出现了一些变种，http慢速的post请求和慢速的read请求都是基于相同的原理。<br>其他包括JavaScript-based DDoS、WordPress pingback DDoS和Joomla反射攻击。</p>
+<p><strong>JavaScript-based DDoS</strong>：在海量访问的网页嵌入指向攻击目标网站的恶意JavaScript代码，当互联网用户访问该网页时，则流量被指向攻击目标网站。典型攻击事件是GitHub DDoS攻击。</p>
+<p><strong>WordPress pingback DDoS</strong>：基于wordpress搭建的WEB网站默认开放XML-RPC pingback服务，该服务是用来通知第三方网站blog系统有文章被引用。攻击者假冒攻击目标网站的IP地址给数以万计wordpress站点发送pingback请求，开放pingback服务的网站会向攻击目标网站发送HTTP get请求。</p>
+<h3 id="NTP反射型DDos攻击">NTP反射型DDos攻击</h3><h2 id="按攻击方式分类">按攻击方式分类</h2><h3 id="反射型">反射型</h3><p>反射型攻击的本质是利用“质询-应答”式协议，将质询包的源地址通过原始套接字伪造设置为目标地址，则应答的“回包”都被发送至目标，如果回包体积比较大或协议支持递归效果，攻击流量会被放大，成为一种高性价比的流量型攻击。<br>例如通过将SYN包的源地址设置为目标地址，然后向大量的真实TCP服务器发送TCP的SYN包，而这些收到SYN包的TCP服务器为了完成3次握手把SYN|ACK包“应答”给目标地址，完成了一次“反射”攻击，攻击者隐藏了自身。<br>反射型攻击利用的协议目前包括NTP、Chargen、SSDP、DNS、RPC portmap等</p>
+<h3 id="流量放大型">流量放大型</h3><p>通过递归等手法将攻击流量方法的攻击类型</p>
+<h3 id="混合型">混合型</h3><p>即混合多种攻击方式</p>
+<h3 id="脉冲型">脉冲型</h3><p>即DDOS攻击流量呈现脉冲状，难以防御</p>
+<h3 id="链路泛洪">链路泛洪</h3><p>在链路上进行攻击目标的“上一跳”</p>
+<h2 id="DDOS攻击防御">DDOS攻击防御</h2><p>1、近源清洗<br>2、CDN、云清洗<br>在攻击发生时，设置CNAME，进行云清洗<br>3、ADS设备<br>目前在ADS设备里覆盖了3-4,7这三层的解决方案。<br><img src="https://img.alicdn.com/imgextra/i4/192713264/TB2Aas8aF_AQeBjSZFyXXb1bXXa_!!192713264.png" alt="ADS"><br>4、OS/APP层<br>做应用层的一些防护、设置反向代理，根据请求内容，进行请求计数，然后超过一定的次数，阻断或者弹出验证码等</p>
+<p>留待后续继续完善。。。</p>
+<h2 id="参考文章">参考文章</h2><ul>
+<li><a href="http://www.ayazero.com/?p=75" target="_blank" rel="external">浅析大规模DDOS防御架构-应对T级攻防</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MjM5Njc3NjM4MA==&amp;mid=402475339&amp;idx=1&amp;sn=530182906bc56ff37d11cc42abf12f0e" target="_blank" rel="external">华为《2015僵尸网络与DDoS攻击专题报告》</a></li>
+</ul>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/urls/"
+              target="_blank"
+              >
+              安全圈
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+  <section class="duoshuo-comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="" data-title="DDOS攻击简介" data-url="http://ohroot.com/2016/09/18/ddos-introduction/index.html"></div>
+    <!-- 多说评论框 end -->
+  </section>
+
+
+
+
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"bigegg"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235687', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
